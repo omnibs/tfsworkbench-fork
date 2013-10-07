@@ -100,7 +100,7 @@ namespace TfsWorkbench.TaskBoardUI.DataObjects
             var itemStatus = SwimLaneHelper.GetItemStatus(child);
             if (itemStatus != this.State)
             {
-                if (SwimLaneHelper.CustomStates.Contains(this.State))
+                if (WorkbenchItemHelper.CustomStates.Contains(this.State))
                 {
                     var body = child.GetBody();
                     if (body.ToLowerInvariant().EndsWith("]"))
@@ -108,6 +108,11 @@ namespace TfsWorkbench.TaskBoardUI.DataObjects
                         var index = body.LastIndexOf("[", System.StringComparison.Ordinal);
                         var substr = body.Substring(index);
                         body = body.Replace(substr, "[" + this.State + "]");
+                        child[WorkbenchItemHelper.GetBodyFieldName(child.GetTypeName())] = body;
+                    }
+                    else
+                    {
+                        body += "[" + this.State + "]";
                         child[WorkbenchItemHelper.GetBodyFieldName(child.GetTypeName())] = body;
                     }
                 }

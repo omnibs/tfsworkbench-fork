@@ -18,6 +18,8 @@ namespace TfsWorkbench.UIElements.DragHelpers
 
     using Core.Interfaces;
 
+    using TfsWorkbench.Core.Helpers;
+
     /// <summary>
     /// Initialises and instance of TfsWorkbench.WpfUI.DragListView
     /// </summary>
@@ -139,7 +141,7 @@ namespace TfsWorkbench.UIElements.DragHelpers
 
                     var allowedValuesArray = allowedValues as IEnumerable<object>;
 
-                    if (allowedValuesArray == null || allowedValuesArray.Contains(this.State))
+                    if (allowedValuesArray == null || allowedValuesArray.Contains(this.State) ||  WorkbenchItemHelper.CustomStates.Contains(this.State))
                     {
                         continue;
                     }

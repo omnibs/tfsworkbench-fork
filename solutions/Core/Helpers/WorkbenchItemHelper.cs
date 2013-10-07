@@ -216,6 +216,14 @@ namespace TfsWorkbench.Core.Helpers
             setState(workbenchItem, state);
         }
 
+        public static string[] CustomStates
+        {
+            get
+            {
+                return new string[] { "Working", "Blocked", "Removed" };
+            }
+        }
+
         /// <summary>
         /// Determines whether the specified workbench item is excluded.
         /// </summary>

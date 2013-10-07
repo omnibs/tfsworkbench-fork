@@ -25,14 +25,6 @@ namespace TfsWorkbench.TaskBoardUI.Helpers
     /// </summary>
     internal static class SwimLaneHelper
     {
-        public static string[] CustomStates
-        {
-            get
-            {
-                return new string[] { "Working", "Blocked", "Removed" };
-            }
-        }
-
         /// <summary>
         /// Synchronises the state containers.
         /// </summary>
@@ -288,7 +280,7 @@ namespace TfsWorkbench.TaskBoardUI.Helpers
             var body = workbenchItem.GetBody().Trim().ToLowerInvariant();
             if (body.EndsWith("]"))
             {
-                foreach (var customState in CustomStates)
+                foreach (var customState in WorkbenchItemHelper.CustomStates)
                 {
                     if (body.EndsWith("[" + customState.ToLowerInvariant() + "]"))
                     {
