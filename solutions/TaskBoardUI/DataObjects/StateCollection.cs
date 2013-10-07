@@ -118,6 +118,15 @@ namespace TfsWorkbench.TaskBoardUI.DataObjects
                 }
                 else
                 {
+                    var body = child.GetBody();
+                    if (body.ToLowerInvariant().EndsWith("]"))
+                    {
+                        var index = body.LastIndexOf("[", System.StringComparison.Ordinal);
+                        var substr = body.Substring(index);
+                        body = body.Replace(substr, "");
+                        child[WorkbenchItemHelper.GetBodyFieldName(child.GetTypeName())] = body;
+                    } 
+                    
                     child.SetState(this.State);
                 }
             }

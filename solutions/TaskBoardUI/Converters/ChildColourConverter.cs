@@ -56,6 +56,12 @@ namespace TfsWorkbench.TaskBoardUI.Converters
             }
 
             var currentState = workbenchItem.GetState();
+            var title = workbenchItem.GetCaption();
+            if (title.ToUpperInvariant().Contains("[NP]"))
+            {
+                return new SolidColorBrush(Color.FromRgb(255, 0, 0));
+            }
+
             var stateColour = swimLaneView.ViewMap.StateItemColours.FirstOrDefault(sc => sc.Value.Equals(currentState));
 
             return stateColour == null || BackgoundConverter == null
