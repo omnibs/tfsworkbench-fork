@@ -19,6 +19,8 @@ namespace TfsWorkbench.TaskBoardUI.DataObjects
     using Core.Helpers;
     using Core.Interfaces;
 
+    using TfsWorkbench.TaskBoardUI.Helpers;
+
     /// <summary>
     /// Initialises and instance of TfsWorkbench.Core.DataObjects.SwimLaneView
     /// </summary>
@@ -64,6 +66,15 @@ namespace TfsWorkbench.TaskBoardUI.DataObjects
         /// <param name="includeAsTab">if set to <c>true</c> [include as tab].</param>
         public SwimLaneView(ViewMap viewMap, bool includeAsTab)
         {
+            var customStates = SwimLaneHelper.CustomStates;
+            if (customStates.Length > 0 && !viewMap.SwimLaneStates.Contains(customStates[0]))
+            {
+                foreach (var customState in customStates)
+                {
+                    viewMap.SwimLaneStates.Insert(viewMap.SwimLaneStates.Count - 1, customState);
+                }
+            }
+
             this.IncludeInTabs = includeAsTab;
             this.InitialiseLayout(viewMap);
             this.Orphans.CollectionChanged += this.OnOrphansChanged;

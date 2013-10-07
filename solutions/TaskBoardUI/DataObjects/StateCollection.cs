@@ -16,7 +16,9 @@ namespace TfsWorkbench.TaskBoardUI.DataObjects
     using Core.Helpers;
     using Core.Interfaces;
 
+    using TfsWorkbench.Core.Properties;
     using TfsWorkbench.Core.Services;
+    using TfsWorkbench.TaskBoardUI.Helpers;
 
     /// <summary>
     /// Initializes instance of StateCollection
@@ -95,9 +97,24 @@ namespace TfsWorkbench.TaskBoardUI.DataObjects
         /// <param name="child">The child.</param>
         public new void Add(IWorkbenchItem child)
         {
-            if (child.GetState() != this.State)
+            var itemStatus = SwimLaneHelper.GetItemStatus(child);
+            if (itemStatus != this.State)
             {
-                child.SetState(this.State);
+                if (SwimLaneHelper.CustomStates.Contains(this.State))
+                {
+                    var body = child.GetBody();
+                    if (body.ToLowerInvariant().EndsWith("]"))
+                    {
+                        var index = body.LastIndexOf("[", System.StringComparison.Ordinal);
+                        var substr = body.Substring(index);
+                        body = body.Replace(substr, "[" + this.State + "]");
+                        child[WorkbenchItemHelper.GetBodyFieldName(child.GetTypeName())] = body;
+                    }
+                }
+                else
+                {
+                    child.SetState(this.State);
+                }
             }
 
             if (!this.Contains(child))

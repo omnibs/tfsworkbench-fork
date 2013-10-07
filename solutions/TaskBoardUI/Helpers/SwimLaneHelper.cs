@@ -25,6 +25,14 @@ namespace TfsWorkbench.TaskBoardUI.Helpers
     /// </summary>
     internal static class SwimLaneHelper
     {
+        public static string[] CustomStates
+        {
+            get
+            {
+                return new string[] { "Working", "Blocked", "Removed" };
+            }
+        }
+
         /// <summary>
         /// Synchronises the state containers.
         /// </summary>
@@ -275,6 +283,24 @@ namespace TfsWorkbench.TaskBoardUI.Helpers
             }
         }
 
+        public static string GetItemStatus(IWorkbenchItem workbenchItem)
+        {
+            var body = workbenchItem.GetBody().Trim().ToLowerInvariant();
+            if (body.EndsWith("]"))
+            {
+                foreach (var customState in CustomStates)
+                {
+                    if (body.EndsWith("[" + customState.ToLowerInvariant() + "]"))
+                    {
+                        return customState;
+                    }
+                }
+            }
+
+            // else
+            return workbenchItem.GetState();
+        }
+
         /// <summary>
         /// Adds the child.
         /// </summary>
@@ -325,14 +351,16 @@ namespace TfsWorkbench.TaskBoardUI.Helpers
                 return;
             }
 
+            itemState = GetItemStatus(workbenchItem);
+
             // Add to swim lane row(s).
-            foreach (var stateCollection in
-                FindParentRows(swimLaneView, workbenchItem)
-                .Select(r => r[itemState])
-                .Where(stateCollection => !stateCollection.Contains(workbenchItem))
-                .ToArray())
+            foreach (var stateCollection in FindParentRows(swimLaneView, workbenchItem))
             {
-                stateCollection.Add(workbenchItem);
+                var stateContainer = stateCollection[itemState];
+                if (!stateContainer.Contains(workbenchItem))
+                {
+                    stateContainer.Add(workbenchItem);
+                }
             }
         }
 
