@@ -320,6 +320,8 @@ namespace TfsWorkbench.TaskBoardUI.Helpers
                     .Where(l => swimLaneView.ViewMap.IsViewLink(l) && !filterService.IsExcluded(l.Parent))
                     .Any();
 
+            itemState = GetItemStatus(workbenchItem);
+
             if (!hasIncludedParent)
             {
                 return;
@@ -342,8 +344,6 @@ namespace TfsWorkbench.TaskBoardUI.Helpers
                 // Item not rendered in view
                 return;
             }
-
-            itemState = GetItemStatus(workbenchItem);
 
             // Add to swim lane row(s).
             foreach (var stateCollection in FindParentRows(swimLaneView, workbenchItem))
