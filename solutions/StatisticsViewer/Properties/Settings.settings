@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TfsWorkbench.StatisticsViewer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DisplayName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Statistics</Value>
+    </Setting>
+    <Setting Name="DisplayPriority" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="DisplayMessage" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">View statistics for the loaded workspace.</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

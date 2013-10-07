@@ -1,0 +1,136 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Interfaces="clr-namespace:Emcc.ScrumMastersWorkbench.Core.Interfaces;assembly=Emcc.ScrumMastersWorkbench.Core"
+    xmlns:ItemListUI="clr-namespace:Emcc.ScrumMastersWorkbench.ItemListUI"
+    >
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Emcc.ScrumMastersWorkbench.UIElements;Component/Resources/EditControlTemplates.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <ItemListUI:LocalControlTemplateSelector x:Key="ControlTemplateSelector" />
+
+    <DataTemplate x:Key="CellTemplate0" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [0]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate1" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [1]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate2" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [2]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate3" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [3]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate4" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [4]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate5" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [5]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate6" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [6]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate7" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [7]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate8" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [8]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate9" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [9]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate10" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [10]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate11" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [11]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate12" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [12]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate13" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [13]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate14" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [14]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate15" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [15]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate16" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [16]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate17" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [17]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate18" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [18]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate19" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [19]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate20" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [20]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate21" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [21]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate22" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [22]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate23" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [23]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate24" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [24]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate25" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [25]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate26" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [26]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate27" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [27]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate28" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [28]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate29" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [29]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate30" DataType="{x:Type Interfaces:IControlItemCollection}">
+        <ContentControl IsTabStop="False" Content="{Binding [30]}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+    </DataTemplate>
+</ResourceDictionary>

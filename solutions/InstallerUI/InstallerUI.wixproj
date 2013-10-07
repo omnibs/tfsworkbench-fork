@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.0</ProductVersion>
+    <ProjectGuid>{2d4ff07b-26f8-4bef-b41c-e4383f86dc32}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>InstallerUI</OutputName>
+    <OutputType>Library</OutputType>
+    <WixRootPath>$(MSBuildProjectDirectory)..\..\..\lib\WiX\3.7.1224\</WixRootPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(WixRootPath)MSBuild\Wix.targets</WixTargetsPath>
+    <WixTasksPath Condition=" '$(WixTasksPath)' == '' ">$(WixRootPath)lib\WixTasks.dll</WixTasksPath>
+    <WixToolPath Condition=" '$(WixToolPath)' == '' ">$(WixRootPath)lib</WixToolPath>
+    <WixExtDir Condition=" '$(WixExtDir)' == '' ">$(WixRootPath)lib</WixExtDir>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>
+      $(DefineConstants);
+      bannerBmp=$(MSBuildProjectDirectory)\Bitmaps\bannrbmp.bmp;
+      dialogBmp=$(MSBuildProjectDirectory)\Bitmaps\dlgbmp.bmp;
+      exclamationIco=$(MSBuildProjectDirectory)\Bitmaps\exclamic.ico;
+      infoIco=$(MSBuildProjectDirectory)\Bitmaps\info.ico;
+      licenseRtf=$(MSBuildProjectDirectory)\license.rtf;
+      newIco=$(MSBuildProjectDirectory)\Bitmaps\new.ico;
+      upIco=$(MSBuildProjectDirectory)\Bitmaps\up.ico;
+      printeulaDll=$(MSBuildProjectDirectory)\PrintEula.dll;
+    </DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>
+      $(DefineConstants);
+      bannerBmp=$(MSBuildProjectDirectory)\Bitmaps\bannrbmp.bmp;
+      dialogBmp=$(MSBuildProjectDirectory)\Bitmaps\dlgbmp.bmp;
+      exclamationIco=$(MSBuildProjectDirectory)\Bitmaps\exclamic.ico;
+      infoIco=$(MSBuildProjectDirectory)\Bitmaps\info.ico;
+      licenseRtf=$(MSBuildProjectDirectory)\license.rtf;
+      newIco=$(MSBuildProjectDirectory)\Bitmaps\new.ico;
+      upIco=$(MSBuildProjectDirectory)\Bitmaps\up.ico;
+      printeulaDll=$(MSBuildProjectDirectory)\PrintEula.dll;
+    </DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DefineConstants>
+      $(DefineConstants);
+      bannerBmp=$(MSBuildProjectDirectory)\Bitmaps\bannrbmp.bmp;
+      dialogBmp=$(MSBuildProjectDirectory)\Bitmaps\dlgbmp.bmp;
+      exclamationIco=$(MSBuildProjectDirectory)\Bitmaps\exclamic.ico;
+      infoIco=$(MSBuildProjectDirectory)\Bitmaps\info.ico;
+      licenseRtf=$(MSBuildProjectDirectory)\license.rtf;
+      newIco=$(MSBuildProjectDirectory)\Bitmaps\new.ico;
+      upIco=$(MSBuildProjectDirectory)\Bitmaps\up.ico;
+      printeulaDll=$(MSBuildProjectDirectory)\PrintEula.dll;
+    </DefineConstants>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DefineConstants>
+      $(DefineConstants);
+      bannerBmp=$(MSBuildProjectDirectory)\Bitmaps\bannrbmp.bmp;
+      dialogBmp=$(MSBuildProjectDirectory)\Bitmaps\dlgbmp.bmp;
+      exclamationIco=$(MSBuildProjectDirectory)\Bitmaps\exclamic.ico;
+      infoIco=$(MSBuildProjectDirectory)\Bitmaps\info.ico;
+      licenseRtf=$(MSBuildProjectDirectory)\license.rtf;
+      newIco=$(MSBuildProjectDirectory)\Bitmaps\new.ico;
+      upIco=$(MSBuildProjectDirectory)\Bitmaps\up.ico;
+      printeulaDll=$(MSBuildProjectDirectory)\PrintEula.dll;
+    </DefineConstants>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AdvancedWelcomeEulaDlg.wxs">
+      <Link>
+      </Link>
+    </Compile>
+    <Compile Include="BrowseDlg.wxs" />
+    <Compile Include="CancelDlg.wxs" />
+    <Compile Include="Common.wxs" />
+    <Compile Include="CustomizeDlg.wxs" />
+    <Compile Include="DiskCostDlg.wxs" />
+    <Compile Include="ErrorDlg.wxs" />
+    <Compile Include="ErrorProgressText.wxs" />
+    <Compile Include="ExitDialog.wxs" />
+    <Compile Include="FatalError.wxs" />
+    <Compile Include="FeaturesDlg.wxs" />
+    <Compile Include="FilesInUse.wxs" />
+    <Compile Include="InstallDirDlg.wxs" />
+    <Compile Include="InstallScopeDlg.wxs" />
+    <Compile Include="InvalidDirDlg.wxs" />
+    <Compile Include="LicenseAgreementDlg.wxs" />
+    <Compile Include="MaintenanceTypeDlg.wxs" />
+    <Compile Include="MaintenanceWelcomeDlg.wxs" />
+    <Compile Include="MsiRMFilesInUse.wxs" />
+    <Compile Include="MyWelcomeEulaDlg.wxs" />
+    <Compile Include="OutOfDiskDlg.wxs" />
+    <Compile Include="OutOfRbDiskDlg.wxs" />
+    <Compile Include="PrepareDlg.wxs" />
+    <Compile Include="ProgressDlg.wxs" />
+    <Compile Include="ResumeDlg.wxs" />
+    <Compile Include="SetupTypeDlg.wxs" />
+    <Compile Include="UserExit.wxs" />
+    <Compile Include="VerifyReadyDlg.wxs" />
+    <Compile Include="WaitForCostingDlg.wxs" />
+    <Compile Include="WelcomeDlg.wxs" />
+    <Compile Include="WelcomeEulaDlg.wxs" />
+    <Compile Include="WixUI_Advanced.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bitmaps\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bitmaps\bannrbmp.bmp" />
+    <Content Include="Bitmaps\dlgbmp.bmp" />
+    <Content Include="Bitmaps\exclamic.ico" />
+    <Content Include="Bitmaps\info.ico" />
+    <Content Include="Bitmaps\New.ico" />
+    <Content Include="Bitmaps\Up.ico" />
+    <Content Include="PrintEula.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WixUI_en-us.wxl" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

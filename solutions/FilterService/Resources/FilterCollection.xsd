@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.workbench/Filter" elementFormDefault="qualified" targetNamespace="http://schemas.workbench/Filter" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="FilterCollection" nillable="true" type="tns:ArrayOfWorkbenchFilter" />
+  <xs:complexType name="ArrayOfWorkbenchFilter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkbenchFilter" nillable="true" type="tns:WorkbenchFilter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WorkbenchFilter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" />
+    </xs:sequence>
+    <xs:attribute name="action" type="tns:FilterActionOption" use="required" />
+    <xs:attribute name="typename" type="xs:string" />
+    <xs:attribute name="fieldname" type="xs:string" />
+    <xs:attribute name="operator" type="tns:FilterOperatorOption" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="FilterActionOption">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Include" />
+      <xs:enumeration value="Exclude" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FilterOperatorOption">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="IsEqualTo" />
+      <xs:enumeration value="IsNotEqualTo" />
+      <xs:enumeration value="IsGreaterThan" />
+      <xs:enumeration value="IsLessThan" />
+      <xs:enumeration value="IsGreaterThanEqualTo" />
+      <xs:enumeration value="IsLessThanEqualTo" />
+      <xs:enumeration value="StartsWith" />
+      <xs:enumeration value="EndsWith" />
+      <xs:enumeration value="Contains" />
+      <xs:enumeration value="DoesNotStartWith" />
+      <xs:enumeration value="DoesNotEndWith" />
+      <xs:enumeration value="DoesNotContain" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,24 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.ItemListUI.DisplayMode"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:ItemListUI="clr-namespace:TfsWorkbench.ItemListUI" 
+    Name="PART_DisplayMode"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border Style="{StaticResource MainBorderStyle}">
+        <DockPanel>
+            <ItemListUI:CustomTabControl 
+                x:Name="PART_TabControl" 
+                Background="{x:Null}" 
+                BorderBrush="{x:Null}"
+                ItemsSource="{Binding ElementName=PART_DisplayMode, Path=TabItems}" />
+        </DockPanel>
+    </Border>
+</UserControl>

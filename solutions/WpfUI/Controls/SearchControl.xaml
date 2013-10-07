@@ -1,0 +1,177 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.WpfUI.Controls.SearchControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:Interfaces="clr-namespace:TfsWorkbench.Core.Interfaces;assembly=TfsWorkbench.Core"
+    xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements" 
+    xmlns:Controls="clr-namespace:TfsWorkbench.WpfUI.Controls" 
+    xmlns:ValueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters;assembly=TfsWorkbench.UIElements" 
+    mc:Ignorable="d" 
+    Height="300" 
+    Width="601"
+    Name="PART_ControlRoot"
+    UIElements:DialogWrapper.IsResizeable="True"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="ItemCommandTemplate" DataType="{x:Type Interfaces:IWorkbenchItem}">
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox
+                        SelectedValue="{Binding Source={x:Static Controls:SearchControl.ViewIn}, Mode=OneTime}"
+                        ItemsSource="{Binding ElementName=PART_ControlRoot, Path=SearchProviders.Keys}"
+                        SelectionChanged="GotoSelectionChanged"
+                        MinWidth="55"
+                        ToolTip="View Item In:"
+                        />
+                    <Button
+                        Command="{x:Static UIElements:CommandLibrary.EditItemCommand}"
+                        CommandParameter="{Binding}"
+                        CommandTarget="{Binding ElementName=PART_ControlRoot}"
+                        Style="{DynamicResource EditButtonStyle}" 
+                        ToolTip="Edit Item"
+                        />
+                </StackPanel>
+            </DataTemplate>
+        
+            <ValueConverters:CaptionConverter x:Key="CaptionConverter" />
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border>
+        <DockPanel>
+            <Grid DockPanel.Dock="Top">
+                <TextBlock 
+                    Style="{StaticResource DialogCaptionStyle}"
+                    Text="Workbench Item Search" 
+                    />
+                <Button 
+                    x:Name="PART_CloseButton" 
+                    Click="CloseButtonClick" 
+                    Style="{DynamicResource CloseButtonStyle}" 
+                    ToolTip="Close" 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    IsCancel="True"
+                    />
+            </Grid>
+            <Border
+                DockPanel.Dock="Top"
+                Style="{StaticResource DialogInnerBorderStyle}"
+                >
+                <DockPanel>
+                    <Grid DockPanel.Dock="Top" Margin="20,10,20,10" TextBlock.FontSize="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Margin="0,0,4,0" VerticalAlignment="Center">Search Term / Id:</TextBlock>
+                        <TextBox Name="PART_SearchTerm" KeyDown="SearchTermKeyDown" Grid.Column="1" />
+                        <Button Click="SearchButtonClick" Content="Search" Grid.Column="2" Margin="4,0,0,0" IsDefault="True" />
+                    </Grid>
+                    <TextBlock 
+                        DockPanel.Dock="Top"
+                        FontSize="14"
+                        >
+                        <Run Text="Status:" />
+                        <TextBlock 
+                            Name="PART_Status"
+                            Text="Ready to search..."
+                            Foreground="DarkRed"
+                            />
+                    </TextBlock>
+                    <ListView 
+                        Name="PART_ResultsList" 
+                        DockPanel.Dock="Top"
+                        ItemsSource="{Binding ElementName=PART_ControlRoot, Path=MatchedItems}"
+                        GridViewColumnHeader.Click="ResultListClick"
+                        >
+                        <ListView.Resources>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <GridViewRowPresenter VerticalAlignment="Stretch" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                                <GridViewRowPresenter.ToolTip>
+                                                    <UIElements:WorkbenchItemToolTip WorkbenchItem="{Binding}" />
+                                                </GridViewRowPresenter.ToolTip>
+                                                <GridViewRowPresenter.ContextMenu>
+                                                    <UIElements:WorkbenchItemContextMenu 
+                                                        WorkbenchItem="{Binding}"
+                                                        >
+                                                        <MenuItem
+                                                            CommandParameter="{Binding}" 
+				                                            Command="{x:Static UIElements:CommandLibrary.EditItemCommand}"
+				                                            CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                            >
+                                                            <MenuItem.Icon>
+                                                                <ContentControl Template="{StaticResource EditIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                                                            </MenuItem.Icon>
+                                                            <MenuItem.Header>
+                                                                <TextBlock FontWeight="Bold">
+					                                        <TextBlock.Text>
+					                                            <MultiBinding StringFormat="{}Edit ({0}) {1}">
+							                                        <Binding Path="[System.Id]" />
+							                                        <Binding Path="[System.WorkItemType]"/>
+						                                        </MultiBinding>
+					                                        </TextBlock.Text>
+                                                                </TextBlock>
+                                                            </MenuItem.Header>
+                                                        </MenuItem>
+                                                        <MenuItem 
+                                                            Header="Open In Browser"
+                                                            CommandParameter="{Binding}" 
+				                                            Command="{x:Static UIElements:CommandLibrary.OpenItemInBrowserCommand}"
+				                                            CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                    	                                    >
+                                                            <MenuItem.Icon>
+                                                                <ContentControl Template="{StaticResource WebIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                                                            </MenuItem.Icon>
+                                                        </MenuItem>
+                                                    </UIElements:WorkbenchItemContextMenu>
+                                                </GridViewRowPresenter.ContextMenu>
+                                            </GridViewRowPresenter>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="" CellTemplate="{StaticResource ItemCommandTemplate}" />
+                                    <GridViewColumn Header="{x:Static Controls:SearchControl.IdColumnTitle}" DisplayMemberBinding="{Binding [System.Id]}" />
+                                    <GridViewColumn Header="{x:Static Controls:SearchControl.TypeColumnTitle}" DisplayMemberBinding="{Binding [System.WorkItemType]}" />
+                                    <GridViewColumn Header="{x:Static Controls:SearchControl.CaptionColumnTitle}">
+                                        <GridViewColumn.DisplayMemberBinding>
+                                            <MultiBinding Converter="{StaticResource CaptionConverter}">
+                                                <Binding Path="[System.State]" />
+                                                <Binding />
+                                            </MultiBinding>
+                                        </GridViewColumn.DisplayMemberBinding>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="{x:Static Controls:SearchControl.StateColumnTitle}" DisplayMemberBinding="{Binding [System.State]}" />
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </Border>
+        </DockPanel>
+    </Border>
+</UserControl>

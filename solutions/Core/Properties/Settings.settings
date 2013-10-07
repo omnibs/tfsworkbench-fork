@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TfsWorkbench.Core.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TypeFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">System.WorkItemType</Value>
+    </Setting>
+    <Setting Name="IdFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">System.Id</Value>
+    </Setting>
+    <Setting Name="TitleFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">System.Title</Value>
+    </Setting>
+    <Setting Name="StateFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">System.State</Value>
+    </Setting>
+    <Setting Name="IterationPathFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">System.IterationPath</Value>
+    </Setting>
+    <Setting Name="AreaPathFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">System.AreaPath</Value>
+    </Setting>
+    <Setting Name="ExclusionState" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Deleted</Value>
+    </Setting>
+    <Setting Name="ProjectFileSubDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">TfsWorkbench\ProjectData</Value>
+    </Setting>
+    <Setting Name="ItemColour" Type="System.Windows.Media.Color" Scope="Application">
+      <Value Profile="(Default)">#FFFFFF00</Value>
+    </Setting>
+    <Setting Name="ExcludedStateColour" Type="System.Windows.Media.Color" Scope="Application">
+      <Value Profile="(Default)">#FFFF0000</Value>
+    </Setting>
+    <Setting Name="VolumeWarningLevel" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="RevisionFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">System.Rev</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

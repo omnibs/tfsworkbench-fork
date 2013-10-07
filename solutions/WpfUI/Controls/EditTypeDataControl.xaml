@@ -1,0 +1,208 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:uiElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements"
+    x:Class="TfsWorkbench.WpfUI.Controls.EditTypeDataControl"
+    Height="350" 
+    Width="500"
+    Name="PART_UserControlRoot"
+    uiElements:DialogWrapper.IsResizeable="True"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/EditControlTemplates.xaml" />
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="SmallTitle" TargetType="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button 
+                x:Name="CloseButton" 
+                Click="CloseButtonClick" 
+                Style="{DynamicResource CloseButtonStyle}" 
+                ToolTip="Close" 
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                IsCancel="True"
+                />
+            <TextBlock
+                Style="{StaticResource DialogCaptionStyle}"
+                Text="Item Context Options"
+                />
+            <Border 
+                Grid.Row="1"
+                Style="{StaticResource DialogInnerBorderStyle}"
+                >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Grid.Row="0" Margin="5">
+                        <TextBlock Style="{StaticResource SmallTitle}" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0,0,5,0">Work Item Type:</TextBlock>
+                        <ComboBox Name="PART_SelectedItemType" DockPanel.Dock="Left" SelectedIndex="0" SelectionChanged="ItemTypeSelectionChanged" ItemsSource="{Binding ElementName=PART_UserControlRoot, Path=ItemTypeNames}" />
+                    </DockPanel>
+
+                    <TabControl Grid.Row="1">
+                        <TabItem Header="Display Fields">
+                            <Grid Margin="2" DataContext="{Binding ElementName=PART_UserControlRoot}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" FontStyle="Italic">Select the item display fields.</TextBlock>
+                                <TextBlock Grid.Row="1" VerticalAlignment="Center">Item Caption:</TextBlock>
+                                <TextBlock Grid.Row="2" VerticalAlignment="Center">Body Text:</TextBlock>
+                                <TextBlock Grid.Row="3" VerticalAlignment="Center">Item Metric:</TextBlock>
+                                <TextBlock Grid.Row="4" VerticalAlignment="Center">Assignment / Ownership:</TextBlock>
+                                <TextBlock Grid.Row="5" VerticalAlignment="Center" Margin="0,0,4,0">Default Colour:</TextBlock>
+                                <ComboBox Name="PART_Caption" Grid.Column="1" Grid.Row="1" Margin="0,4,0,0" ItemsSource="{Binding AvailableDisplayFields}" SelectedValue="{Binding CaptionField}" SelectionChanged="DisplayField_SelectionChanged" />
+                                <ComboBox Name="PART_Body" Grid.Column="1" Grid.Row="2" Margin="0,4,0,0" ItemsSource="{Binding AvailableDisplayFields}" SelectedValue="{Binding BodyField}" SelectionChanged="DisplayField_SelectionChanged" />
+                                <ComboBox Name="PART_Numeric" Grid.Column="1" Grid.Row="3" Margin="0,4,0,0" ItemsSource="{Binding AvailableDisplayFields}" SelectedValue="{Binding NumericField}" SelectionChanged="DisplayField_SelectionChanged" />
+                                <ComboBox Name="PART_Owner" Grid.Column="1" Grid.Row="4" Margin="0,4,0,0" ItemsSource="{Binding AvailableDisplayFields}" SelectedValue="{Binding OwnerField}" SelectionChanged="DisplayField_SelectionChanged" />
+                                <ComboBox 
+                                    Name="PART_ColourSelector"
+                                    Grid.Column="1" 
+                                    Grid.Row="5" 
+                                    Margin="0,4,0,0"
+                                    Background="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}"
+                                    ItemsSource="{Binding ColourOptions}"
+                                    SelectedValue="{Binding SelectedColour}"
+                                    >
+                                    <ComboBox.ItemContainerStyle>
+                                        <Style TargetType="ContentControl">
+                                            <Setter Property="Background" Value="{Binding}" />
+                                        </Style>
+                                    </ComboBox.ItemContainerStyle>
+                                </ComboBox>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Context Menu Fields">
+                            <Grid Margin="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="1" Style="{StaticResource SmallTitle}">Available Fields</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource SmallTitle}">Selected Fields</TextBlock>
+
+                                <ListBox
+                                    Name="PART_AvailableFields"
+                                    Grid.Row="2"
+                                    SelectionMode="Multiple"
+                                    Margin="4,0,4,4"
+                                    BorderBrush="DarkGray"
+                                    BorderThickness="1"
+                                    ScrollViewer.CanContentScroll="True"
+                                    />
+
+                                <StackPanel
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Width="40"
+                                    >
+                                    <Button Name="PART_SelecteItem" Content=">>" Click="AddItemClick" Margin="5,0,5,5"/>
+                                    <Button Name="PART_DeselectItem" Content="&lt;&lt;" Click="RemoveItemClick" Margin="5,5,5,0"/>
+                                </StackPanel>
+
+                                <ListBox
+                                    Name="PART_SelectedFields"
+                                    Grid.Row="2"
+                                    Grid.Column="2"
+                                    SelectionMode="Multiple"
+                                    Margin="4,0,4,4"
+                                    BorderBrush="DarkGray"
+                                    BorderThickness="1"
+                                    ScrollViewer.CanContentScroll="True"
+                                    />
+
+                                <TextBlock Grid.Row="3" Grid.ColumnSpan="3" FontStyle="Italic">Note: Only fields with allowed / suggested values can be edited in context menus.</TextBlock>
+                            </Grid>
+                        </TabItem>
+
+                        <TabItem Header="Duplication Fields">
+                            <Grid Margin="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="1" Style="{StaticResource SmallTitle}">Available Fields</TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource SmallTitle}">Selected Fields</TextBlock>
+
+                                <ListBox
+                                    Name="PART_AvailableDuplicationFields"
+                                    Grid.Row="2"
+                                    SelectionMode="Multiple"
+                                    Margin="4,0,4,4"
+                                    BorderBrush="DarkGray"
+                                    BorderThickness="1"
+                                    ScrollViewer.CanContentScroll="True"
+                                    />
+
+                                <StackPanel
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Width="40"
+                                    >
+                                    <Button Content=">>" Click="AddDuplicationItemClick" Margin="5,0,5,5"/>
+                                    <Button Content="&lt;&lt;" Click="RemoveDuplicationItemClick" Margin="5,5,5,0"/>
+                                </StackPanel>
+
+                                <ListBox
+                                    Name="PART_SelectedDuplicationFields"
+                                    Grid.Row="2"
+                                    Grid.Column="2"
+                                    SelectionMode="Multiple"
+                                    Margin="4,0,4,4"
+                                    BorderBrush="DarkGray"
+                                    BorderThickness="1"
+                                    ScrollViewer.CanContentScroll="True"
+                                    />
+
+                                <TextBlock Grid.Row="3" Grid.ColumnSpan="3" FontStyle="Italic">Note: The selected fields will be copied to duplicated items.</TextBlock>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </Border>
+            
+        </Grid>
+    </Border>
+</UserControl>

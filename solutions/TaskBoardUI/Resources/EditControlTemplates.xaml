@@ -1,0 +1,84 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:DataObjects="clr-namespace:Emcc.TeamSystem.TaskBoard.Core.DataObjects;assembly=Emcc.TeamSystem.TaskBoard.Core"
+    xmlns:UIElements="clr-namespace:Emcc.TeamSystem.TaskBoard.UIElements;assembly=Emcc.TeamSystem.TaskBoard.UIElements"
+    xmlns:ValueConverters="clr-namespace:Emcc.TeamSystem.TaskBoard.UIElements.ValueConverters;assembly=Emcc.TeamSystem.TaskBoard.UIElements"
+    xmlns:Interfaces="clr-namespace:Emcc.TeamSystem.TaskBoard.Core.Interfaces;assembly=Emcc.TeamSystem.TaskBoard.Core"
+    >
+
+    <ValueConverters:InvertBoolean x:Key="BooleanInvert" />
+    <ValueConverters:ProjectNodeSelector x:Key="ProjectNodeSelector" />
+
+    <DataTemplate x:Key="FieldControl" DataType="{x:Type DataObjects:ControlItem}">
+        <ContentControl IsTabStop="False">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HasAllowedValues}" Value="True">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <ComboBox 
+                                            IsEditable="{Binding Path=IsLimitedToAllowedValues, Converter={StaticResource BooleanInvert}}"
+                                            DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Path=DataContext}" 
+                                            IsEnabled="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+                                            ItemsSource="{Binding AllowedValues}" 
+                                            SelectedItem="{Binding Value}" 
+                                            ToolTip="{Binding HelpText}" 
+                                            />
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding HasAllowedValues}" Value="False">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <TextBox 
+                                            DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}, Path=DataContext}" 
+                                            IsEnabled="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+                                            Text="{Binding Value}" 
+                                            ToolTip="{Binding HelpText}" 
+                                            />
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="HtmlFieldControl">
+        <ScrollViewer
+            VerticalScrollBarVisibility="Auto">
+            <TextBox 
+                MinLines="5"
+                MaxLines="5"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                IsEnabled="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+                Text="{Binding Value}" 
+                ToolTip="{Binding HelpText}" 
+                />
+        </ScrollViewer>
+    </DataTemplate>
+                  
+    <DataTemplate x:Key="WorkItemClassificationControl">
+        <UIElements:ComboBoxTreeView 
+            Value="{Binding Mode=TwoWay, Path=Value}" 
+            IsEnabled="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+            ToolTip="{Binding HelpText}" 
+            >
+            <UIElements:ComboBoxTreeView.RootNode>
+                <MultiBinding Converter="{StaticResource ProjectNodeSelector}">
+                    <MultiBinding.Bindings>
+                        <Binding RelativeSource="{RelativeSource AncestorType={x:Type Interfaces:IProjectDataConsumer}}" Path="ProjectData" />
+                        <Binding Path="FieldName" />
+                    </MultiBinding.Bindings>
+                </MultiBinding>
+            </UIElements:ComboBoxTreeView.RootNode>
+        </UIElements:ComboBoxTreeView>
+    </DataTemplate>
+</ResourceDictionary>

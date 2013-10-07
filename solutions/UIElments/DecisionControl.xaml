@@ -1,0 +1,43 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.UIElements.DecisionControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="403"
+    Name="PART_ControlRoot"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border>
+        <DockPanel DataContext="{Binding ElementName=PART_ControlRoot}">
+            <TextBlock DockPanel.Dock="Top" Text="{Binding Caption}" Style="{StaticResource DialogCaptionStyle}" />
+            <Border
+                DockPanel.Dock="Top"
+                Style="{StaticResource DialogInnerBorderStyle}"
+                >
+                <DockPanel>
+                    <CheckBox DockPanel.Dock="Bottom" IsChecked="{Binding DoNotShowAgain}" Content="{Binding DoNotShowAgainText}">
+                        <CheckBox.Style>
+                            <Style TargetType="CheckBox">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding HideDoNotShowAgain}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </CheckBox.Style>
+                    </CheckBox>
+                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,5">
+                        <Button Name="PART_YesButton" Width="100" Margin="0,0,5,0" Click="YesButton_OnClick">Yes</Button>
+                        <Button Name="PART_NoButton" Width="100" Click="NoButton_OnClick">No</Button>
+                    </StackPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="{Binding Message}" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,5,0,5" />
+                </DockPanel>
+            </Border>
+        </DockPanel>
+    </Border>
+</UserControl>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+
+  <Directory Id="TARGETDIR" Name="SourceDir">
+    <?if $(var.Platform)=x64 ?>
+        <Directory Id="ProgramFiles64Folder" Name="PFiles64">
+    <?else ?>
+        <Directory Id="ProgramFilesFolder" Name="PFiles">
+    <?endif ?>
+          
+          <Directory Id="BASEINSTALLDIR" Name="Scrum for Team System">
+            <Directory Id="APPLICATIONFOLDER"
+                     Name="!(loc.ApplicationName)" />
+          </Directory>
+          
+     <?if $(var.Platform)=x64 ?>
+        </Directory>
+     <?else?>
+         </Directory>
+     <?endif?>
+
+    <Directory Id="ProgramMenuFolder" Name="Programs" >
+      <Directory Id="ProgramMenuDir" Name="Scrum for Team System">
+        <Component Id="ProgramMenuDir" Guid="C841AF59-BCD5-446B-8DAA-8CF24D28F308">
+          <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+          <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\Scrum for Team System\[ProductName]' Type='string' Value='' KeyPath='yes' />
+        </Component>
+      </Directory>
+        
+    </Directory>
+
+    <Directory Id="DesktopFolder" Name="Desktop">
+      <Component Id="TfsWorkbenchUIDesktopShortcut" Guid="F464232E-1F14-4D67-B416-5E7238908EFA">
+        <Condition>INSTALLDESKTOPSHORTCUT</Condition>
+        <RegistryKey Root="HKCU" Key="Software\[Manufacturer]\Scrum for Team System\[ProductName]">
+            <RegistryValue Name="DesktopIcon" Type="integer" Value="1" KeyPath="yes" />
+        </RegistryKey>
+        <Shortcut 
+          Id="DesktopShortcut" 
+          Directory="DesktopFolder" 
+          Icon="TfsWorkbench.exe" 
+          Name="!(loc.ApplicationName)" 
+          WorkingDirectory="TARGETDIR" 
+          Target="[#TfsWorkbenchUI]" 
+          />
+      </Component>
+    </Directory>
+    
+  </Directory>
+  
+</Include>

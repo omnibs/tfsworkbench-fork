@@ -1,0 +1,140 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ValueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters"
+    xmlns:Interfaces="clr-namespace:TfsWorkbench.Core.Interfaces;assembly=TfsWorkbench.Core" 
+    xmlns:PopupControls="clr-namespace:TfsWorkbench.UIElements.PopupControls" xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements" xmlns:Services="clr-namespace:TfsWorkbench.Core.Services;assembly=TfsWorkbench.Core">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="ApplicationStyles.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+
+    <ValueConverters:InvertBoolean x:Key="BooleanInvert" />
+    <ValueConverters:ProjectNodeSelector x:Key="ProjectNodeSelector" />
+    <ValueConverters:NumberToStringConverter x:Key="NumberToString" />
+
+    <DataTemplate x:Key="ControlToolTip">
+        <TextBlock>
+            <TextBlock Text="{Binding Path=DisplayText }" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Path=HelpText, StringFormat={} ({0})}" FontStyle="Italic" />
+            <LineBreak />
+            <TextBlock Text="{Binding Value}" />
+        </TextBlock>
+    </DataTemplate>
+
+    <DataTemplate x:Key="FieldControlDropDown" DataType="{x:Type Interfaces:IControlItem}">
+        <ComboBox 
+            IsEditable="False"
+            IsReadOnly="{Binding Path=IsReadOnly}"
+            ItemsSource="{Binding AllowedValues}" 
+            SelectedItem="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource NumberToString}}" 
+            IsTabStop="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+            >
+            <ComboBox.ToolTip>
+                <ContentPresenter ContentTemplate="{StaticResource ControlToolTip}" />
+            </ComboBox.ToolTip>
+        </ComboBox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="FieldControlComboBox" DataType="{x:Type Interfaces:IControlItem}">
+        <UIElements:EditableComboBox 
+            IsEditable="True"
+            IsReadOnly="{Binding Path=IsReadOnly}"
+            ItemsSource="{Binding AllowedValues}" 
+            Text="{Binding Path=Value}" 
+            IsTabStop="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+            >
+            <UIElements:EditableComboBox.ToolTip>
+                <ContentPresenter ContentTemplate="{StaticResource ControlToolTip}" />
+            </UIElements:EditableComboBox.ToolTip>
+        </UIElements:EditableComboBox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="FieldControlTextBox" DataType="{x:Type Interfaces:IControlItem}">
+        <TextBox 
+            IsReadOnly="{Binding Path=IsReadOnly}"
+            Text="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+			Style="{StaticResource GreyOutOnReadOnly}"
+            IsTabStop="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+            >
+            <TextBox.ToolTip>
+                <ContentPresenter ContentTemplate="{StaticResource ControlToolTip}" />
+            </TextBox.ToolTip>
+        </TextBox>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="HtmlFieldControl">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="100">
+            <TextBox 
+    			AcceptsReturn="True"
+    			TextWrapping="Wrap"
+    			IsReadOnly="{Binding IsReadOnly}"
+    			Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+				Style="{StaticResource GreyOutOnReadOnly}"
+                IsTabStop="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+                >
+                <TextBox.ToolTip>
+                    <ContentPresenter ContentTemplate="{StaticResource ControlToolTip}" />
+                </TextBox.ToolTip>
+            </TextBox>
+        </ScrollViewer>
+    </DataTemplate>
+
+    <DataTemplate x:Key="HtmlFieldControl_SingleLine">
+        <PopupControls:PopUpTextBoxControl 
+            Value="{Binding Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+    		IsReadOnly="{Binding IsReadOnly}"
+            IsTabStop="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+            >
+            <PopupControls:PopUpTextBoxControl.ToolTip>
+                <ContentPresenter ContentTemplate="{StaticResource ControlToolTip}" />
+            </PopupControls:PopUpTextBoxControl.ToolTip>
+        </PopupControls:PopUpTextBoxControl>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="WorkItemClassificationControl">
+        <PopupControls:ComboBoxTreeView 
+            Value="{Binding Mode=TwoWay, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+            IsEnabled="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+            IsTabStop="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+            RootNode="{Binding Path=FieldName, Converter={StaticResource ProjectNodeSelector}}"
+            >
+            <PopupControls:ComboBoxTreeView.ToolTip>
+                <ContentPresenter ContentTemplate="{StaticResource ControlToolTip}" />
+            </PopupControls:ComboBoxTreeView.ToolTip>
+        </PopupControls:ComboBoxTreeView>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="DateTimeControl">
+        <DatePicker
+            SelectedDate="{Binding Mode=TwoWay, Path=Value}"
+            IsEnabled="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+            IsTabStop="{Binding Path=IsReadOnly, Converter={StaticResource BooleanInvert}}"
+            >
+            <DatePicker.ToolTip>
+                <ContentPresenter ContentTemplate="{StaticResource ControlToolTip}" />
+            </DatePicker.ToolTip>
+        </DatePicker>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TextBlockControl">
+        <Border
+            BorderBrush="Black"
+            BorderThickness="1"
+            Background="White"
+            Height="25"
+            Margin="0,2,0,0"
+            Padding="2,0,2,0"
+            >
+            <TextBlock
+                Text="{Binding Path=Value}" 
+                TextWrapping="NoWrap"
+                TextTrimming="CharacterEllipsis"
+                VerticalAlignment="Center"
+                >
+                <TextBlock.ToolTip>
+                    <ContentPresenter ContentTemplate="{StaticResource ControlToolTip}" />                        
+                </TextBlock.ToolTip>
+            </TextBlock>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>

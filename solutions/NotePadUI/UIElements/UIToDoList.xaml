@@ -1,0 +1,144 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.NotePadUI.UIElements.UIToDoList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:notePadUi="clr-namespace:TfsWorkbench.NotePadUI"
+    xmlns:models="clr-namespace:TfsWorkbench.NotePadUI.Models"
+    mc:Ignorable="d" 
+    d:DesignHeight="500" d:DesignWidth="300"
+    d:DataContext="{d:DesignInstance notePadUi:ToDoListController}"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/TfsWorkbench.NotePadUI;component/Resources/CommonResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="ToDoItemTemplate" DataType="{x:Type models:ToDoItem}">
+                <Grid Margin="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox 
+                        IsChecked="{Binding IsDone}" 
+                        FontSize="30" 
+                        notePadUi:DragBehaviour.DragAction="None"
+                        Cursor="Hand"
+                        VerticalAlignment="Center"
+                        />
+                    
+                    <TextBox 
+                        Grid.Column="1"
+                        notePadUi:DragBehaviour.DragAction="None"
+                        Text="{Binding Text}"
+                        FontFamily="Lucida Handwriting"
+                        BorderBrush="Transparent"
+                        Background="Transparent"
+                        TextWrapping="Wrap"
+                        AcceptsReturn="True"
+                        FontSize="18"
+                        >
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsDone}" Value="true">
+                                        <Setter Property="TextDecorations" Value="Strikethrough" />
+                                        <Setter Property="Foreground" Value="#ffa0a0a0" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <Button 
+                        Grid.Column="2"                        
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center"
+                        Margin="4,2,0,0"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.DeleteCommand}"
+                        CommandParameter="{Binding}"
+                        Style="{StaticResource RedMouseOverButton}"
+                        Content="&#10006;"
+                        TextBlock.FontSize="14"
+                        ToolTip="Remove"
+                        />
+
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Path 
+			Stroke="Black" 
+			Data="M390.114,14.949477 C390.114,9.0743598 394.81249,0.72699997 394.81249,0.72699997 388.27603,0.72699997 381.73958,0.72699997 375.20312,0.72699997 375.20312,0.72699997 379.784,9.0483373 379.784,14.949288 379.784,24.951558 374.63527,33.06 368.284,33.06 361.93273,33.06 356.784,24.951558 356.784,14.949288 356.784,9.0740463 361.32812,0.72699997 361.32812,0.72699997 L341.82812,0.72699997 C341.82812,0.72699997 346.454,9.0483373 346.454,14.949288 346.454,24.951558 341.30527,33.06 334.954,33.06 328.60273,33.06 323.454,14.615954 323.454,14.615954 323.454,14.615954 313.124,22.282624 313.124,22.282624 313.124,22.282624 307.97527,33.06 301.624,33.06 295.27273,33.06 290.124,24.951558 290.124,14.949288 290.124,9.0740463 294.65624,0.72699997 294.65624,0.72699997 288.17708,0.72699997 281.69791,0.72699997&#xD;&#xA;275.21874,0.72699997 275.21874,0.72699997 279.794,9.0483373 279.794,14.949288 279.794,24.951558 274.64527,33.06 268.294,33.06 261.94273,33.06 254.46067,24.951558 254.46067,14.949288 254.46067,9.0740463 258.02604,5.060335 258.02604,5.060335 251.53645,5.060335 248.3802,2.3936673 241.89062,2.3936673 241.89062,2.3936673 246.464,15.715007 246.464,21.615957 246.464,31.618227 241.31527,33.06 234.964,33.06 228.61273,33.06&#xD;&#xA;223.464,24.951558 223.464,14.949288 223.464,9.0740463 228.01562,0.72699997 228.01562,0.72699997 221.53125,0.72699997 215.04687,0.72699997 208.5625,0.72699997 208.5625,0.72699997 213.134,9.0483373 213.134,14.949288 213.134,24.951558 207.98527,33.06 201.634,33.06 195.28273,33.06 190.134,24.951558 190.134,14.949288 190.134,9.0740463 194.65625,0.72699997 194.65625,0.72699997 L175.25,0.72699997 C175.25,0.72699997 179.804,9.0483373 179.804,14.949288 179.804,24.951558 174.65527,33.06 168.304,33.06 161.95273,33.06 156.804,24.951558 156.804,14.949288 156.804,9.0740463 161.39062,0.72699997 161.39062,0.72699997 L143.22396,5.3936685 C143.22396,5.3936685 146.474,12.381672 146.474,18.282622 146.474,28.284892 141.32527,33.06 134.974,33.06 128.62273,33.06 123.474,24.951558 123.474,14.949288 123.474,9.0740463 128.10937,0.72699997 128.10937,0.72699997 121.59896,0.72699997 115.08854,0.72699997 108.57812,0.72699997 108.57812,0.72699997 113.144,9.0483373 113.144,14.949288 113.144,24.951558 107.99527,33.06 101.644,33.06 95.292725,33.06 90.144,14.949288&#xD;&#xA;90.144,14.949288 90.144,14.949288 79.814,14.949288 79.814,14.949288 79.814,14.949288 74.665275,33.06 68.314,33.06 61.962725,33.06 56.814,24.951558 56.814,14.949288 56.814,9.0740463 61.437499,0.72699997 61.437499,0.72699997 61.409721,0.72699997 41.749999,0.72699997 41.749999,0.72699997 L41.730697,0.71874999 C41.730697,0.71874999 46.484,9.0483377 46.484,14.949288 46.484,24.951558 41.335275,33.06 34.984,33.06 28.632725,33.06 23.484,24.951558 23.484,14.949288 23.484,9.0740461 28.218749,0.72699997 28.218749,0.72699997 28.218749,0.72699997 0.5,0.72699997 0.5,0.72699997 3.653506,175.1973 3.273313,348.5803 0.5,521.22696 3.8709997,546.04524 6.3001801,568.74024 3,596.22699 27.481026,594.93159 48.996953,598.06641&#xD;&#xA;72,599.727 153.16667,597.61875 234.33333,598.39758 315.5,599.727 339.91338,592.83466 364.26181,588.15384 388.5,587.22698 394.21495,554.26671 397.66379,520.52491 399.5,486.22694 395.01557,424.56097 396.21206,362.89433 399.5,301.22687 L399.5,32.008249 C399.5,32.008249 390.114,24.111738 390.114,14.949477 z" 
+			Stretch="Fill"
+            >
+            <Path.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFDEDEDE" Offset="0"/>
+                    <GradientStop Color="White" Offset="0.306"/>
+                    <GradientStop Color="White" Offset="0.69"/>
+                    <GradientStop Color="#FFDEDEDE" Offset="1"/>
+                </LinearGradientBrush>
+            </Path.Fill>
+            <Path.Effect>
+                <DropShadowEffect Opacity="0.5" />
+            </Path.Effect>
+        </Path>
+
+        <Path 
+			Stroke="Transparent" 
+			Data="M390.114,14.949477 C390.114,9.0743598 394.81249,0.72699997 394.81249,0.72699997 388.27603,0.72699997 381.73958,0.72699997 375.20312,0.72699997 375.20312,0.72699997 379.784,9.0483373 379.784,14.949288 379.784,24.951558 374.63527,33.06 368.284,33.06 361.93273,33.06 356.784,24.951558 356.784,14.949288 356.784,9.0740463 361.32812,0.72699997 361.32812,0.72699997 L341.82812,0.72699997 C341.82812,0.72699997 346.454,9.0483373 346.454,14.949288 346.454,24.951558 341.30527,33.06 334.954,33.06 328.60273,33.06 323.454,14.615954 323.454,14.615954 323.454,14.615954 313.124,22.282624 313.124,22.282624 313.124,22.282624 307.97527,33.06 301.624,33.06 295.27273,33.06 290.124,24.951558 290.124,14.949288 290.124,9.0740463 294.65624,0.72699997 294.65624,0.72699997 288.17708,0.72699997 281.69791,0.72699997&#xD;&#xA;275.21874,0.72699997 275.21874,0.72699997 279.794,9.0483373 279.794,14.949288 279.794,24.951558 274.64527,33.06 268.294,33.06 261.94273,33.06 254.46067,24.951558 254.46067,14.949288 254.46067,9.0740463 258.02604,5.060335 258.02604,5.060335 251.53645,5.060335 248.3802,2.3936673 241.89062,2.3936673 241.89062,2.3936673 246.464,15.715007 246.464,21.615957 246.464,31.618227 241.31527,33.06 234.964,33.06 228.61273,33.06&#xD;&#xA;223.464,24.951558 223.464,14.949288 223.464,9.0740463 228.01562,0.72699997 228.01562,0.72699997 221.53125,0.72699997 215.04687,0.72699997 208.5625,0.72699997 208.5625,0.72699997 213.134,9.0483373 213.134,14.949288 213.134,24.951558 207.98527,33.06 201.634,33.06 195.28273,33.06 190.134,24.951558 190.134,14.949288 190.134,9.0740463 194.65625,0.72699997 194.65625,0.72699997 L175.25,0.72699997 C175.25,0.72699997 179.804,9.0483373 179.804,14.949288 179.804,24.951558 174.65527,33.06 168.304,33.06 161.95273,33.06 156.804,24.951558 156.804,14.949288 156.804,9.0740463 161.39062,0.72699997 161.39062,0.72699997 L143.22396,5.3936685 C143.22396,5.3936685 146.474,12.381672 146.474,18.282622 146.474,28.284892 141.32527,33.06 134.974,33.06 128.62273,33.06 123.474,24.951558 123.474,14.949288 123.474,9.0740463 128.10937,0.72699997 128.10937,0.72699997 121.59896,0.72699997 115.08854,0.72699997 108.57812,0.72699997 108.57812,0.72699997 113.144,9.0483373 113.144,14.949288 113.144,24.951558 107.99527,33.06 101.644,33.06 95.292725,33.06 90.144,14.949288&#xD;&#xA;90.144,14.949288 90.144,14.949288 79.814,14.949288 79.814,14.949288 79.814,14.949288 74.665275,33.06 68.314,33.06 61.962725,33.06 56.814,24.951558 56.814,14.949288 56.814,9.0740463 61.437499,0.72699997 61.437499,0.72699997 61.409721,0.72699997 41.749999,0.72699997 41.749999,0.72699997 L41.730697,0.71874999 C41.730697,0.71874999 46.484,9.0483377 46.484,14.949288 46.484,24.951558 41.335275,33.06 34.984,33.06 28.632725,33.06 23.484,24.951558 23.484,14.949288 23.484,9.0740461 28.218749,0.72699997 28.218749,0.72699997 28.218749,0.72699997 0.5,0.72699997 0.5,0.72699997 3.653506,175.1973 3.273313,348.5803 0.5,521.22696 3.8709997,546.04524 6.3001801,568.74024 3,596.22699 27.481026,594.93159 48.996953,598.06641&#xD;&#xA;72,599.727 153.16667,597.61875 234.33333,598.39758 315.5,599.727 339.91338,592.83466 364.26181,588.15384 388.5,587.22698 394.21495,554.26671 397.66379,520.52491 399.5,486.22694 395.01557,424.56097 396.21206,362.89433 399.5,301.22687 L399.5,32.008249 C399.5,32.008249 390.114,24.111738 390.114,14.949477 z" 
+            Stretch="Fill"
+            >
+            <Path.Fill>
+                <ImageBrush ImageSource="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/PostItNoteOverlay.png" Stretch="UniformToFill" />
+            </Path.Fill>
+        </Path>
+        
+        <Viewbox Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="15,0,15,30">
+            <Grid>
+                <Rectangle Height="1" Margin="0,30, 0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,45, 0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,60, 0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,75, 0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,90, 0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,105,0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,120,0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,135,0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,150,0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,165,0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,180,0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,195,0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,210,0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+                <Rectangle Height="1" Margin="0,225,0,0" Stroke="#ffdcdcdc" VerticalAlignment="Top" />
+            </Grid>
+        </Viewbox>
+        
+        <Button 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top" 
+            Margin="0,36,15,0"
+            Command="{Binding AddCommand}"
+            Style="{StaticResource RedMouseOverButton}"
+            Content="&#10010;"
+            TextBlock.FontSize="20"
+            ToolTip="Add new to do item"
+            />
+        
+        <ItemsControl 
+            Margin="15,72,15,15"
+            ItemsSource="{Binding ToDoItems}" 
+            ItemTemplate="{StaticResource ToDoItemTemplate}"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Top"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            ScrollViewer.CanContentScroll="False"
+            />
+    </Grid>
+</UserControl>

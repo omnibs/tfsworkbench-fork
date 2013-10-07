@@ -1,0 +1,273 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Interfaces="clr-namespace:TfsWorkbench.Core.Interfaces;assembly=TfsWorkbench.Core"
+    xmlns:ItemListUI="clr-namespace:TfsWorkbench.ItemListUI" xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements" xmlns:ValueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters;assembly=TfsWorkbench.UIElements">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+        <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/EditControlTemplates.xaml"/>
+        <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <ItemListUI:LocalControlTemplateSelector x:Key="ControlTemplateSelector" />
+
+    <ValueConverters:CaptionConverter x:Key="CaptionConverter" />
+    
+    <Style x:Key="Highlight" TargetType="Rectangle">
+        <Setter Property="Stroke" Value="Blue" />
+        <Setter Property="StrokeThickness" Value="2" />
+        <Setter Property="Fill" Value="#3F0000FF" />
+        <Setter Property="Opacity" Value="0.5" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                <Setter Property="Visibility" Value="Visible" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsSelected}" Value="False">
+                <Setter Property="Visibility" Value="Hidden" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <DataTemplate x:Key="CellTemplate0" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [0]}">
+            <DockPanel>
+                <Button 
+                    Width="20"
+                    Height="20"
+                    DockPanel.Dock="Left"
+                    Margin="0,0,2,0"
+                    Style="{StaticResource SaveButtonStyle}" 
+    				CommandParameter="{Binding WorkbenchItem}" 
+    				Command="{x:Static UIElements:CommandLibrary.SaveItemCommand}"
+                    >
+                    <Button.ToolTip>
+                        <TextBlock>
+                            <Run Text="Save:" />
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource CaptionConverter}">
+                                        <Binding Path="WorkbenchItem[System.State]" />
+                                        <Binding Path="WorkbenchItem" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </TextBlock>
+                    </Button.ToolTip>
+                </Button>
+                <ContentControl DockPanel.Dock="Left" IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            </DockPanel>
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate1" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [1]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate2" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [2]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate3" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [3]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate4" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [4]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate5" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [5]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate6" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [6]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate7" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [7]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate8" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [8]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate9" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [9]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate10" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [10]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate11" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [11]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate12" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [12]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate13" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [13]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate14" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [14]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate15" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [15]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate16" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [16]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate17" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [17]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate18" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [18]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate19" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [19]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate20" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [20]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate21" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [21]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate22" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [22]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate23" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [23]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate24" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [24]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate25" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [25]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate26" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [26]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate27" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [27]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate28" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [28]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate29" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [29]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CellTemplate30" DataType="{x:Type Interfaces:IControlItemGroup}">
+        <Grid DataContext="{Binding [30]}">
+            <ContentControl IsTabStop="False" Content="{Binding}" ContentTemplateSelector="{StaticResource ControlTemplateSelector}" />
+            <Rectangle Style="{StaticResource Highlight}" />
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TfsWorkbench.ItemListUI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ModeName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Item List</Value>
+    </Setting>
+    <Setting Name="HelpPageUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.ScrumforTeamSystem.co.uk/ProcessGuidance/v3/scrum%20masters%20workbench/item-list</Value>
+    </Setting>
+    <Setting Name="DisplayPriority" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="ModeDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">View lists of workspace items grouped by type.</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

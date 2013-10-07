@@ -1,0 +1,106 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.ReportViewer.ReportViewerControl"    
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"    
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements" 
+    xmlns:ReportViewer="clr-namespace:TfsWorkbench.ReportViewer" 
+    mc:Ignorable="d"     
+    Height="400" 
+    Width="600"
+    Name="PART_ReportViewer"
+    UIElements:DialogWrapper.IsResizeable="True">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <HierarchicalDataTemplate x:Key="NodeTemplate" DataType="{x:Type ReportViewer:IReportNode}" ItemsSource="{Binding Children}">
+                <DockPanel>
+                    <Button 
+                        Name="PART_ReportButton"
+                        DockPanel.Dock="Left"
+                        Style="{StaticResource ReportButtonStyle}" 
+                        Command="{x:Static ReportViewer:LocalCommandLibrary.ShowReportCommand}"
+                        CommandParameter="{Binding CatalogItem}"
+                        CommandTarget="{Binding RelativeSource={RelativeSource Self}}"
+                        ToolTip="Show Report"
+                        Visibility="Collapsed"
+                        Width="25"
+                        Height="25"
+                        />
+                    <TextBlock 
+                        DockPanel.Dock="Left"
+                        MaxWidth="400"
+                        MouseDown="OnTextBlockMouseDown"
+                        VerticalAlignment="Center"
+                        >
+                        <TextBlock.ContextMenu>
+                            <ContextMenu Name="PART_ContextMenu" Visibility="Hidden">
+                                <MenuItem 
+                                    Command="{x:Static ReportViewer:LocalCommandLibrary.ShowReportCommand}"
+                                    CommandParameter="{Binding CatalogItem}"
+                                    CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
+                                    />
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding CatalogItem.Name}" FontWeight="Bold" />
+                            <TextBlock Name="PART_Description" Text="{Binding CatalogItem.Description}" TextWrapping="Wrap" FontStyle="Italic" Margin="10,0,0,0" />
+                        </StackPanel>
+                    </TextBlock>
+                </DockPanel>
+                <HierarchicalDataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding CatalogItem.Type}" Value="Report">
+                        <Setter TargetName="PART_ContextMenu" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="PART_ReportButton" Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding CatalogItem.Description}" Value="{x:Null}">
+                        <Setter TargetName="PART_Description" Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding CatalogItem.Description}" Value="">
+                        <Setter TargetName="PART_Description" Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                </HierarchicalDataTemplate.Triggers>
+            </HierarchicalDataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button 
+                Name="CloseButton" 
+                HorizontalAlignment="Right"
+                Command="{x:Static UIElements:CommandLibrary.CloseDialogCommand}"
+                CommandParameter="{Binding ElementName=PART_ReportViewer}"
+                CommandTarget="{Binding ElementName=PART_ReportViewer}"
+                Style="{DynamicResource CloseButtonStyle}" 
+                ToolTip="Close" 
+                IsCancel="True"
+                />
+            
+            <TextBlock 
+                Style="{StaticResource DialogCaptionStyle}"
+                Text="Project Report Selector"
+                />
+
+            <Border
+                Grid.Row="1"
+                Style="{StaticResource DialogInnerBorderStyle}"
+                >
+                <TreeView 
+                    Name="PART_ReportTree"
+                    BorderBrush="Black"
+                    Margin="5"
+                    ItemTemplate="{StaticResource NodeTemplate}"
+                    ItemsSource="{Binding ElementName=PART_ReportViewer, Path=ReportRoot.Children}"
+                    />
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

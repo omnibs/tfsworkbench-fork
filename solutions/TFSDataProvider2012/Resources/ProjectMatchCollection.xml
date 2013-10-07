@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ProjectMatchCollection 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://schemas.workbench/ProjectMatch"
+  >
+  <ProjectMatchers>
+    <Match name="SfTSv2" resource="WitdToViewMapSfTSv2.xslt">
+      <WorkItemTypeMatchs>
+        <TypeMatch name="Product Backlog Item">
+          <ExpectedFieldNames>
+            <Field>System.State</Field>
+            <Field>Conchango.TeamSystem.Scrum.Team</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Sprint Backlog Item">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Conchango.TeamSystem.Scrum.TaskPriority</Field>
+            <Field>Conchango.TeamSystem.Scrum.Team</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Bug">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Conchango.TeamSystem.Scrum.Team</Field>
+            <Field>Conchango.TeamSystem.Scrum.TestingImpact</Field>
+            <Field>Conchango.TeamSystem.Scrum.Build.Environment</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Impediment">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Conchango.TeamSystem.Scrum.Team</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Sprint">
+          <ExpectedFieldNames>
+            <Field>System.State</Field>
+            <Field>Conchango.TeamSystem.Scrum.Team</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Sprint Retrospective">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>Conchango.TeamSystem.Scrum.Team</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+      </WorkItemTypeMatchs>
+    </Match>
+    <Match name="SfTSv3" resource="WitdToViewMapSfTSv3.xslt">
+      <WorkItemTypeMatchs>
+        <TypeMatch name="Product Backlog Item">
+          <ExpectedFieldNames>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Scheduling.StoryPoints</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Sprint Backlog Task">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Scrum.v3.WorkRemaining</Field>
+            <Field>Scrum.v3.TaskPriority</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Acceptance Test">
+          <ExpectedFieldNames>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Bug">
+          <ExpectedFieldNames>
+            <Field>System.State</Field>
+            <Field>Scrum.v3.TestingImpact</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Impediment">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Release">
+          <ExpectedFieldNames>
+            <Field>System.State</Field>
+            <Field>Scrum.v3.ReleaseAudience</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Sprint">
+          <ExpectedFieldNames>
+            <Field>System.State</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Team Sprint">
+          <ExpectedFieldNames>
+            <Field>System.State</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Sprint Retrospective">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+      </WorkItemTypeMatchs>
+    </Match>
+    <Match name="TFSScrumv2.2" resource="WitdToViewMapTFSScrumv2.2.xslt">
+      <WorkItemTypeMatchs>
+        <TypeMatch name="Code Review Request">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.CodeReview.ContextCode</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Product Backlog Item">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.AcceptanceCriteria</Field>
+            <Field>Microsoft.VSTS.Common.BacklogPriority</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Bug">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.TCM.ReproSteps</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Task">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.CMMI.Blocked</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+      </WorkItemTypeMatchs>
+    </Match>
+    <Match name="TFSScrumv1" resource="WitdToViewMapTFSScrumv1.xslt">
+      <WorkItemTypeMatchs>
+        <TypeMatch name="Product Backlog Item">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Task">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Activity</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Test Case">
+          <ExpectedFieldNames>
+            <Field>System.State</Field>
+            <Field>System.AssignedTo</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Bug">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Severity</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Impediment">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Sprint">
+          <ExpectedFieldNames />
+        </TypeMatch>
+      </WorkItemTypeMatchs>
+    </Match>
+    <Match name="MSFv5" resource="WitdToViewMapMSFv5.xslt">
+      <WorkItemTypeMatchs>
+        <TypeMatch name="User Story">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Risk</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Issue">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Bug">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>System.Reason</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Severity</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Test Case">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.TCM.AutomationStatus</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Task">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Activity</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+      </WorkItemTypeMatchs>
+    </Match>
+    <Match name="CMMIv5" resource="WitdToViewMapCMMIv5.xslt">
+      <WorkItemTypeMatchs>
+        <TypeMatch name="Bug">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Severity</Field>
+            <Field>Microsoft.VSTS.Common.Triage</Field>
+            <Field>Microsoft.VSTS.CMMI.Blocked</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Task">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Triage</Field>
+            <Field>Microsoft.VSTS.CMMI.Blocked</Field>
+            <Field>Microsoft.VSTS.CMMI.TaskType</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Issue">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Triage</Field>
+            <Field>Microsoft.VSTS.CMMI.Escalate</Field>
+            <Field>Microsoft.VSTS.Common.Severity</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Change Request">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Triage</Field>
+            <Field>Microsoft.VSTS.CMMI.Blocked</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Risk">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Severity</Field>
+            <Field>Microsoft.VSTS.CMMI.Blocked</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Requirement">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Triage</Field>
+            <Field>Microsoft.VSTS.CMMI.Blocked</Field>
+            <Field>Microsoft.VSTS.CMMI.Committed</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Review">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.CMMI.MeetingType</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Test Case">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.TCM.AutomationStatus</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+      </WorkItemTypeMatchs>
+    </Match>
+    <Match name="CMMIv4.2" resource="WitdToViewMapCMMIv4.2.xslt">
+      <WorkItemTypeMatchs>
+        <TypeMatch name="Bug">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Severity</Field>
+            <Field>Microsoft.VSTS.Common.Triage</Field>
+            <Field>Microsoft.VSTS.CMMI.Blocked</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Task">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Severity</Field>
+            <Field>Microsoft.VSTS.Common.Triage</Field>
+            <Field>Microsoft.VSTS.Common.Discipline</Field>
+            <Field>Microsoft.VSTS.CMMI.TaskType</Field>
+            <Field>Microsoft.VSTS.CMMI.RequiresReview</Field>
+            <Field>Microsoft.VSTS.CMMI.RequiresTest</Field>
+            <Field>Microsoft.VSTS.CMMI.Blocked</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Issue">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Triage</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Change Request">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Triage</Field>
+            <Field>Microsoft.VSTS.CMMI.Blocked</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Risk">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Severity</Field>
+            <Field>Microsoft.VSTS.CMMI.Blocked</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Requirement">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Triage</Field>
+            <Field>Microsoft.VSTS.CMMI.Blocked</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Review">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.CMMI.MeetingType</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+      </WorkItemTypeMatchs>
+    </Match>
+    <Match name="MSFv4.2" resource="WitdToViewMapMSFv4.2.xslt">
+      <WorkItemTypeMatchs>
+        <TypeMatch name="Bug">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Issue</Field>
+            <Field>Microsoft.VSTS.Common.Priority</Field>
+            <Field>Microsoft.VSTS.Common.Triage</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Task">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Discipline</Field>
+            <Field>Microsoft.VSTS.Common.ExitCriteria</Field>
+            <Field>Microsoft.VSTS.Common.Issue</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Quality of Service Requirement">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.ExitCriteria</Field>
+            <Field>Microsoft.VSTS.Common.Issue</Field>
+            <Field>Microsoft.VSTS.Common.QualityOfServiceType</Field>
+            <Field>Microsoft.VSTS.Common.RoughOrderOfMagnitude</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Scenario">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Issue</Field>
+            <Field>Microsoft.VSTS.Common.RoughOrderOfMagnitude</Field>
+            <Field>Microsoft.VSTS.Common.ExitCriteria</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+        <TypeMatch name="Risk">
+          <ExpectedFieldNames>
+            <Field>System.AssignedTo</Field>
+            <Field>System.State</Field>
+            <Field>Microsoft.VSTS.Common.Severity</Field>
+            <Field>Microsoft.VSTS.Common.Issue</Field>
+            <Field>Microsoft.VSTS.Common.ExitCriteria</Field>
+          </ExpectedFieldNames>
+        </TypeMatch>
+      </WorkItemTypeMatchs>
+    </Match>
+    <Match name="Default" resource="WitdToViewMap.xslt">
+      <WorkItemTypeMatchs />
+    </Match>
+  </ProjectMatchers>
+</ProjectMatchCollection>

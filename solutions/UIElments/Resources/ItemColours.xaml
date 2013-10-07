@@ -1,0 +1,301 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:valueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters">
+
+    <LinearGradientBrush x:Key="Pink" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="#FFFF9F9F" Offset="0"/>
+        <GradientStop Color="#FFDC8686" Offset="0.358"/>
+        <GradientStop Color="#FFFFA39F" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Orange" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="#FFFF9700" Offset="0"/>
+        <GradientStop Color="#FFCD7B04" Offset="0.362"/>
+        <GradientStop Color="#FFFDC329" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Green" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="#FF9BC79D" Offset="0"/>
+        <GradientStop Color="#FF68B075" Offset="0.362"/>
+        <GradientStop Color="#FF91C395" Offset="0.991"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Cyan" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="#FF9FFFFF" Offset="0"/>
+        <GradientStop Color="#FF86D8DC" Offset="0.358"/>
+        <GradientStop Color="#FF9FFBFF" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Purple" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="#FFAE00FF" Offset="0"/>
+        <GradientStop Color="#FF8404CD" Offset="0.362"/>
+        <GradientStop Color="#FFE029FD" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Blue" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="#FF7171FF" Offset="0"/>
+        <GradientStop Color="#FF5A64CF" Offset="0.362"/>
+        <GradientStop Color="#FF7878FF" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Red" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="#FFE08E8E" Offset="0"/>
+        <GradientStop Color="#FFD34D4D" Offset="0.358"/>
+        <GradientStop Color="#FFFF4646" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Yellow" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="#FFFFFF9F" Offset="0"/>
+        <GradientStop Color="#FFDCDC86" Offset="0.358"/>
+        <GradientStop Color="#FFFFFF9F" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="White" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="#FFF0F0F0" Offset="0.362"/>
+        <GradientStop Color="White" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Gray" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="Gainsboro" Offset="0"/>
+        <GradientStop Color="#FFC0C0C0" Offset="0.362"/>
+        <GradientStop Color="Gainsboro" Offset="1"/>
+    </LinearGradientBrush>
+
+    <VisualBrush 
+        x:Key="WhiteFillBrush" 
+        Stretch="None"
+        TileMode="FlipXY" 
+        Viewport="0, 0, 500, 350" 
+        ViewportUnits="Absolute"
+        >
+        <VisualBrush.Visual>
+            <Grid Width="500" Height="350">
+                <Rectangle Fill="{StaticResource White}" />
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <ImageBrush 
+                            ImageSource="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/PostItNoteOverlay.png" 
+                            Stretch="None"                             
+                            />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
+    <VisualBrush 
+        x:Key="YellowFillBrush" 
+        Stretch="None"
+        TileMode="FlipXY" 
+        Viewport="0, 0, 500, 350" 
+        ViewportUnits="Absolute"
+        >
+        <VisualBrush.Visual>
+            <Grid Width="500" Height="350">
+                <Rectangle Fill="{StaticResource Yellow}" />
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <ImageBrush 
+                            ImageSource="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/PostItNoteOverlay.png" 
+                            Stretch="None"                             
+                            />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
+    <VisualBrush 
+        x:Key="RedFillBrush" 
+        Stretch="None"
+        TileMode="FlipXY" 
+        Viewport="0, 0, 500, 350" 
+        ViewportUnits="Absolute"
+        >
+        <VisualBrush.Visual>
+            <Grid Width="500" Height="350">
+                <Rectangle Fill="{StaticResource Red}" />
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <ImageBrush 
+                            ImageSource="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/PostItNoteOverlay.png" 
+                            Stretch="None"                             
+                            />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
+    <VisualBrush 
+        x:Key="PurpleFillBrush" 
+        Stretch="None"
+        TileMode="FlipXY" 
+        Viewport="0, 0, 500, 350" 
+        ViewportUnits="Absolute"
+        >
+        <VisualBrush.Visual>
+            <Grid Width="500" Height="350">
+                <Rectangle Fill="{StaticResource Purple}" />
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <ImageBrush 
+                            ImageSource="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/PostItNoteOverlay.png" 
+                            Stretch="None"                             
+                            />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
+    <VisualBrush 
+        x:Key="OrangeFillBrush" 
+        Stretch="None"
+        TileMode="FlipXY" 
+        Viewport="0, 0, 500, 350" 
+        ViewportUnits="Absolute"
+        >
+        <VisualBrush.Visual>
+            <Grid Width="500" Height="350">
+                <Rectangle Fill="{StaticResource Orange}" />
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <ImageBrush 
+                            ImageSource="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/PostItNoteOverlay.png" 
+                            Stretch="None"                             
+                            />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
+    <VisualBrush 
+        x:Key="PinkFillBrush" 
+        Stretch="None"
+        TileMode="FlipXY" 
+        Viewport="0, 0, 500, 350" 
+        ViewportUnits="Absolute"
+        >
+        <VisualBrush.Visual>
+            <Grid Width="500" Height="350">
+                <Rectangle Fill="{StaticResource Pink}" />
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <ImageBrush 
+                            ImageSource="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/PostItNoteOverlay.png" 
+                            Stretch="None"                             
+                            />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
+    <VisualBrush 
+        x:Key="BlueFillBrush" 
+        Stretch="None"
+        TileMode="FlipXY" 
+        Viewport="0, 0, 500, 350" 
+        ViewportUnits="Absolute"
+        >
+        <VisualBrush.Visual>
+            <Grid Width="500" Height="350">
+                <Rectangle Fill="{StaticResource Blue}" />
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <ImageBrush 
+                            ImageSource="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/PostItNoteOverlay.png" 
+                            Stretch="None"                             
+                            />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
+    <VisualBrush 
+        x:Key="CyanFillBrush" 
+        Stretch="None"
+        TileMode="FlipXY" 
+        Viewport="0, 0, 500, 350" 
+        ViewportUnits="Absolute"
+        >
+        <VisualBrush.Visual>
+            <Grid Width="500" Height="350">
+                <Rectangle Fill="{StaticResource Cyan}" />
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <ImageBrush 
+                            ImageSource="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/PostItNoteOverlay.png" 
+                            Stretch="None"                             
+                            />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
+    <VisualBrush 
+        x:Key="GreenFillBrush" 
+        Stretch="None"
+        TileMode="FlipXY" 
+        Viewport="0, 0, 500, 350" 
+        ViewportUnits="Absolute"
+        >
+        <VisualBrush.Visual>
+            <Grid Width="500" Height="350">
+                <Rectangle Fill="{StaticResource Green}" />
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <ImageBrush 
+                            ImageSource="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/PostItNoteOverlay.png" 
+                            Stretch="None"                             
+                            />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
+    <VisualBrush 
+        x:Key="GrayFillBrush" 
+        Stretch="None"
+        TileMode="FlipXY" 
+        Viewport="0, 0, 500, 350" 
+        ViewportUnits="Absolute"
+        >
+        <VisualBrush.Visual>
+            <Grid Width="500" Height="350">
+                <Rectangle Fill="{StaticResource Gray}" />
+                <Rectangle>
+                    <Rectangle.Fill>
+                        <ImageBrush 
+                            ImageSource="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/PostItNoteOverlay.png" 
+                            Stretch="None"                             
+                            />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
+    <valueConverters:BackgroundBrushConverter 
+        x:Key="ColourPicker"
+        DefaultColour="{StaticResource YellowFillBrush}" 
+        Blue ="{StaticResource BlueFillBrush}"
+        Cyan ="{StaticResource CyanFillBrush}"
+        Green ="{StaticResource GreenFillBrush}"
+        Orange ="{StaticResource OrangeFillBrush}"
+        Pink ="{StaticResource PinkFillBrush}"
+        Purple ="{StaticResource PurpleFillBrush}"
+        Red ="{StaticResource RedFillBrush}"
+        Yellow ="{StaticResource YellowFillBrush}" 
+        White="{StaticResource WhiteFillBrush}"   
+        Gray="{StaticResource GrayFillBrush}"
+        />
+    
+</ResourceDictionary>

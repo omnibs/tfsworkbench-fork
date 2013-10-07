@@ -1,0 +1,42 @@
+﻿<Button 
+    x:Class="TfsWorkbench.PollingService.PollingServiceButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ValueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters;assembly=TfsWorkbench.UIElements" 
+    xmlns:PollingService="clr-namespace:TfsWorkbench.PollingService" 
+    DataContext="{Binding ElementName=PART_ControlRoot, Path=ChangePoller}"
+    Command="{x:Static PollingService:LocalCommandLibrary.ShowPollerDialogCommand}"
+    CommandTarget="{Binding ElementName=PART_ControlRoot}"
+    Name="PART_ControlRoot"
+    >
+    <Button.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <ValueConverters:BoolToStringConverter x:Key="BoolToStringConverter" TrueText="Running" FalseText="Stopped" />
+            <ValueConverters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
+            <ValueConverters:BoolToVisibilityConverter x:Key="VisibilityConverter" FalseVisibility="Collapsed" TrueVisibility="Visible" />
+        </ResourceDictionary>
+    </Button.Resources>
+    <Button.Style>
+        <Binding Source="{StaticResource RefreshButtonStyle}" />
+    </Button.Style>
+    <Button.ToolTip>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock>
+                <Run Text="Polling Status:" />
+                <TextBlock Text="{Binding Path=IsRunning, Converter={StaticResource BoolToStringConverter}}" />
+            </TextBlock>
+            <TextBlock Visibility="{Binding Path=IsRunning, Converter={StaticResource VisibilityConverter}}">
+                <Run Text=" - Next Poll In:" />
+                <TextBlock Text="{Binding Path=NextPollIn, Converter={StaticResource TimeSpanToStringConverter}}" />
+            </TextBlock>
+        </StackPanel>
+    </Button.ToolTip>
+    <TextBlock>
+        <Run Text="Polling:" />
+        <TextBlock Text="{Binding Path=IsRunning, Converter={StaticResource BoolToStringConverter}}" />
+    </TextBlock>
+</Button>

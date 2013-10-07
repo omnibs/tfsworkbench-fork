@@ -1,0 +1,48 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.StatisticsViewer.StatisticsViewerPageControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:StatisticsGroups="clr-namespace:TfsWorkbench.StatisticsViewer.StatisticsGroups" mc:Ignorable="d" 
+    d:DesignHeight="300" d:DesignWidth="300"
+    Name="PART_ControlRoot"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Templates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <StatisticsGroups:LineTemplateSelector x:Key="LineTemplateSelector" />
+            <StatisticsGroups:HeaderTemplateSelector x:Key="HeaderTemplateSelector" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <DockPanel DataContext="{Binding ElementName=PART_ControlRoot, Path=StatisticsPage}">
+        <TextBlock DockPanel.Dock="Top" Text="{Binding PageDescription}" />
+        <ScrollViewer
+            VerticalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Disabled"
+            DockPanel.Dock="Top"
+            >
+            <ItemsControl 
+                Margin="15,0,0,0"
+                ItemsSource="{Binding Groups}"
+                >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type StatisticsGroups:IStatisticsGroup}">
+                        <DockPanel Margin="0,0,0,4">
+                            <TextBlock DockPanel.Dock="Top" Text="{Binding Header}" FontWeight="Bold" FontSize="14" />
+                            <Rectangle DockPanel.Dock="Top" Fill="{x:Null}" Stroke="Blue" StrokeThickness="0,0,0,1" />
+                            <ContentPresenter DockPanel.Dock="Top" ContentTemplateSelector="{StaticResource HeaderTemplateSelector}" Content="{Binding}" />
+                            <ItemsControl 
+                                DockPanel.Dock="Top"
+                                ItemsSource="{Binding Lines}"
+                                ItemTemplateSelector="{StaticResource LineTemplateSelector}"
+                                >
+                            </ItemsControl>
+                        </DockPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

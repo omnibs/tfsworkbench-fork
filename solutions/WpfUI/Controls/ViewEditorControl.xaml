@@ -1,0 +1,217 @@
+﻿<UserControl
+    x:Class="TfsWorkbench.WpfUI.Controls.ViewEditorControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:DataObjects="clr-namespace:TfsWorkbench.Core.DataObjects;assembly=TfsWorkbench.Core" 
+    xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements" 
+    x:Name="PART_ViewEditPanel" 
+	mc:Ignorable="d"
+    UIElements:DialogWrapper.IsResizeable="True" 
+    Height="460"
+    Width="370"
+    >
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+				<ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <StackPanel Style="{DynamicResource CommandPanel}" VerticalAlignment="Top" Height="25" HorizontalAlignment="Right">
+                <Button Click="OnDeleteClick" Style="{DynamicResource DeleteButtonStyle}" ToolTip="Delete view"/>
+                <Button Click="OnCloseClick" Style="{DynamicResource CloseButtonStyle}" ToolTip="Close" IsCancel="True"/>
+            </StackPanel>
+            <TextBlock 
+                Style="{StaticResource DialogCaptionStyle}"
+                Text="View Editor Panel"
+                />
+        </Grid>
+        <Border 
+            DockPanel.Dock="Top"
+            Style="{StaticResource DialogInnerBorderStyle}"
+            >
+            <TabControl Background="White" Padding="8">
+                <TabItem Header="General">
+                    <ScrollViewer
+                        HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Auto"
+                        >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="4*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="View Title:"/></TextBlock>
+                            <TextBox Grid.Row="0" Grid.Column="1" Margin="2" Text="{Binding ViewMap.Title, ElementName=PART_ViewEditPanel, UpdateSourceTrigger=PropertyChanged}" Background="White" DataContext="{Binding}" />
+
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Description:"/></TextBlock>
+                            <TextBox Grid.Row="1" MaxLines="5" MinLines="5" AcceptsReturn="True" TextWrapping="Wrap" Margin="2" Grid.Column="1" Text="{Binding ViewMap.Description, ElementName=PART_ViewEditPanel, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Parent Types:"/></TextBlock>
+                            <ListView 
+                                    x:Name="PART_ParentTypes"
+                                    Margin="2"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    ItemsSource="{Binding ParentTypeSelections, ElementName=PART_ViewEditPanel}"
+                                    >
+                                <ListView.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type DataObjects:SelectedValue}">
+                                        <CheckBox 
+                                            Name="PART_CheckBox"
+                                            Margin="0,0,2,0" 
+                                            IsChecked="{Binding IsSelected}" 
+                                            Content="{Binding Text}" 
+                                            Checked="OnCheckChange"
+                                            Unchecked="OnCheckChange"
+                                            />
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                            <TextBlock Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Link Type:"/></TextBlock>
+                            <ComboBox
+    						        x:Name="LinkType"
+    						        Margin="2"
+    						        Grid.Row="3" 
+    						        Grid.Column="1" 
+    						        ItemsSource="{Binding ProjectData.LinkTypes, ElementName=PART_ViewEditPanel}"
+    						        SelectedItem="{Binding ViewMap.LinkName, ElementName=PART_ViewEditPanel}" 
+                                    />
+
+                            <TextBlock Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Child Type:"/></TextBlock>
+                            <ComboBox 
+    						        x:Name="ChildType"
+    						        Margin="2"
+    						        Grid.Row="4" 
+    						        Grid.Column="1" 
+    						        ItemsSource="{Binding ProjectData.ItemTypes.TypeNames, ElementName=PART_ViewEditPanel}"
+    						        SelectedItem="{Binding ViewMap.ChildType, ElementName=PART_ViewEditPanel}" 
+    						        SelectionChanged="OnChildTypeSelectionChanged"
+                                    />
+
+                            <TextBlock Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center"><Run Text="Swim Lane:"/></TextBlock>
+                            <CheckBox Grid.Row="5" Grid.Column="1" Margin="2" IsChecked="{Binding ViewMap.IsNotSwimLane, ElementName=PART_ViewEditPanel}" Content="Hide from swim lane views." />
+                        </Grid>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Header="Child States">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="0.35*" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <DockPanel Grid.Row="0" Grid.RowSpan="2">
+                            <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center"><Run Text="Unassigned States"/></TextBlock>
+                            <ListBox x:Name="UnassignedStates" Background="White" />
+                        </DockPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                            <Button Margin="10,5,10,5" Click="ToSwimLaneClick" Content="&gt;&gt;"/>
+                            <Button Margin="10,5,10,5" Click="FromSwimLineClick" Content="&lt;&lt;"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+                            <Button Margin="10,5,10,5" Click="ToBucketClick" Content="&gt;&gt;"/>
+                            <Button Margin="10,5,10,5" Click="FromBucketClick" Content="&lt;&lt;"/>
+                        </StackPanel>
+
+                        <DockPanel Grid.Row="0" Grid.Column="2">
+                            <Grid DockPanel.Dock="Top" HorizontalAlignment="Stretch" Margin="0,0,0,2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"><Run Text="Swim Lanes"/></TextBlock>
+                                <Button Grid.Row="0" Grid.Column="1" Content="^" HorizontalAlignment="Right" Width="20" Click="SwimLaneUp"/>
+                                <Button Grid.Row="0" Grid.Column="2" Content="v" HorizontalAlignment="Right" Width="20" Click="SwimLaneDown"/>
+                            </Grid>
+                            
+                        
+                            <ListBox x:Name="SwimLaneStates" Background="White" />
+                            
+                        </DockPanel>
+
+                        <DockPanel Grid.Row="1" Grid.Column="2">
+                            <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center"><Run Text="Bucket States"/></TextBlock>
+                            <ListBox x:Name="BucketStates" Background="White" />
+                        </DockPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Child Colours">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" Text="Select the swinlane item colours:" />
+                        <ListView 
+                            x:Name="PART_ColorList"
+                            DockPanel.Dock="Top"
+                            Background="{x:Null}"
+                            ItemsSource="{Binding ViewMap.StateItemColours, ElementName=PART_ViewEditPanel}"
+                            HorizontalContentAlignment="Stretch"
+                            >
+                            <ListView.ItemTemplate>
+                                <DataTemplate DataType="{x:Type DataObjects:StateColour}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.4*" />
+                                            <ColumnDefinition Width="0.6*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Value}" HorizontalAlignment="Right" Margin="0,0,10,0" />
+                                        <ComboBox 
+                                            x:Name="PART_ColourSelector"
+                                            Grid.Column="1" 
+                                            HorizontalContentAlignment="Stretch" 
+                                            VerticalContentAlignment="Stretch"
+                                            Background="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem.Content}"
+                                            SelectionChanged="ColourSelectorSelectionChanged"
+                                            >
+                                            <ComboBoxItem IsSelected="True" Content="{Binding Mode=OneTime, Path=ColourAsString}" Background="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                                            <ComboBoxItem Content="Yellow" Background="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                                            <ComboBoxItem Content="Green" Background="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                                            <ComboBoxItem Content="Cyan" Background="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                                            <ComboBoxItem Content="Red" Background="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                                            <ComboBoxItem Content="Purple" Background="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                                            <ComboBoxItem Content="Blue" Background="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                                            <ComboBoxItem Content="White" Background="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                                            <ComboBoxItem Content="Orange" Background="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                                            <ComboBoxItem Content="Pink" Background="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                                            <ComboBoxItem Content="Gainsboro" Background="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                                        </ComboBox>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </DockPanel>
+                </TabItem>
+            </TabControl>
+        </Border>
+    </DockPanel>
+</UserControl>

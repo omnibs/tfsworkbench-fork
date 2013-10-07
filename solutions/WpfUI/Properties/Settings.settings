@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TfsWorkbench.WpfUI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WindowHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="WindowWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">900</Value>
+    </Setting>
+    <Setting Name="WindowTop" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="WindowLeft" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="WindowState" Type="System.Windows.WindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="HomePageUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://tfsworkbench.codeplex.com/</Value>
+    </Setting>
+    <Setting Name="ApplicationTitle" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">TFS Workbench v2.3</Value>
+    </Setting>
+    <Setting Name="HelpPageUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.ScrumforTeamSystem.co.uk/ProcessGuidance/v3/scrum%20masters%20workbench</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

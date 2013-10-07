@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TfsWorkbench.NotePadUI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Title" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Note Pad</Value>
+    </Setting>
+    <Setting Name="Description" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">A free form work item layout mode.</Value>
+    </Setting>
+    <Setting Name="DisplayPriority" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+    <Setting Name="DataFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">TfsWorkbench\NotePad\Data.xml</Value>
+    </Setting>
+    <Setting Name="DisplayModeScale" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

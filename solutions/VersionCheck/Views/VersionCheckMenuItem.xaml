@@ -1,0 +1,25 @@
+﻿<MenuItem 
+    x:Class="TfsWorkbench.VersionCheck.Views.VersionCheckMenuItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    Header="{Binding MenuHeaderText}"
+    mc:Ignorable="d" 
+    >
+    <MenuItem.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/ApplicationStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/CommandButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </MenuItem.Resources>
+    <MenuItem.Icon>
+        <ContentControl Template="{StaticResource QuestionIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+    </MenuItem.Icon>
+    <MenuItem Header="{Binding ToggleStartUpCheckHeaderText}" IsCheckable="True" IsChecked="{Binding CheckVersionOnStartUp}" />
+    <MenuItem Header="{Binding ShowButtonHeaderText}" IsCheckable="True" IsChecked="{Binding ShowButton}" />
+    <MenuItem Header="{Binding VersionCheckCommand.DisplayName}" Command="{Binding VersionCheckCommand.Command}" />
+    <MenuItem Header="{Binding GoToDownloadPageCommand.DisplayName}" Command="{Binding GoToDownloadPageCommand.Command}" />
+</MenuItem>

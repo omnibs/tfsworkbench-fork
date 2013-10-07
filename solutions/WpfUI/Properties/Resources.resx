@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="String001" xml:space="preserve">
+    <value>Displaying {0} of {1} item(s).</value>
+  </data>
+  <data name="String002" xml:space="preserve">
+    <value>Project closed.</value>
+  </data>
+  <data name="String003" xml:space="preserve">
+    <value>This project contains unsaved work items.
+
+Do you wish to discard the unsaved changes?</value>
+  </data>
+  <data name="String004" xml:space="preserve">
+    <value>Discard Unsaved Changes</value>
+  </data>
+  <data name="String005" xml:space="preserve">
+    <value>Error: Unable to close dialog. The specified parameter was not of the expected type.</value>
+  </data>
+  <data name="String006" xml:space="preserve">
+    <value>Error: Unable to create child item. The parameter is not of the expected type.</value>
+  </data>
+  <data name="String007" xml:space="preserve">
+    <value>Error: Unable to create parent item. No item type specified.</value>
+  </data>
+  <data name="String008" xml:space="preserve">
+    <value>Confirm deletion of view: </value>
+  </data>
+  <data name="String009" xml:space="preserve">
+    <value>Confirm Delete View</value>
+  </data>
+  <data name="String010" xml:space="preserve">
+    <value>Error: Unable to discard item. The specified command parameter was not of the expected type.</value>
+  </data>
+  <data name="String011" xml:space="preserve">
+    <value>Error: Unable to open edit panel. Invalid context.</value>
+  </data>
+  <data name="String012" xml:space="preserve">
+    <value>Item: '{0}' ({1}) refreshed.</value>
+  </data>
+  <data name="String013" xml:space="preserve">
+    <value>Refresh item and view children has failed. The command parameter is incorrect.</value>
+  </data>
+  <data name="String014" xml:space="preserve">
+    <value>Refreshing this item will overwrite unsaved child item changes.
+
+Discard unsaved child item changes?</value>
+  </data>
+  <data name="String015" xml:space="preserve">
+    <value>Confirm discard child item changes</value>
+  </data>
+  <data name="String016" xml:space="preserve">
+    <value>Item{0} ({1}) refreshed.</value>
+  </data>
+  <data name="String017" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="String018" xml:space="preserve">
+    <value>Refreshing {0} item{1}.</value>
+  </data>
+  <data name="String019" xml:space="preserve">
+    <value>{0}/wi.aspx?tfs={1}&amp;pguid={2}&amp;id={3}</value>
+  </data>
+  <data name="String020" xml:space="preserve">
+    <value>New View</value>
+  </data>
+  <data name="String021" xml:space="preserve">
+    <value>new view description</value>
+  </data>
+  <data name="String022" xml:space="preserve">
+    <value>Saving Items...</value>
+  </data>
+  <data name="String023" xml:space="preserve">
+    <value>{0} ({1}) highlighted in {2}</value>
+  </data>
+  <data name="String024" xml:space="preserve">
+    <value>This project contains unsaved work item changes.
+
+Are you sure you want to reset the project layout and discard unsaved work item changes?</value>
+  </data>
+  <data name="String025" xml:space="preserve">
+    <value>Confirm Reset Layout And Discard Unsaved Changes</value>
+  </data>
+  <data name="String026" xml:space="preserve">
+    <value>Are you sure you want to reset the project layout?</value>
+  </data>
+  <data name="String027" xml:space="preserve">
+    <value>Confirm Reset Project Layout</value>
+  </data>
+  <data name="String028" xml:space="preserve">
+    <value>Resetting Project Layout...</value>
+  </data>
+  <data name="String029" xml:space="preserve">
+    <value>Discard unsaved changes?</value>
+  </data>
+  <data name="String030" xml:space="preserve">
+    <value>Confirm Discard Unsaved Changes</value>
+  </data>
+  <data name="String031" xml:space="preserve">
+    <value>Refreshing Project Data...</value>
+  </data>
+  <data name="String032" xml:space="preserve">
+    <value>Item: '{0}' ({1}) saved.</value>
+  </data>
+  <data name="String033" xml:space="preserve">
+    <value>Invalid project collection url: {0}</value>
+  </data>
+  <data name="String034" xml:space="preserve">
+    <value>Unable to load project layout data file.</value>
+  </data>
+  <data name="String035" xml:space="preserve">
+    <value>Default project layout.</value>
+  </data>
+  <data name="String036" xml:space="preserve">
+    <value>Project layout saving failed.</value>
+  </data>
+  <data name="String037" xml:space="preserve">
+    <value>Items saved.</value>
+  </data>
+  <data name="String038" xml:space="preserve">
+    <value>Loading project layout data...</value>
+  </data>
+  <data name="String039" xml:space="preserve">
+    <value>Loading '{0}' work item{1}...</value>
+  </data>
+  <data name="String040" xml:space="preserve">
+    <value>Your chosen workspace options match '{0}' items. Loading this volume of items may impact performance.
+
+Ignore and continue loading?</value>
+  </data>
+  <data name="String041" xml:space="preserve">
+    <value>Large Work Item Volume Detected</value>
+  </data>
+  <data name="String042" xml:space="preserve">
+    <value>Don't ask me again for this project</value>
+  </data>
+  <data name="String044" xml:space="preserve">
+    <value>Saving failed: {0}({1}) could not be saved.</value>
+  </data>
+  <data name="String045" xml:space="preserve">
+    <value>MEF Composition has failed. Loader exception details: </value>
+  </data>
+  <data name="String046" xml:space="preserve">
+    <value>No data provider found.</value>
+  </data>
+  <data name="String047" xml:space="preserve">
+    <value>You must select at least one view parent type.</value>
+  </data>
+  <data name="String048" xml:space="preserve">
+    <value>No Parent Type Selected</value>
+  </data>
+  <data name="String049" xml:space="preserve">
+    <value>Discard this unsaved item?</value>
+  </data>
+  <data name="String050" xml:space="preserve">
+    <value>Confirm Discard</value>
+  </data>
+  <data name="String051" xml:space="preserve">
+    <value>Validation Errors:</value>
+  </data>
+  <data name="String052" xml:space="preserve">
+    <value>Unable to load previous project data.</value>
+  </data>
+  <data name="String053" xml:space="preserve">
+    <value>Select your workspace data.</value>
+  </data>
+  <data name="String054" xml:space="preserve">
+    <value>1: Choose collection and project:</value>
+  </data>
+  <data name="String055" xml:space="preserve">
+    <value>Choose Project</value>
+  </data>
+  <data name="String056" xml:space="preserve">
+    <value>Selected Collection:</value>
+  </data>
+  <data name="String057" xml:space="preserve">
+    <value>Selected Project Name:</value>
+  </data>
+  <data name="String058" xml:space="preserve">
+    <value>2: Select iteration path / planning scope:</value>
+  </data>
+  <data name="String059" xml:space="preserve">
+    <value>3: Select area path / feature scope:</value>
+  </data>
+  <data name="String060" xml:space="preserve">
+    <value>4: Load the project data:</value>
+  </data>
+  <data name="String061" xml:space="preserve">
+    <value>Load Workspace</value>
+  </data>
+  <data name="String062" xml:space="preserve">
+    <value>Loading project data...</value>
+  </data>
+  <data name="String063" xml:space="preserve">
+    <value>Loading project nodes...</value>
+  </data>
+  <data name="String064" xml:space="preserve">
+    <value>Project nodes loaded.</value>
+  </data>
+  <data name="String065" xml:space="preserve">
+    <value>No Data Provider Found</value>
+  </data>
+</root>

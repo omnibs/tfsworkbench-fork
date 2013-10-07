@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="TfsWorkbench.WpfUI.Controls.DisplayModeTitle"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ValueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters;assembly=TfsWorkbench.UIElements"
+    Name="PART_UserControl"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="TitleBorderStyle" TargetType="Border">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=PART_UserControl, Path=IsActive}" Value="false">
+                        <Setter Property="Opacity" Value="0.4" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding ElementName=PART_UserControl, Path=IsMouseOver}" Value="true">
+                        <Setter Property="Opacity" Value="1" />
+                        <Setter Property="TextBlock.Foreground" Value="DarkRed" />
+                    </DataTrigger>
+                </Style.Triggers>
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="TextBlock.FontSize" Value="14pt" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Effect" Value="{DynamicResource DropShadowLevel1}"/>
+                <Setter Property="Background" Value="{DynamicResource ToolbarBackground}" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="ToolTip" Value="{Binding ElementName=PART_UserControl, Path=DisplayMode.Description}" />
+            </Style>
+            <ValueConverters:BoolToVisibilityConverter x:Key="VisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border Style="{StaticResource TitleBorderStyle}">
+        <Grid MouseLeftButtonUp="Grid_MouseLeftButtonUp">
+            <Path 
+                Fill="White" 
+                Stretch="Fill" 
+                Margin="42.5,0,42.5,-9.97" 
+                VerticalAlignment="Bottom" 
+                Height="5.97" 
+                Data="M0.10118861,4.8566596 L11.466845,9.6121413 22.518653,4.8566594 z" 
+                Width="25" 
+                Visibility="{Binding ElementName=PART_UserControl, Path=IsActive, Converter={StaticResource VisibilityConverter}}" 
+            />
+            <TextBlock Text="{Binding ElementName=PART_UserControl, Path=DisplayMode.Title}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+    </Border>
+</UserControl>

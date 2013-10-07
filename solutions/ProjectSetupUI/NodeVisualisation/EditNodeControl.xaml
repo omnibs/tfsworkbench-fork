@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="TfsWorkbench.ProjectSetupUI.NodeVisualisation.EditNodeControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="106" Width="400"
+    Name="EditNodeRoot"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+                <ResourceDictionary Source="../Resources/ProjectSetupTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border>
+        <DockPanel>
+            <Grid DockPanel.Dock="Top">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Style="{DynamicResource CommandPanel}">
+                    <Button 
+                        Name="SaveButton"
+                        Click="Save_Click"
+                        Style="{DynamicResource SaveButtonStyle}" ToolTip="Save changes"
+                        />
+                    <Button 
+                        Name="CancelButton"
+                        Click="Cancel_Click"
+                        Style="{DynamicResource CloseButtonStyle}" 
+                        ToolTip="Close"
+                        IsCancel="True"
+                        />
+                </StackPanel>
+                <TextBlock 
+                    DockPanel.Dock="Top" 
+                    Style="{StaticResource DialogCaptionStyle}"
+                    Text="Edit Node" 
+                    />
+            </Grid>
+            <Border 
+                Style="{StaticResource DialogInnerBorderStyle}"
+                DockPanel.Dock="Top" 
+                >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,4,0">Parent Path:</TextBlock>
+                    <TextBox Grid.Column="1" Text="{Binding ElementName=EditNodeRoot, Path=ParentNode.Path, Mode=OneWay}" IsReadOnly="True" Style="{StaticResource GreyOutOnReadOnly}" />
+                    <TextBlock Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,4,0">Node Name:</TextBlock>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=EditNodeRoot, Path=ChildNode.Name, UpdateSourceTrigger=PropertyChanged}"  Margin="0,4,0,0" TextChanged="TextBox_TextChanged" />
+                </Grid>
+            </Border>
+        </DockPanel>
+    </Border>
+</UserControl>

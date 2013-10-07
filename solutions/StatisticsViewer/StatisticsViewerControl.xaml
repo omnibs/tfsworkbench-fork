@@ -1,0 +1,63 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.StatisticsViewer.StatisticsViewerControl"    
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"    
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements" 
+    xmlns:StatisticsGroups="clr-namespace:TfsWorkbench.StatisticsViewer.StatisticsGroups" 
+    mc:Ignorable="d"     
+    Height="400" 
+    Width="600"
+    Name="PART_StatisticsViewer"
+    UIElements:DialogWrapper.IsResizeable="True">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="StatisticsGroupTemplare" DataType="{x:Type StatisticsGroups:IStatisticsGroup}">
+                <TabItem Header="{Binding Header}">
+                    
+                </TabItem>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Height="25">
+                <Button 
+                    Name="PART_ResetButton" 
+                    Click="OnResetButtonClick"
+                    Style="{DynamicResource RefreshButtonStyle}" 
+                    ToolTip="Refresh" 
+                    />
+                <Button 
+                    Name="PART_CloseButton" 
+                    Command="{x:Static UIElements:CommandLibrary.CloseDialogCommand}"
+                    CommandParameter="{Binding ElementName=PART_StatisticsViewer}"
+                    CommandTarget="{Binding ElementName=PART_StatisticsViewer}"
+                    Style="{DynamicResource CloseButtonStyle}" 
+                    ToolTip="Close" 
+                    IsCancel="True"
+                    />
+            </StackPanel>
+            <TextBlock 
+                Style="{StaticResource DialogCaptionStyle}"
+                Text="Workspace Statistics Viewer"
+                />
+
+            <Border
+                Grid.Row="1"
+                Style="{StaticResource DialogInnerBorderStyle}"
+                >
+                <TabControl Name="PART_TabControl" />
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

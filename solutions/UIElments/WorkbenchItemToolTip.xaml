@@ -1,0 +1,66 @@
+﻿<ToolTip 
+    x:Class="TfsWorkbench.UIElements.WorkbenchItemToolTip"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Interfaces="clr-namespace:TfsWorkbench.Core.Interfaces;assembly=TfsWorkbench.Core" 
+    xmlns:ValueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters" 
+    Name="PART_UserControl" 
+    Closed="OnToolTipClosed"
+    Opened="OnToolTipOpened"
+    >
+    <ToolTip.Resources>
+        <ResourceDictionary>
+            <ValueConverters:HeaderTitleConverter x:Key="HeaderTitleConverter" />
+        </ResourceDictionary>
+    </ToolTip.Resources>
+    <DockPanel DataContext="{Binding ElementName=PART_UserControl, Path=ControlItemGroup}" Width="600">
+
+        <TextBlock 
+            DockPanel.Dock="Top"
+            TextWrapping="Wrap"
+            FontWeight="Bold" 
+            FontSize="16" 
+            >
+            <TextBlock.Text>
+                <MultiBinding Converter="{StaticResource HeaderTitleConverter}">
+                    <Binding Path="WorkbenchItem[System.State]" />
+                    <Binding Path="WorkbenchItem" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+
+        <Rectangle DockPanel.Dock="Top" Fill="{x:Null}" Stroke="Blue" StrokeThickness="0,0,0,1" />
+
+        <TextBlock DockPanel.Dock="Top" FontSize="12">
+            <TextBlock 
+                FontWeight="Bold"
+                Text="{Binding Path=WorkbenchItem[System.State]}"
+                />
+            <TextBlock 
+                FontStyle="Italic" 
+                Text="{Binding Path=WorkbenchItem[System.WorkItemType], StringFormat={}({0})}"
+                />
+        </TextBlock>
+
+        <ItemsControl 
+            Name="PART_ValueList" 
+            DockPanel.Dock="Top"
+            ItemsSource="{Binding ControlItems}" 
+            Margin="0,10,0,0"
+            >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type Interfaces:IControlItem}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="0.7*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock FontWeight="Bold" Text="{Binding DisplayText}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Text="{Binding Value}" TextWrapping="Wrap" VerticalAlignment="Center" />
+                        <Rectangle Grid.ColumnSpan="2" Fill="{x:Null}" Stroke="#c0c0c0c0" StrokeThickness="1" VerticalAlignment="Bottom" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DockPanel>
+</ToolTip>

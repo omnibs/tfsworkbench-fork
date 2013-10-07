@@ -1,0 +1,93 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.WpfUI.Controls.AboutControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements" 
+    xmlns:Properties="clr-namespace:TfsWorkbench.WpfUI.Properties" 
+    xmlns:Controllers="clr-namespace:TfsWorkbench.WpfUI.Controllers" 
+    MinHeight="280" 
+    MinWidth="450"
+    x:Name="AboutDialog"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Style="{DynamicResource CommandPanel}" HorizontalAlignment="Right">
+                <Button 
+                    Name="CloseButton" 
+                    Command="{x:Static UIElements:CommandLibrary.CloseDialogCommand}"
+                    CommandParameter="{Binding ElementName=AboutDialog}"
+                    CommandTarget="{Binding ElementName=AboutDialog}"
+                    Style="{DynamicResource CloseButtonStyle}" 
+                    ToolTip="Close" 
+                    IsCancel="True"
+                    />
+            </StackPanel>
+            <TextBlock
+                Style="{StaticResource DialogCaptionStyle}"
+                Text="About" />
+            <Border
+                Grid.Row="1"
+                Style="{StaticResource DialogInnerBorderStyle}"
+                >
+                <DockPanel Margin="5,10,5,5">
+                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Text="{Binding Source={x:Static Properties:Settings.Default}, Path=ApplicationTitle}" />
+                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <Hyperlink 
+                        Command="{x:Static UIElements:CommandLibrary.SystemShellCommand}" 
+                        CommandParameter="{Binding Source={x:Static Properties:Settings.Default}, Path=HomePageUrl}"
+                        CommandTarget="{Binding ElementName=AboutDialog}"
+                        >
+                        <TextBlock Text="{Binding Source={x:Static Properties:Settings.Default}, Path=HomePageUrl}" />
+                    </Hyperlink>
+                </TextBlock>
+                    <ListView 
+						DockPanel.Dock="Top" 
+						ItemsSource="{x:Static Controllers:ApplicationController.AssemblyData}" 
+						Background="White"
+						>
+                    	<ListView.ItemContainerStyle>
+				        	<Style TargetType="{x:Type ListViewItem}">
+								<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+				        		<Setter Property="Template">
+				        			<Setter.Value>
+				        				<ControlTemplate TargetType="{x:Type ListViewItem}">
+				        					<GridViewRowPresenter VerticalAlignment="Stretch" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+				        				</ControlTemplate>
+				        			</Setter.Value>
+				        		</Setter>
+				        	</Style>
+						</ListView.ItemContainerStyle>
+                        <ListView.Resources>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView x:Name="EditGridView">
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding [0]}" />
+                                    <GridViewColumn Header="Asembly" DisplayMemberBinding="{Binding [1]}" />
+                                    <GridViewColumn Header="Version" DisplayMemberBinding="{Binding [2]}" />
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </Border>
+            <TextBlock Grid.Row="2" HorizontalAlignment="Right" FontSize="10">Crispin Parker - 2010</TextBlock>
+        </Grid>
+    </Border>
+</UserControl>

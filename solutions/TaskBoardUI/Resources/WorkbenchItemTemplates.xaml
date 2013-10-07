@@ -1,0 +1,190 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements"
+    xmlns:Interfaces="clr-namespace:TfsWorkbench.Core.Interfaces;assembly=TfsWorkbench.Core" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:TaskBoardUI="clr-namespace:TfsWorkbench.TaskBoardUI"
+    xmlns:ValueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters;assembly=TfsWorkbench.UIElements" 
+    xmlns:Properties="clr-namespace:TfsWorkbench.TaskBoardUI.Properties" 
+    xmlns:Converters="clr-namespace:TfsWorkbench.TaskBoardUI.Converters"
+    mc:Ignorable="d">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="CommonElements.xaml" />
+        <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+        <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+        <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ItemColours.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Converters:ChildColourConverter x:Key="ColourConverter" BackgoundConverter="{StaticResource ColourPicker}" />
+
+    <ValueConverters:CaptionConverter x:Key="CaptionConverter" />
+    <ValueConverters:OwnerConverter x:Key="OwnerConverter" />
+    <ValueConverters:NumericConverter x:Key="NumericConverter" />
+    <ValueConverters:BodyConverter x:Key="BodyConverter" />
+    <ValueConverters:HeaderTitleConverter x:Key="TaskTextConverter" />
+
+    <DataTemplate x:Key="WorkbenchItemTemplate" DataType="{x:Type Interfaces:IWorkbenchItem}">
+        <Grid
+			Width="{Binding Source={x:Static Properties:Settings.Default}, Path=CurrentCardSize.Width}" 
+			Height="{Binding Source={x:Static Properties:Settings.Default}, Path=CurrentCardSize.Height}" 
+            x:Name="PART_MainGrid"
+			Cursor="{x:Static UIElements:CustomCursors.Hand}"
+			>
+            <Grid.ToolTip>
+                <UIElements:WorkbenchItemToolTip WorkbenchItem="{Binding}" />
+            </Grid.ToolTip>
+            <Grid.ContextMenu>
+                <UIElements:WorkbenchItemContextMenu
+                    WorkbenchItem="{Binding}"
+                    >
+                    <MenuItem
+                        CommandParameter="{Binding}" 
+				        Command="{x:Static UIElements:CommandLibrary.EditItemCommand}"
+				        CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                        >
+				        <MenuItem.Icon>
+							<ContentControl Template="{StaticResource EditIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+						</MenuItem.Icon>
+                        <MenuItem.Header>
+                            <TextBlock FontWeight="Bold">
+					            <TextBlock.Text>
+					                <MultiBinding StringFormat="{}Edit ({0}) {1}">
+							            <Binding Path="[System.Id]" />
+							            <Binding Path="[System.WorkItemType]"/>
+						            </MultiBinding>
+					            </TextBlock.Text>
+                            </TextBlock>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem 
+                        Header="Open In Browser"
+                        CommandParameter="{Binding}" 
+				        Command="{x:Static UIElements:CommandLibrary.OpenItemInBrowserCommand}"
+				        CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                    	>
+                        <MenuItem.Icon>
+                            <ContentControl Template="{StaticResource WebIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem 
+                        Header="Save Changes"
+                        CommandParameter="{Binding}" 
+				        Command="{x:Static UIElements:CommandLibrary.SaveItemCommand}"
+				        CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                    	>
+				        <MenuItem.Icon>
+							<ContentControl Template="{StaticResource SaveIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+						</MenuItem.Icon>
+					</MenuItem>
+                    <MenuItem 
+    					Header="Duplicate"
+    					CommandParameter="{Binding}" 
+    					Command="{x:Static UIElements:CommandLibrary.DuplicateCommand}"
+    					CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
+                        >
+                        <MenuItem.Icon>
+                            <ContentControl Template="{StaticResource CopyIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem 
+                        Header="Refresh / Reset"
+                        CommandParameter="{Binding}" 
+				        Command="{x:Static UIElements:CommandLibrary.RefreshItemCommand}"
+				        CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                        >
+				        <MenuItem.Icon>
+							<ContentControl Template="{StaticResource RefreshIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+						</MenuItem.Icon>
+					</MenuItem>
+                    <MenuItem 
+                        Header="Discard Unsaved Item"
+                        CommandParameter="{Binding}" 
+				        Command="{x:Static UIElements:CommandLibrary.DiscardItemCommand}"
+				        CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                        >
+                        <MenuItem.Icon>
+                            <ContentControl Template="{StaticResource DeleteIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </UIElements:WorkbenchItemContextMenu>
+            </Grid.ContextMenu>
+
+            <Path 
+			    Data="M0.5,0.5 L51,4 334.5,0.5 C329.37329,84.147296 328.58654,168.4937 335.00035,254 335.74997,250.08333 331.25368,324.77936 326.33334,325.66668 265.33389,336.66708 134,343 134,343 L0.5,343.5 C2.3333315,284.55556 8.6666586,227.33337 5.9999946,166.66667 -1.1730936,3.4786629 0.6666665,-0.66666667 0.5,0.5 z" 
+			    HorizontalAlignment="Left" 
+			    Stretch="Fill" 
+			    VerticalAlignment="Top" 
+			    Stroke="Black"
+                Effect="{DynamicResource DropShadowLevel1}"
+                >
+                <Path.Fill>
+                    <MultiBinding Converter="{StaticResource ColourConverter}">
+                        <Binding />
+                        <Binding RelativeSource="{RelativeSource AncestorType={x:Type TaskBoardUI:ViewControl}}" Path="SwimLaneView"/>
+                    </MultiBinding>
+                </Path.Fill>
+            </Path>
+
+        	<DockPanel Margin="8,8,8,2" TextBlock.Foreground="Black" d:IsHidden="True">
+                <DockPanel DockPanel.Dock="Bottom">
+                    <TextBlock TextTrimming="CharacterEllipsis" FontWeight="Bold" DockPanel.Dock="Right" Margin="2,0,18,0">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource NumericConverter}">
+                                <Binding Path="[System.State]" />
+                                <Binding />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <TextBlock TextTrimming="CharacterEllipsis" FontStyle="Italic" DockPanel.Dock="Left">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource OwnerConverter}">
+                                <Binding Path="[System.State]" />
+                                <Binding />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DockPanel>
+                <TextBlock 
+                    DockPanel.Dock="Top"
+                    TextTrimming="CharacterEllipsis" 
+                    TextWrapping="Wrap"
+                    FontWeight="SemiBold"
+                    >
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource TaskTextConverter}">
+                            <Binding Path="[System.State]" />
+                            <Binding />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock 
+                    DockPanel.Dock="Top"
+                    TextTrimming="CharacterEllipsis" 
+                    TextWrapping="Wrap"
+                    >
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource BodyConverter}">
+                            <Binding Path="[System.State]" />
+                            <Binding />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </DockPanel>
+        	<Button
+        		CommandParameter="{Binding}" 
+        		CommandTarget="{Binding ElementName=PART_MainGrid}"
+        		Command="{x:Static UIElements:CommandLibrary.SaveItemCommand}" 
+        		HorizontalAlignment="Right" 
+        		Style="{StaticResource SaveButtonStyle}" 
+        		VerticalAlignment="Bottom" 
+                Height="18" 
+                Width="18"
+                Margin="0,0,4,4"
+				/>
+    	</Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

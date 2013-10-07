@@ -1,0 +1,31 @@
+﻿<MenuItem 
+    x:Class="TfsWorkbench.FilterService.FilterServiceMenuItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:Properties="clr-namespace:TfsWorkbench.FilterService.Properties" 
+    xmlns:FilterService="clr-namespace:TfsWorkbench.FilterService" 
+    Command="{x:Static FilterService:LocalCommandLibrary.ShowFilterDialogCommand}"
+    CommandTarget="{Binding RelativeSource={RelativeSource Self}}"
+    ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Controller.Filters.Description}"
+    >
+    <MenuItem.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </MenuItem.Resources>
+    <MenuItem.Header>
+        <TextBlock>
+            <Run Text="Show: " />
+            <TextBlock Text="{Binding Source={x:Static Properties:Settings.Default}, Path=DisplayName}" />
+        </TextBlock>
+    </MenuItem.Header>
+    <MenuItem.Icon>
+        <ContentControl 
+            Template="{StaticResource FilterIconTemplate}"
+            Style="{StaticResource MenuIconStyle}"            
+            />
+    </MenuItem.Icon>
+</MenuItem>

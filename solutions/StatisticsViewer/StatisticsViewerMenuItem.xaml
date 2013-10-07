@@ -1,0 +1,33 @@
+﻿<MenuItem 
+    x:Class="TfsWorkbench.StatisticsViewer.StatisticsViewerMenuItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:Properties="clr-namespace:TfsWorkbench.StatisticsViewer.Properties" 
+    xmlns:StatisticsViewer="clr-namespace:TfsWorkbench.StatisticsViewer" 
+    mc:Ignorable="d"
+    Command="{x:Static StatisticsViewer:LocalCommandLibrary.ShowStatisticsViewerCommand}"
+    CommandTarget="{Binding RelativeSource={RelativeSource Self}}"
+    >
+    <MenuItem.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </MenuItem.Resources>
+    <MenuItem.Header>
+        <TextBlock>
+            <Run Text="Show: " />
+            <TextBlock Text="{Binding Source={x:Static Properties:Settings.Default}, Path=DisplayName}" />
+        </TextBlock>
+    </MenuItem.Header>
+    <MenuItem.Icon>
+        <ContentControl 
+            Template="{StaticResource StatisticsIconTemplate}" 			
+            Style="{StaticResource MenuIconStyle}"            
+            />
+    </MenuItem.Icon>
+</MenuItem>

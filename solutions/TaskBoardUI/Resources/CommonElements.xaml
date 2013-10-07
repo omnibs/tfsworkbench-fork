@@ -1,0 +1,17 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<LinearGradientBrush x:Key="OtherItemsBackgorund" EndPoint="0.5,1" StartPoint="0.5,0">
+		<GradientStop Color="#FFDEDEDE" Offset="0"/>
+		<GradientStop Color="White" Offset="1"/>
+	</LinearGradientBrush>
+	<LinearGradientBrush x:Key="SwimLaneItemBackgorund" EndPoint="0.5,1" StartPoint="0.5,0">
+		<GradientStop Color="#7E7E7E" Offset="0"/>
+		<GradientStop Color="#858585" Offset="1"/>
+	</LinearGradientBrush>
+	<SolidColorBrush x:Key="ColumnItemRightBorderBrush" Color="#FFFFFFFF"/>
+	<SolidColorBrush x:Key="ColumnResizeGripperBrush" Color="#FF000000"/>
+    <SolidColorBrush x:Key="RowResizeGripperBrush" Color="#FF000000"/>
+    <SolidColorBrush x:Key="ValidDropLocationBorderBrush" Color="Green" />
+	<SolidColorBrush x:Key="InvalidDropLocationBorderBrush" Color="Red" />
+</ResourceDictionary>

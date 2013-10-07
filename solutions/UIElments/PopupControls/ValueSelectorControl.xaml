@@ -1,0 +1,104 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.UIElements.PopupControls.ValueSelectorControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:DataObjects="clr-namespace:TfsWorkbench.Core.DataObjects;assembly=TfsWorkbench.Core" 
+    xmlns:Converters="clr-namespace:TfsWorkbench.UIElements.ValueConverters"
+    Name="PART_ValueSelector"
+    >
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+            <Converters:BoolToVisibilityConverter x:Key="VisibilityConverter" FalseVisibility="Collapsed" />
+        </ResourceDictionary>
+	</UserControl.Resources>
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <Popup 
+            PopupAnimation="Fade"
+            x:Name="PART_Popup"
+            AllowsTransparency="True"
+            Placement="Bottom"
+            PlacementTarget="{Binding ElementName=PART_ToggleButton}"
+            MinWidth="{Binding ElementName=PART_ToggleButton, Path=ActualWidth}"
+            >
+            <Border BorderBrush="black" BorderThickness="1" Background="White">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Button 
+                        x:Name="PART_SelectAllButton"
+                        Click="OnSelectAllClick" 
+                        Style="{DynamicResource ApplyButtonStyle}"
+                        Visibility="{Binding ElementName=PART_ValueSelector, Path=ShowSelectAll, Converter={StaticResource VisibilityConverter}}"                        
+                        HorizontalAlignment="Center"
+                        ToolTip="Select all"
+                        >
+                        <Button.LayoutTransform>
+                            <ScaleTransform ScaleX="0.75" ScaleY="0.75" />
+                        </Button.LayoutTransform>
+                    </Button>
+                    <Button 
+                        x:Name="PART_DeselectAllButton"
+                        Grid.Column="1"
+                        Click="OnDeselectAllClick" 
+                        Style="{DynamicResource CloseButtonStyle}"
+                        Visibility="{Binding ElementName=PART_ValueSelector, Path=ShowSelectAll, Converter={StaticResource VisibilityConverter}}"
+                        HorizontalAlignment="Center"
+                        ToolTip="Deselect All"
+                        >
+                        <Button.LayoutTransform>
+                            <ScaleTransform ScaleX="0.75" ScaleY="0.75" />
+                        </Button.LayoutTransform>
+                    </Button>
+                    <ListView 
+                        Grid.Row="1" 
+                        Grid.ColumnSpan="2" 
+                        x:Name="PART_PopupListView" 
+                        ItemsSource="{Binding ElementName=PART_ValueSelector, Path=ValueSelections}"
+                        BorderBrush="Transparent"
+                        Background="Transparent"
+                        >
+                        <ListView.ItemTemplate>
+                            <DataTemplate DataType="{x:Type DataObjects:SelectedValue}">
+                                <CheckBox 
+                                    Name="PART_CheckBox"
+                                    Margin="0,0,2,0" 
+                                    IsChecked="{Binding IsSelected}" 
+                                    Content="{Binding Text}" 
+                                    Checked="OnCheckChange"
+                                    Unchecked="OnCheckChange"
+                                    />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Border>
+        </Popup>
+        <ToggleButton 
+			Name="PART_ToggleButton" 
+			HorizontalContentAlignment="Stretch"
+			IsChecked="{Binding ElementName=PART_Popup, Path=IsOpen}" 
+			MinWidth="100"
+			>
+        	<Grid>
+        		<Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition />
+        			<ColumnDefinition Width="16" />
+        		</Grid.ColumnDefinitions>
+				<ContentControl IsTabStop="False" Template="{StaticResource FilterIconTemplate}" Margin="2" Foreground="{StaticResource ButtonNormalStroke}" />
+                <TextBlock Text="{Binding ElementName=PART_ValueSelector, Path=DisplayText}" Grid.Column="1" />
+				<Rectangle Fill="{StaticResource Arrow}" Width="8" Height="4" Grid.Column="2" />
+        	</Grid>
+        </ToggleButton>
+    </StackPanel>
+</UserControl>

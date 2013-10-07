@@ -1,0 +1,716 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:TaskBoardUI="clr-namespace:TfsWorkbench.TaskBoardUI"
+    xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements"
+    xmlns:DragHelpers="clr-namespace:TfsWorkbench.UIElements.DragHelpers;assembly=TfsWorkbench.UIElements" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:System="clr-namespace:System;assembly=mscorlib" 
+    xmlns:Constants="clr-namespace:TfsWorkbench.TaskBoardUI.Constants" 
+    xmlns:ValueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters;assembly=TfsWorkbench.UIElements" 
+    xmlns:DataObjects="clr-namespace:TfsWorkbench.TaskBoardUI.DataObjects" 
+    xmlns:Converters="clr-namespace:TfsWorkbench.TaskBoardUI.Converters" 
+    mc:Ignorable="d"
+    >
+    
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+		<ResourceDictionary Source="DragListViewTemplates.xaml" />
+		<ResourceDictionary Source="CommonElements.xaml"/>
+        <ResourceDictionary Source="WorkbenchItemTemplates.xaml"/>
+        <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+        <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ItemColours.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Converters:IndexedItemConverter x:Key="IndexedItemConverter" />
+
+    <ValueConverters:CaptionConverter x:Key="CaptionConverter" />
+    <ValueConverters:OwnerConverter x:Key="OwnerConverter" />
+    <ValueConverters:NumericConverter x:Key="NumericConverter" />
+    <ValueConverters:BodyConverter x:Key="BodyConverter" />
+    <ValueConverters:HeaderTitleConverter x:Key="HeaderConverter" />
+
+    <Style TargetType="Rectangle" x:Key="ContainerRightBorder">
+        <Setter Property="Fill" Value="Transparent" />
+        <Setter Property="Stroke" Value="{StaticResource ColumnItemRightBorderBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Width" Value="1" />
+        <Setter Property="Margin" Value="0,4"/>
+    </Style>
+    
+    <DataTemplate x:Key="StateCollectionCell">
+        <Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+	        <TaskBoardUI:StateCollectionView StateCollection="{Binding}" />
+		</Grid>
+	</DataTemplate>
+
+    <RadialGradientBrush x:Key="RowHeaderBackground" Center="0.25,0.1" GradientOrigin="0.25,0.1" RadiusY="0.75">
+        <GradientStop Color="#FF818EFF" Offset="0"/>
+        <GradientStop Color="#FFABB5FF" Offset="0.991"/>
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="RowHeaderBackgroundHighlight" Center="0.25,0.1" GradientOrigin="0.25,0.1" RadiusY="0.75">
+        <GradientStop Color="#FFC7CCFF" Offset="0"/>
+        <GradientStop Color="#FFCCD2FF" Offset="0.988"/>
+    </RadialGradientBrush>
+
+    <DataTemplate x:Key="ParentCellTemplate" DataType="{x:Type DataObjects:SwimLaneRow}">
+    	<Grid Height="{Binding RowHeight}">
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition Width="Auto" />
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+            
+            <Grid Grid.ColumnSpan="3" Margin="0,0,4,0">
+                <Path 
+			        Stroke="Black" 
+			        Data="M0.5,0.5 L499.5,0.5 496.66667,232 495.33334,296 72.667009,296.66667 0.5,299.5 C0.5,227.55556 -0.58082467,105.49097 1.5,98 4,89 0.5,28.222222 0.5,0.5 z"                     
+                    Stretch="Fill"
+                    Fill="{StaticResource WhiteFillBrush}"
+                    >
+                    <Path.Effect>
+                        <DropShadowEffect Opacity="0.5" />
+                    </Path.Effect>
+                </Path>
+                <!--
+                <Viewbox Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="15,0,15,30">
+                    <Grid>
+                        <Rectangle Height="1" Margin="0,80, 0,0" Stroke="#ffa5a5a5" VerticalAlignment="Top" />
+                        <Rectangle Height="1" Margin="0,110,0,0" Stroke="#ffa5a5a5" VerticalAlignment="Top" />
+                        <Rectangle Height="1" Margin="0,140,0,0" Stroke="#ffa5a5a5" VerticalAlignment="Top" />
+                        <Rectangle Height="1" Margin="0,170,0,0" Stroke="#ffa5a5a5" VerticalAlignment="Top" />
+                        <Rectangle Height="1" Margin="0,200,0,0" Stroke="#ffa5a5a5" VerticalAlignment="Top" />
+                        <Rectangle Height="1" Margin="0,230,0,0" Stroke="#ffa5a5a5" VerticalAlignment="Top" />
+                        <Rectangle Height="1" Margin="0,260,0,0" Stroke="#ffa5a5a5" VerticalAlignment="Top" />
+                    </Grid>
+                </Viewbox>
+                -->
+            </Grid>
+
+            <StackPanel HorizontalAlignment="left" Margin="0" VerticalAlignment="Top" Orientation="Vertical">
+                <Button
+    				Style="{StaticResource AddButtonStyle}"
+    				CommandParameter="{Binding ChildCreationArguments}" 
+    				Command="{x:Static UIElements:CommandLibrary.CreateChildCommand}"
+    				CommandTarget="{Binding RelativeSource={RelativeSource Self}}"
+					>
+                    <Button.ToolTip>
+                        <TextBlock>
+                            <Run Text="Add New:" />
+                            <TextBlock Text="{Binding ChildCreationArguments.ChildTypeName}" />
+                        </TextBlock>
+                    </Button.ToolTip>
+                </Button>
+                <Button
+    				Style="{StaticResource EditButtonStyle}"
+    				CommandParameter="{Binding Parent}" 
+    				Command="{x:Static UIElements:CommandLibrary.EditItemCommand}"
+    				CommandTarget="{Binding RelativeSource={RelativeSource Self}}"
+					ToolTip="Edit item"
+                    />
+    			<Button
+    				Style="{StaticResource WebButtonStyle}"
+    				CommandParameter="{Binding Parent}" 
+    				Command="{x:Static UIElements:CommandLibrary.OpenItemInBrowserCommand}"
+    				CommandTarget="{Binding RelativeSource={RelativeSource Self}}"
+					ToolTip="Open in browser"
+                    />
+    			<Button
+    				Style="{StaticResource SaveButtonStyle}"
+    				CommandParameter="{Binding Parent}" 
+    				Command="{x:Static UIElements:CommandLibrary.SaveItemCommand}"
+    				CommandTarget="{Binding RelativeSource={RelativeSource Self}}"
+					ToolTip="Save item"
+                    />
+    			<Button
+    				Style="{StaticResource RefreshButtonStyle}"
+    				CommandParameter="{Binding ChildCreationArguments}" 
+    				Command="{x:Static UIElements:CommandLibrary.RefreshItemAndViewChildren}"
+    				CommandTarget="{Binding RelativeSource={RelativeSource Self}}"
+					ToolTip="Refresh / reset row"
+                    />
+    		</StackPanel>
+            
+            <Grid Grid.Column="1" Width="Auto" Margin="0,0,5,0">
+                <Grid.ToolTip>
+                    <UIElements:WorkbenchItemToolTip WorkbenchItem="{Binding Parent}" />
+                </Grid.ToolTip>
+                <Grid.ContextMenu>
+                    <UIElements:WorkbenchItemContextMenu
+                            WorkbenchItem="{Binding Parent}"
+                            >
+                        <MenuItem 
+    							CommandParameter="{Binding ChildCreationArguments}" 
+    							Command="{x:Static UIElements:CommandLibrary.CreateChildCommand}"
+    							CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
+                                >
+                            <MenuItem.Header>
+                                <TextBlock FontWeight="Bold">
+                                        <Run Text="Add New:" />
+                                        <TextBlock Text="{Binding ChildCreationArguments.ChildTypeName}" />
+                                    </TextBlock>
+                            </MenuItem.Header>
+                            <MenuItem.Icon>
+                                <ContentControl Template="{StaticResource AddIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+    							CommandParameter="{Binding Parent}" 
+    							Command="{x:Static UIElements:CommandLibrary.EditItemCommand}"
+    							CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
+                                >
+                            <MenuItem.Icon>
+                                <ContentControl Template="{StaticResource EditIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                            </MenuItem.Icon>
+                            <MenuItem.Header>
+                                <TextBlock>
+					                    <TextBlock.Text>
+					                        <MultiBinding StringFormat="{}Edit ({0}) {1}">
+							                    <Binding Path="Parent[System.Id]" />
+							                    <Binding Path="Parent[System.WorkItemType]"/>
+						                    </MultiBinding>
+					                    </TextBlock.Text>
+                                </TextBlock>
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <MenuItem 
+    							Header="Open Item In Browser"
+    							CommandParameter="{Binding Parent}" 
+    							Command="{x:Static UIElements:CommandLibrary.OpenItemInBrowserCommand}"
+    							CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
+                                >
+                            <MenuItem.Icon>
+                                <ContentControl Template="{StaticResource WebIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem 
+    							Header="Save Changes"
+    							CommandParameter="{Binding Parent}" 
+    							Command="{x:Static UIElements:CommandLibrary.SaveItemCommand}"
+    							CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
+                                >
+                            <MenuItem.Icon>
+                                <ContentControl Template="{StaticResource SaveIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem 
+    						Header="Duplicate"
+    						CommandParameter="{Binding Parent}" 
+    						Command="{x:Static UIElements:CommandLibrary.DuplicateCommand}"
+    						CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
+                            >
+                            <MenuItem.Icon>
+                                <ContentControl Template="{StaticResource CopyIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem 
+    							Header="Refresh / Reset Row"
+    							CommandParameter="{Binding ChildCreationArguments}" 
+    							Command="{x:Static UIElements:CommandLibrary.RefreshItemAndViewChildren}"
+    							CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
+                            	>
+                            <MenuItem.Icon>
+                                <ContentControl Template="{StaticResource RefreshIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem 
+    							Header="Discard Unsaved Item"
+    							CommandParameter="{Binding Parent}" 
+    							Command="{x:Static UIElements:CommandLibrary.DiscardItemCommand}"
+    							CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"
+                            	>
+                            <MenuItem.Icon>
+                                <ContentControl Template="{StaticResource DeleteIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </UIElements:WorkbenchItemContextMenu>
+                </Grid.ContextMenu>
+
+                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="3" d:LayoutOverrides="Height" TextBlock.Foreground="Black">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top" FontSize="14" FontWeight="Bold" TextWrapping="Wrap">
+                            <TextBlock.Text>
+                                <MultiBinding Converter="{StaticResource HeaderConverter}">
+                                    <Binding Path="Parent[System.State]" />
+                                    <Binding Path="Parent" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <Rectangle DockPanel.Dock="Top" Fill="{x:Null}" Stroke="Blue" StrokeThickness="0,0,0,1" Margin="2,0,2,0" />
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                            <TextBlock Text="{Binding Parent[System.State]}" FontWeight="Bold" Margin="0,0,2,0" />
+                            <TextBlock Text="{Binding Path=Parent[System.WorkItemType], StringFormat=({0})}" FontStyle="Italic" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                        </StackPanel>
+                        <DockPanel DockPanel.Dock="Bottom">
+                            <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold" Foreground="DarkRed">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource NumericConverter}">
+                                            <Binding Path="Parent[System.State]" />
+                                            <Binding Path="Parent" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Right" FontStyle="Italic" VerticalAlignment="Center" Margin="0,0,4,0">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource OwnerConverter}">
+                                            <Binding Path="Parent[System.State]" />
+                                            <Binding Path="Parent" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                            </TextBlock>
+                        </DockPanel>
+                        <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap">
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource BodyConverter}">
+                                        <Binding Path="Parent[System.State]" />
+                                        <Binding Path="Parent" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                        </TextBlock>
+                    </DockPanel>
+                </ScrollViewer>
+            </Grid>
+            <Rectangle Fill="Transparent" Stroke="{StaticResource ColumnItemRightBorderBrush}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="1" Grid.Column="2" Margin="0,4" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RowHeaderTemplate" DataType="{x:Type System:String}">
+        <TextBlock x:Name="HeaderText" Text="{Binding}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate1" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=0, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate2" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=1, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate3" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=2, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate4" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=3, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate5" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=4, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate6" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=5, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate7" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=6, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate8" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=7, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate9" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=8, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate10" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=9, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate11" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=10, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate12" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=11, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate13" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=12, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate14" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=13, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate15" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=14, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate16" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=15, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate17" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=16, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate18" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=17, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate19" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=18, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ColumnTemplate20" DataType="{x:Type DataObjects:SwimLaneRow}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{Binding RowHeight}"
+                StateCollection="{Binding ConverterParameter=19, Converter={StaticResource IndexedItemConverter}, Path=SwimLaneColumns}"
+                />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BucketCellTemplate0">
+        <Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+	        <TaskBoardUI:StateCollectionView 
+	            Height="{x:Static Constants:Numbers.OtherItemsRowHeight}" 
+	            StateCollection="{Binding ConverterParameter=0, Converter={StaticResource IndexedItemConverter}, Path=BucketStates}" />
+		</Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BucketCellTemplate1">
+        <Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+	        <TaskBoardUI:StateCollectionView 
+	            Height="{x:Static Constants:Numbers.OtherItemsRowHeight}" 
+	            StateCollection="{Binding ConverterParameter=1, Converter={StaticResource IndexedItemConverter}, Path=BucketStates}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BucketCellTemplate2">
+        <Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+	        <TaskBoardUI:StateCollectionView 
+	            Height="{x:Static Constants:Numbers.OtherItemsRowHeight}" 
+	            StateCollection="{Binding ConverterParameter=2, Converter={StaticResource IndexedItemConverter}, Path=BucketStates}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BucketCellTemplate3">
+        <Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+	        <TaskBoardUI:StateCollectionView 
+	            Height="{x:Static Constants:Numbers.OtherItemsRowHeight}" 
+	            StateCollection="{Binding ConverterParameter=3, Converter={StaticResource IndexedItemConverter}, Path=BucketStates}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BucketCellTemplate4">
+        <Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+	        <TaskBoardUI:StateCollectionView 
+	            Height="{x:Static Constants:Numbers.OtherItemsRowHeight}" 
+	            StateCollection="{Binding ConverterParameter=4, Converter={StaticResource IndexedItemConverter}, Path=BucketStates}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BucketCellTemplate5">
+        <Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+	        <TaskBoardUI:StateCollectionView 
+	            Height="{x:Static Constants:Numbers.OtherItemsRowHeight}" 
+	            StateCollection="{Binding ConverterParameter=5, Converter={StaticResource IndexedItemConverter}, Path=BucketStates}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BucketCellTemplate6">
+        <Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+	        <TaskBoardUI:StateCollectionView 
+	            Height="{x:Static Constants:Numbers.OtherItemsRowHeight}" 
+	            StateCollection="{Binding ConverterParameter=6, Converter={StaticResource IndexedItemConverter}, Path=BucketStates}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BucketCellTemplate7">
+        <Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+	        <TaskBoardUI:StateCollectionView 
+	            Height="{x:Static Constants:Numbers.OtherItemsRowHeight}" 
+	            StateCollection="{Binding ConverterParameter=7, Converter={StaticResource IndexedItemConverter}, Path=BucketStates}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BucketCellTemplate8">
+        <Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+	        <TaskBoardUI:StateCollectionView 
+	            Height="{x:Static Constants:Numbers.OtherItemsRowHeight}" 
+	            StateCollection="{Binding ConverterParameter=8, Converter={StaticResource IndexedItemConverter}, Path=BucketStates}" />
+        </Grid>			
+    </DataTemplate>
+
+    <DataTemplate x:Key="BucketCellTemplate9">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="4"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+            <TaskBoardUI:StateCollectionView 
+	            Height="{x:Static Constants:Numbers.OtherItemsRowHeight}" 
+	            StateCollection="{Binding ConverterParameter=9, Converter={StaticResource IndexedItemConverter}, Path=BucketStates}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="OrphanCellTemplate">
+        <Grid>
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition/>
+    			<ColumnDefinition Width="Auto" MinWidth="4"/>
+    		</Grid.ColumnDefinitions>
+    		<Rectangle Style="{StaticResource ContainerRightBorder}" Grid.Column="1" />
+	    	<DragHelpers:DragListView 
+	    		ItemsSource="{Binding Orphans}" 
+	    		MinWidth="{x:Static Constants:Numbers.MinContainerWidth}"
+	    		ItemTemplate="{StaticResource WorkbenchItemTemplate}"
+				Height="{x:Static Constants:Numbers.OtherItemsRowHeight}"
+	    		Style="{StaticResource DragListViewStyle}"
+	            />
+		</Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

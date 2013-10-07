@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="4.0">
+
+    <Import Project="Microsoft.Sdc.Common.tasks" />
+    <Import Project="MSBuild.Community.tasks" />
+
+    <PropertyGroup>
+        <VersionXmlFile>$(MSBuildProjectDirectory)\..\common\build.VersionNumber.config</VersionXmlFile>
+        <AssemblyVersionFile>$(MSBuildProjectDirectory)\..\common\TfsWorkbenchVersionInfo.cs</AssemblyVersionFile>
+        <SolutionsRoot>$(MSBuildProjectDirectory)\..\solutions\</SolutionsRoot>
+        <LocaleToBuild>en-US</LocaleToBuild>
+        <VersionNumber>0.0.0.0</VersionNumber>
+        <OnlyIncrementRevisionNumber>false</OnlyIncrementRevisionNumber>
+    </PropertyGroup>
+
+    <Target Name="Build"
+      DependsOnTargets="CleanOutDir;
+                        UpdateVersionNumber;
+                        ReadVersionNumber;
+                        SetAssemblyVersionNumber;
+                        Buildx64Installer;
+                        Buildx86Installer;
+						DisplayFinalFolderMessage" />
+
+    <Target Name="CleanOutDir">
+        <Folder.CleanFolder Path="$(OutDir)"
+                            Force="true"
+                            ContinueOnError="true"
+                            />
+    </Target>
+
+    <Target Name="UpdateVersionNumber">
+      <VersionNumber.Update 
+        VersionNumberConfigFileLocation="$(VersionXmlFile)"
+        OnlyIncrementRevision="true">
+          <Output 
+            PropertyName="VersionNumber"
+            TaskParameter="VersionNumber" 
+            />
+      </VersionNumber.Update>
+    </Target>
+    
+    <Target Name="ReadVersionNumber">
+      <VersionNumber.Load ConfigFileLocation="$(VersionXmlFile)">
+        <Output TaskParameter="VersionNumber"
+                PropertyName="VersionNumber" />
+      </VersionNumber.Load>
+      <Message Text="Version Number: $(VersionNumber)" Importance="high" />
+      <Message Text="Version File: $(VersionXmlFile)" Importance="high" />
+    </Target>
+  
+    <Target Name="SetAssemblyVersionNumber">
+      <FileUpdate
+        Files="$(AssemblyVersionFile)"
+        Regex="\(&quot;.*&quot;\)"
+        ReplacementText="(&quot;$(VersionNumber)&quot;)"
+        />
+    </Target>
+  
+    <Target Name="Buildx64Installer"> 
+      <PropertyGroup>
+        <WixBuildProps>
+          Platform=x64;
+		  Configuration=Release;
+          LocaleToBuild=$(LocaleToBuild);
+          VersionNumber=$(VersionNumber);
+        </WixBuildProps>
+      </PropertyGroup>
+
+      <!-- Build 64bit MSI/Bootstrapper -->
+      <Message Text="Building 64 bit installer..." Importance="high" />
+      <MSBuild 
+        Projects="$(SolutionsRoot)\TfsWorkbench.Installer.sln"
+        Properties="$(WixBuildProps)" 
+        />
+		
+      <ItemGroup>
+        <InstallerFilesx64 Include="$(OutDir)\$(LocaleToBuild)\*.msi"/>
+      </ItemGroup>
+
+      <Copy 
+        SourceFiles="@(InstallerFilesx64)" 
+        DestinationFolder="$(FinalOutput)" 
+        />
+    </Target>
+
+    <Target Name="Buildx86Installer"> 
+      <PropertyGroup>
+        <WixBuildProps>
+          Platform=x86;
+		  Configuration=Release;
+          LocaleToBuild=$(LocaleToBuild);
+          VersionNumber=$(VersionNumber);
+        </WixBuildProps>
+      </PropertyGroup>
+
+      <!-- Build 32bit MSI/Bootstrapper -->
+      <Message Text="Building 32 bit installer..." Importance="high" />
+      <MSBuild 
+        Projects="$(SolutionsRoot)\TfsWorkbench.Installer.sln"
+        Properties="$(WixBuildProps)" 
+        />      
+      
+      <ItemGroup>
+        <InstallerFilesx86 Include="$(OutDir)\$(LocaleToBuild)\*.msi"/>
+      </ItemGroup>
+
+      <Copy 
+        SourceFiles="@(InstallerFilesx86)" 
+        DestinationFolder="$(FinalOutput)" 
+        />
+    </Target>
+
+    <Target Name="DisplayFinalFolderMessage">
+	
+      <ConvertToAbsolutePath Paths="$(FinalOutput)">
+          <Output TaskParameter="AbsolutePaths" PropertyName="FinaloutputAbs"/>
+      </ConvertToAbsolutePath>
+      
+      <Message Text="*********************************************************************" Importance="high" />
+      <Message Text="Installers copied to: $(FinaloutputAbs)\" Importance="high" />
+      <Message Text="Process complete." Importance="high" />
+            
+    </Target>
+
+</Project>

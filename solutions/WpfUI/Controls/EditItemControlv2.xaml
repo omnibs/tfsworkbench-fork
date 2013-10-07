@@ -1,0 +1,111 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:WpfUI="clr-namespace:TfsWorkbench.WpfUI" 
+    xmlns:ValueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters;assembly=TfsWorkbench.UIElements" 
+    mc:Ignorable="d" 
+    x:Class="TfsWorkbench.WpfUI.Controls.EditItemControlv2"
+    Height="550" 
+    Width="725"
+    UIElements:DialogWrapper.IsResizeable="True"
+    UIElements:DialogWrapper.IsModeless="False"
+    Name="PART_ControlRoot"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/TfsWorkbench.UIElements;component/Resources/EditControlTemplates.xaml" />
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <ValueConverters:HeaderTitleConverter x:Key="HeaderConverter" />
+
+            <Style x:Key="ContainerGridStyle" TargetType="{x:Type Grid}">
+                <Setter Property="UIElements:DialogWrapper.IsDragging" Value="{Binding ElementName=PART_ControlRoot, Path=(UIElements:DialogWrapper.IsDragging)}" />
+                <Setter Property="UIElements:DialogWrapper.IsTopMost" Value="{Binding ElementName=PART_ControlRoot, Path=(UIElements:DialogWrapper.IsTopMost)}" />
+                <Style.Triggers>
+                    <Trigger Property="UIElements:DialogWrapper.IsTopMost" Value="False">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </Trigger>
+                    <Trigger Property="UIElements:DialogWrapper.IsDragging" Value="True">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </Trigger>
+              </Style.Triggers>
+            </Style>
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border DataContext="{Binding ElementName=PART_ControlRoot}">
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <StackPanel 
+                        DockPanel.Dock="Right"
+                        Orientation="Horizontal" 
+                        Style="{DynamicResource CommandPanel}" 
+                        Height="25" 
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top"
+                        >
+                    <Button 
+                        Click="OnSaveButtonClick"
+                        Style="{DynamicResource SaveButtonStyle}" 
+                        ToolTip="Save item" 
+                        />
+                    <Button
+                        Command="{x:Static UIElements:CommandLibrary.OpenItemInBrowserCommand}"
+                        CommandParameter="{Binding WorkbenchItem}"
+                        CommandTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type WpfUI:MainAppWindow}}}"
+                        Style="{DynamicResource WebButtonStyle}" 
+                        ToolTip="Open In Browser"
+                        />
+                    <Button 
+                        Command="{x:Static UIElements:CommandLibrary.RefreshItemCommand}"
+                        CommandParameter="{Binding WorkbenchItem}"
+                        CommandTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type WpfUI:MainAppWindow}}}"
+                        Click="OnRefreshButtonClick" 
+                        Style="{DynamicResource RefreshButtonStyle}" 
+                        ToolTip="Reset / refresh item"
+                        />
+                    <Button 
+                        x:Name="PART_DiscardButton"
+                        IsEnabled="{Binding WorkbenchItem.ValueProvider.IsNew}" 
+                        Click="OnDiscardButtonClick" 
+                        Style="{DynamicResource DeleteButtonStyle}" 
+                        ToolTip="Discard unsaved item" 
+                        />
+                    <Button 
+                        x:Name="PART_CloseButton" 
+                        Click="OnCloseButtonClick" 
+                        Style="{DynamicResource CloseButtonStyle}" 
+                        ToolTip="Close" 
+                        IsCancel="True"
+                        />
+                </StackPanel>
+                <TextBlock
+                    DockPanel.Dock="Left"
+                    HorizontalAlignment="Stretch"
+                    TextAlignment="Left"
+                    TextTrimming="CharacterEllipsis"
+                    Style="{StaticResource DialogCaptionStyle}"
+                    >
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource HeaderConverter}">
+                            <Binding Path="WorkbenchItem[System.State]" />
+                            <Binding Path="WorkbenchItem" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </DockPanel>
+            <Border Style="{DynamicResource DialogInnerBorderStyle}">
+                <Grid>
+                    <Rectangle Name="PART_Background" Fill="{x:Static SystemColors.ControlBrush}" />
+                    <Grid Name="PART_ContentGrid" Style="{StaticResource ContainerGridStyle}" />
+                </Grid>
+            </Border>
+        </DockPanel>
+    </Border>
+</UserControl>

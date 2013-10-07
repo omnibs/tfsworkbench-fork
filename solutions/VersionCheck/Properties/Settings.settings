@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TfsWorkbench.VersionCheck.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DisplayPriority" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CheckOnStartUp" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowButton" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CheckUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.ScrumforTeamSystem.co.uk/VersionNumber.aspx?product=tfsworkbench</Value>
+    </Setting>
+    <Setting Name="DownloadUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://tfsworkbench.codeplex.com/releases</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

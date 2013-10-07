@@ -1,0 +1,240 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.FilterService.FilterServiceView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Properties="clr-namespace:TfsWorkbench.FilterService.Properties" 
+    xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements" 
+    xmlns:FilterService="clr-namespace:TfsWorkbench.FilterService" 
+    xmlns:Converters="clr-namespace:TfsWorkbench.FilterService.Converters" 
+    xmlns:PopupControls="clr-namespace:TfsWorkbench.UIElements.PopupControls;assembly=TfsWorkbench.UIElements" 
+    xmlns:Services="clr-namespace:TfsWorkbench.Core.Services;assembly=TfsWorkbench.Core" 
+    Name="PART_ControlRoot"
+    Height="300" 
+    Width="600"
+    UIElements:DialogWrapper.IsResizeable="True"
+    UIElements:DialogWrapper.IsModeless="False"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Converters:OperatorToStringConverter x:Key="OperatorConverter" />
+            <Converters:ActionToStringConverter x:Key="ActionConverter" />
+
+            <DataTemplate x:Key="FilterTemplate" DataType="{x:Type FilterService:WorkbenchFilter}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Command="{x:Static FilterService:LocalCommandLibrary.RemoveFilterCommand}"
+                        CommandParameter="{Binding}"
+                        Style="{StaticResource DeleteButtonStyle}"
+                        ToolTip="{x:Static Properties:Resources.String020}"
+                        />
+                    <TextBlock 
+                        Grid.Column="1"
+                        Text="{Binding Description}" 
+                        VerticalAlignment="Center"
+                        />
+                </Grid>
+            </DataTemplate>
+
+            <Style x:Key="EditPanelStyle" TargetType="Panel">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=PART_ControlRoot, Path=WorkbenchFilter}" Value="{x:Null}">
+                        <Setter Property="IsEnabled" Value="False" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Converters:LocalProjectNodeSelector x:Key="ProjectNodeSelector" />
+
+            <Converters:ValueTemplateSelector x:Key="ValueTemplateSelector" />
+            
+            <DataTemplate x:Key="DefaultValueTemplate" DataType="{x:Type FilterService:WorkbenchFilter}">
+                <TextBox Text="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+            </DataTemplate>
+
+            <DataTemplate x:Key="DateValueTemplate" DataType="{x:Type FilterService:WorkbenchFilter}">
+                <DatePicker SelectedDate="{Binding Mode=TwoWay, Path=Value}" />
+            </DataTemplate>
+
+            <DataTemplate x:Key="ProjectPathValueTemplate" DataType="{x:Type FilterService:WorkbenchFilter}">
+                <PopupControls:ComboBoxTreeView 
+                    Value="{Binding Mode=TwoWay, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
+                    RootNode="{Binding Path=FieldName, Converter={StaticResource ProjectNodeSelector}}"
+                    />
+            </DataTemplate>
+
+            <DataTemplate x:Key="StateSelectorTemplate" DataType="{x:Type FilterService:WorkbenchFilter}">
+                <ComboBox
+                    SelectedItem="{Binding Value}"
+                    ItemsSource="{Binding ElementName=PART_ControlRoot, Path=Controller.FilterInfo.StateOptions}"
+                    />
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid DataContext="{Binding ElementName=PART_ControlRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel
+            Orientation="Horizontal"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Right">
+            <Button 
+                Command="{x:Static FilterService:LocalCommandLibrary.AddFilterCommand}"
+                ToolTip="{x:Static Properties:Resources.String027}" 
+                Style="{DynamicResource AddButtonStyle}"
+                Content="{x:Static Properties:Resources.String033}"
+                />
+            <Button 
+                Command="{x:Static FilterService:LocalCommandLibrary.ClearAllFiltersCommand}"
+                ToolTip="{x:Static Properties:Resources.String035}" 
+                Style="{DynamicResource DeleteButtonStyle}"
+                Content="{x:Static Properties:Resources.String036}"
+                />
+            <Button 
+                Command="{x:Static FilterService:LocalCommandLibrary.ApplyFiltersCommand}"
+                ToolTip="{x:Static Properties:Resources.String040}" 
+                Style="{DynamicResource ApplyButtonStyle}"
+                Content="{x:Static Properties:Resources.String039}"
+                />
+            <Button 
+                Click="OnCloseButtonClick" 
+                Style="{DynamicResource CloseButtonStyle}" 
+                ToolTip="{x:Static Properties:Resources.String018}" 
+                Content="{x:Static Properties:Resources.String018}"
+                IsCancel="True"
+                />
+        </StackPanel>
+        <TextBlock
+            Style="{StaticResource DialogCaptionStyle}"
+            HorizontalAlignment="Left"
+            Text="{x:Static Properties:Resources.String019}"
+            />
+        <Border
+            Grid.Row="1"
+            Style="{StaticResource DialogInnerBorderStyle}"
+            >
+            <DockPanel DataContext="{Binding ElementName=PART_ControlRoot}">
+                <Border
+                    DockPanel.Dock="Top"
+                    CornerRadius="5" 
+			        Effect="{DynamicResource DropShadowLevel1}" 
+			        Background="{DynamicResource ToolbarBackground}" 
+			        Padding="10" 
+                    Margin="0,0,0,5"
+			        VerticalAlignment="Top" 
+			        >
+                    <DockPanel>
+                        <StackPanel
+                            DockPanel.Dock="Right"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right">
+                        </StackPanel>
+
+                        <Grid Style="{StaticResource EditPanelStyle}" DockPanel.Dock="Right">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+
+                            <TextBlock 
+                                Text="{x:Static Properties:Resources.String025}" 
+                                VerticalAlignment="Center" 
+                                />
+
+                            <ComboBox
+                                Grid.Column="1"
+                                Name="PART_FilterAction"
+                                ItemsSource="{Binding Controller.FilterInfo.FilterActions}"
+                                SelectedValue="{Binding WorkbenchFilter.FilterAction, Converter={StaticResource ActionConverter}}"
+                                />
+
+                            <ComboBox 
+                                Grid.Column="2"
+                                Grid.ColumnSpan="2"
+                                Name="PART_ItemType" 
+                                ItemsSource="{Binding Controller.FilterInfo.ItemTypes}"
+                                SelectedValue="{Binding WorkbenchFilter.ItemTypeName}"
+                                />
+
+                            <TextBlock 
+                                Grid.Row="1"
+                                Text="{x:Static Properties:Resources.String028}" 
+                                VerticalAlignment="Center" 
+                                />
+
+                            <ComboBox
+                                Name="PART_FieldNames"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                ItemsSource="{Binding Controller.FilterInfo.FieldNames}"
+                                SelectedValue="{Binding WorkbenchFilter.FieldName}"
+                                />
+
+                            <ComboBox
+                                Name="PART_Operator"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                ItemsSource="{Binding Controller.FilterInfo.FilterOperators}"
+                                SelectedValue="{Binding Path=WorkbenchFilter.FilterOperator, Converter={StaticResource OperatorConverter}}"
+                                />
+
+                            <ContentControl
+                                Content="{Binding WorkbenchFilter}"
+                                Name="PART_Value"
+                                Grid.Row="1"
+                                Grid.Column="3"
+                                ContentTemplateSelector="{StaticResource ValueTemplateSelector}"
+                                />
+                        </Grid>
+                    </DockPanel>
+                </Border>
+                <TextBlock 
+                    DockPanel.Dock="Bottom"                    
+                    >
+                    <TextBlock.Text>
+                        <Binding
+                            Path="Controller.FilterInfo.FilterStatus"
+                            StringFormat="{x:Static Properties:Resources.String042}"
+                            />
+                    </TextBlock.Text>
+                </TextBlock>
+                <ListView 
+                    Name="PART_FilterList"
+                    DockPanel.Dock="Top"
+                    SelectionMode="Single"
+                    ItemsSource="{Binding Controller.Filters}" 
+                    SelectionChanged="OnFilterSelectionChanged"
+                    ItemTemplate="{StaticResource FilterTemplate}"
+                    >
+                    <ListView.Resources>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.Resources>
+                </ListView>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>
+
+    

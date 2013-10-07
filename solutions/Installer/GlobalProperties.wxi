@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <Property Id="ApplicationFolderName"
+           Value="!(loc.ApplicationName)" />
+  <Property Id="WixAppFolder"
+            Value="WixPerMachineFolder" />
+  <Property Id="ALLUSERS"
+            Value="1" />
+
+  <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+  <Property Id="INSTALLDESKTOPSHORTCUT" Value="1" />
+  <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
+  <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch TFS Workbench after setup." />
+
+  <!-- Custom (Overridable) Properties -->
+  
+  <Property Id="EVENTMESSAGEFILEPATH"
+              Value="\Microsoft.NET\Framework\v2.0.50727\EventLogMessages.dll" />
+  
+  <Property Id="MSIUSEREALADMINDETECTION"
+            Value="1" />
+
+  <Property Id="TEAMEXPLORER2010INSTALLED">
+    <RegistrySearch
+       Id="TeamExplorerInstalled"
+       Type="raw"
+       Root="HKLM"
+       Key="SOFTWARE\Microsoft\VisualStudio\10.0\InstalledProducts\Team Explorer"
+       Name="Package"
+       Win64="no"
+      />
+    </Property>
+
+  <Property Id="TEAMEXPLORER2012INSTALLED">
+    <RegistrySearch
+       Id="TeamExplorer2012Installed"
+       Type="raw"
+       Root="HKLM"
+       Key="SOFTWARE\Wow6432Node\Microsoft\DevDiv\vs\Servicing\11.0\teamExplorerCore"
+       Name="Version"
+       Win64="no"
+      />
+  </Property>
+
+  <!-- WiX Variables-->
+  <WixVariable Id="WixUISupportPerUser"
+               Value="0" />
+  <WixVariable Id="WixUILicenseRtf"
+               Value="License.rtf" />
+</Include>

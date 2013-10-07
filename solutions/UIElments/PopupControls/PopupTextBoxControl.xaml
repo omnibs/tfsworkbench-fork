@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="TfsWorkbench.UIElements.PopupControls.PopUpTextBoxControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Name="PART_Control"
+    >
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+    <StackPanel>
+        <Popup 
+            PopupAnimation="Fade"
+            x:Name="Popup"
+            AllowsTransparency="True"
+            Placement="Bottom"
+            PlacementTarget="{Binding ElementName=ToggleButton}"
+            MinWidth="{Binding ElementName=ToggleButton, Path=ActualWidth}"
+            >
+            <ScrollViewer x:Name="PopupScroller" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="100" MaxWidth="1000">
+                <TextBox 
+    			    AcceptsReturn="True"
+    			    TextWrapping="Wrap"
+                    Text="{Binding ElementName=PART_Control, Path=Value}"
+                    IsReadOnly="{Binding ElementName=PART_Control, Path=IsReadOnly}"
+    				Style="{StaticResource GreyOutOnReadOnly}"
+                />
+            </ScrollViewer>
+        </Popup>
+        <ToggleButton 
+			Name="ToggleButton" 
+			HorizontalContentAlignment="Stretch"
+			IsChecked="{Binding ElementName=Popup, Path=IsOpen}" 
+			MinWidth="100"
+			>
+        	<Grid>
+        		<Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+        			<ColumnDefinition Width="16" />
+        		</Grid.ColumnDefinitions>
+                <TextBlock MaxHeight="20" Text="{Binding ElementName=PART_Control, Path=Value, UpdateSourceTrigger=PropertyChanged}" TextTrimming="CharacterEllipsis" />
+				<Rectangle Fill="{StaticResource Arrow}" Width="8" Height="4" Grid.Column="1" />
+        	</Grid>
+        </ToggleButton>
+    </StackPanel>
+</UserControl>

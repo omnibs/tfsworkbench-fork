@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <?if $(var.Platform)=x64 ?>
+    <?define win64Flag = "yes" ?>
+  <?else ?>
+    <?define win64Flag = "no" ?>
+  <?endif ?>
+
+  <!-- Note: Product Version and Name attributes are replaced during the Team Build process. -->
+  <Product 
+    Id="*"
+    Name="TFS Workbench v$(var.VersionNumber)"
+    Language="1033"
+    Version="$(var.VersionNumber)"
+    Manufacturer="Scrum for Team System"
+    UpgradeCode="70CDFD6E-5B67-4111-91CA-36B1EAEC30D5">
+    
+    <Package 
+      InstallerVersion="500"
+      Compressed="yes"
+      InstallPrivileges="elevated"
+      Platform="$(var.Platform)"/>
+
+    <MajorUpgrade 
+      DowngradeErrorMessage="A later version of TFS Workbench is already installed. Setup will now exit."
+      AllowSameVersionUpgrades="yes"
+      />
+    
+    <PropertyRef Id="NETFRAMEWORK45"/>
+
+    <Condition Message="This application requires .NET Framework 4.5. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+    
+    <Condition 
+      Message="This product requires TFS connectivity. Please install an edition of Visual Studio 2010 or 2012 that includes TFS connectivity (Team Explorer) and then run this installer again."
+      >
+        <![CDATA[Installed OR TEAMEXPLORER2010INSTALLED OR TEAMEXPLORER2012INSTALLED]]>
+    </Condition>
+
+    <?if $(var.Platform)=x64 ?>
+      <Condition Message="This installer package is intended for a 64 bit (x64) operating system.">VersionNT64</Condition>
+    <?else ?>
+      <Condition Message="This installer package is intended for a 32 bit (x86) operating system.">Not VersionNT64</Condition>
+    <?endif ?>
+    
+    <Media Id="1"
+           Cabinet="TfsWorkbench.cab"
+           EmbedCab="yes" />
+
+    <UIRef Id="WixUI_Advanced" />
+
+    <?include GlobalProperties.wxi ?>
+    <?include DirectoryStructure.wxi ?>
+    <?include CustomActions.wxi?>
+    <?include Feature.wxi ?>
+   
+  </Product>
+</Wix>

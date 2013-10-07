@@ -1,0 +1,46 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TfsWorkbench.TFSDataProvider.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LastTfsUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastProjectName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastCollectionGuid" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastProjectCollectionUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultFields" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;System.Id&lt;/string&gt;
+  &lt;string&gt;System.ChangedBy&lt;/string&gt;
+  &lt;string&gt;System.ChangedDate&lt;/string&gt;
+  &lt;string&gt;System.CreatedBy&lt;/string&gt;
+  &lt;string&gt;System.CreatedDate&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="MainQuery" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SELECT [System.Id]
+FROM WorkItems 
+WHERE ([System.TeamProject] = '{0}'{1}{2})</Value>
+    </Setting>
+    <Setting Name="LinqQuery" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SELECT [System.Id] 
+FROM WorkItemLinks 
+WHERE 
+  (
+    [Source].[System.TeamProject] = '{0}' 
+    AND [Source].[System.RelatedLinkCount] &gt; 0
+    AND [Source].[System.IterationPath] UNDER '{1}' 
+    AND [Source].[System.AreaPath] UNDER '{2}'
+  ) 
+And   ([System.Links.LinkType] &lt;&gt; '') And ([Target].[System.WorkItemType] &lt;&gt; '') 
+mode(MayContain)</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

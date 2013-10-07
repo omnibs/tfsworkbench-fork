@@ -1,0 +1,172 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.NotePadUI.UIElements.UIPadItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:notePadUi="clr-namespace:TfsWorkbench.NotePadUI"
+    xmlns:uiElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements"
+    xmlns:helpers="clr-namespace:TfsWorkbench.NotePadUI.Helpers"
+    xmlns:models="clr-namespace:TfsWorkbench.NotePadUI.Models"
+    xmlns:localUiElements="clr-namespace:TfsWorkbench.NotePadUI.UIElements"
+    Canvas.Top="{Binding TopOffset, Mode=TwoWay}"
+    Canvas.Left="{Binding LeftOffset, Mode=TwoWay}"
+    Canvas.ZIndex="{Binding ZIndex, Mode=TwoWay}"    
+    RenderTransformOrigin="0.5,0.5"
+    Width="{Binding Width, Mode=TwoWay}"
+    MinWidth="150"
+    Height="{Binding Height, Mode=TwoWay}"
+    MinHeight="90"
+    mc:Ignorable="d" 
+    d:DesignHeight="200"
+    d:DesignWidth="200"
+    d:DataContext="{d:DesignInstance Type=models:PadItemBase}"
+    notePadUi:DragBehaviour.DragAction="Move"
+    Cursor="{x:Static uiElements:CustomCursors.Hand}"
+    x:Name="PART_Root">
+    
+    <UserControl.RenderTransform>
+        <RotateTransform Angle="{Binding Angle, Mode=TwoWay}" />
+    </UserControl.RenderTransform>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/TfsWorkbench.NotePadUI;component/Resources/CommonResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <DataTemplate x:Key="WorkbenchItemTemplate">
+                <localUiElements:UIWorkbenchItem 
+                    DataContext="{Binding}" 
+                    />
+            </DataTemplate>
+
+            <DataTemplate x:Key="StickyNoteTemplate">
+                <localUiElements:UINotePadItem
+                    DataContext="{Binding}"
+                    />
+            </DataTemplate>
+
+            <DataTemplate x:Key="ToDoTemplate">
+                <localUiElements:UIToDoList
+                    ToDoList="{Binding}"
+                    />
+            </DataTemplate>
+
+            <helpers:UiPadItemTemplateSelector 
+                x:Key="TemplateSelector"
+                StickyNoteTemplate="{StaticResource StickyNoteTemplate}"
+                WorkbenchItemTemplate="{StaticResource WorkbenchItemTemplate}"
+                ToDoTemplate="{StaticResource ToDoTemplate}"
+                />
+
+            <ControlTemplate x:Key="RotateTempalte" TargetType="ContentControl">
+                <Ellipse 
+                    Width="20" 
+                    Height="20" 
+                    Fill="Transparent" 
+                    notePadUi:DragBehaviour.DragAction="Rotate" 
+                    Cursor="{x:Static uiElements:CustomCursors.Rotate}"
+                    />
+            </ControlTemplate>
+           
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <ContentControl 
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Right" 
+            Margin="0,-10,-10,0"
+            Template="{StaticResource RotateTempalte}"
+            />
+        <ContentControl 
+            VerticalAlignment="Bottom" 
+            HorizontalAlignment="Right" 
+            Margin="0,0,-10,-10"
+            Template="{StaticResource RotateTempalte}"
+            />
+        <ContentControl 
+            VerticalAlignment="Bottom" 
+            HorizontalAlignment="Left" 
+            Margin="-10,0,0,-10"
+            Template="{StaticResource RotateTempalte}"
+            />
+        <ContentControl 
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Left" 
+            Margin="-10,-10,0,0"
+            Template="{StaticResource RotateTempalte}"
+            />
+
+        <ContentPresenter
+            Name="PART_Content" 
+            Content="{Binding}" 
+            ContentTemplateSelector="{StaticResource TemplateSelector}" 
+            />
+
+        <Image 
+            Source="pack://application:,,,/TfsWorkbench.NotePadUI;component/Resources/pin.png" 
+            Width="25"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="90,-10,0,0"
+            />
+
+        <Button 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Margin="4,2,0,0"
+            Command="{x:Static notePadUi:LocalCommandLibrary.DeletePadItemCommand}"
+            CommandParameter="{Binding ElementName=PART_Root}"
+            Style="{StaticResource RedMouseOverButton}"
+            Content="&#215;"
+            TextBlock.FontSize="18"
+            TextBlock.FontWeight="Bold"
+            ToolTip="Remove"
+            />
+        
+        <ContentControl
+            VerticalAlignment="Stretch" 
+            HorizontalAlignment="Right" 
+            Margin="0,0,0,20"
+            >
+            <Rectangle 
+                Width="10" 
+                Fill="Transparent" 
+                notePadUi:DragBehaviour.DragAction="Resize" 
+                Cursor="{x:Static Cursors.SizeWE}"
+                notePadUi:DragBehaviour.ResizeAspect="Horizontal"
+                />
+        </ContentControl>
+
+        <ContentControl
+            VerticalAlignment="Bottom" 
+            HorizontalAlignment="Stretch" 
+            Margin="0,0,20,0"
+            >
+            <Rectangle 
+                Height="10" 
+                Fill="Transparent" 
+                notePadUi:DragBehaviour.DragAction="Resize" 
+                Cursor="{x:Static Cursors.SizeNS}"
+                notePadUi:DragBehaviour.ResizeAspect="Vertical"
+                />
+        </ContentControl>
+
+        <ContentControl
+            VerticalAlignment="Bottom" 
+            HorizontalAlignment="Right" 
+            >
+            <Rectangle 
+                Height="20" 
+                Width="20"
+                Fill="Transparent" 
+                notePadUi:DragBehaviour.DragAction="Resize" 
+                Cursor="{x:Static Cursors.SizeNWSE}"
+                notePadUi:DragBehaviour.ResizeAspect="Both"
+                />
+        </ContentControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,58 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.NotePadUI.UIElements.UINotePadItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:scratchPadUi="clr-namespace:TfsWorkbench.NotePadUI"
+    xmlns:models="clr-namespace:TfsWorkbench.NotePadUI.Models"
+    mc:Ignorable="d" 
+    d:DesignHeight="125" d:DesignWidth="200"
+    d:DataContext="{d:DesignInstance Type=models:NotePadItem}"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;component/Resources/ItemColours.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+
+        <Path 
+			Data="M0.5,0.5 L51,4 334.5,0.5 C329.37329,84.147296 328.58654,168.4937 335.00035,254 335.74997,250.08333 331.25368,324.77936 326.33334,325.66668 265.33389,336.66708 134,343 134,343 L0.5,343.5 C2.3333315,284.55556 8.6666586,227.33337 5.9999946,166.66667 -1.1730936,3.4786629 0.6666665,-0.66666667 0.5,0.5 z" 
+			HorizontalAlignment="Left" 
+			Stretch="Fill" 
+			VerticalAlignment="Top" 
+			Stroke="Black"
+            Fill="{Binding Path=Colour, Converter={StaticResource ColourPicker}}"
+            >
+            <Path.Effect>
+                <DropShadowEffect Opacity="0.5" />
+            </Path.Effect>
+        </Path>
+
+        <DockPanel Margin="15">
+
+            <TextBlock 
+                DockPanel.Dock="Top"
+                FontFamily="Lucida Handwriting"
+                FontSize="12"
+                Text="{Binding Created}" 
+                />
+
+            <TextBox 
+                scratchPadUi:DragBehaviour.DragAction="None"
+                DockPanel.Dock="Top" 
+                Text="{Binding Text}"
+                FontFamily="Lucida Handwriting"
+                BorderBrush="Transparent"
+                Background="Transparent"
+                TextWrapping="Wrap"
+                AcceptsReturn="True"
+                FontSize="14"
+                />
+
+        </DockPanel>
+    </Grid>
+</UserControl>

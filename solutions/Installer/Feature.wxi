@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+	
+  <Feature Id="TfsWorkbench" Title="!(loc.ApplicationName)" Level="1" Display="expand">
+    
+    <Feature
+      Id="VisualStudio2010"
+      Title="Team Explorer 2010 Connectivity"
+      Level="0"
+      Absent="disallow"
+      AllowAdvertise="no"
+      Display="expand">
+      <ComponentRef Id="TfsDataProvider2010"/>
+      <Condition Level="1">TEAMEXPLORER2010INSTALLED AND NOT TEAMEXPLORER2012INSTALLED</Condition>
+    </Feature>
+
+    <Feature
+      Id="VisualStudio2012"
+      Title="Team Explorer 2012 Connectivity"
+      Level="0"
+      Absent="disallow"
+      AllowAdvertise="no"
+      Display="expand">
+      <ComponentRef Id="TfsDataProvider2012"/>
+      <Condition Level="1">TEAMEXPLORER2012INSTALLED</Condition>
+    </Feature>
+
+    <Feature Id="DisplayModes" Title="Display Modes" Level="1" Display="expand">
+      <Feature 
+        Id="TaskBoard"
+        Title="Task Board"
+        Level="1"
+        Absent="allow"
+        AllowAdvertise="no"
+        Display="expand">
+        <ComponentRef Id="TaskBoard"/>
+      </Feature>
+      <Feature 
+        Id="NotePad"
+        Title="Note Pad"
+        Level="1"
+        Absent="allow"
+        AllowAdvertise="no"
+        Display="expand">
+        <ComponentRef Id="NotePad"/>
+      </Feature>
+      <Feature 
+        Id="ItemList"
+        Title="Item List"
+        Level="1"
+        Absent="allow"
+        AllowAdvertise="no"
+        Display="expand">
+        <ComponentRef Id="ItemList"/>
+      </Feature>
+      <Feature 
+        Id="Hierarchy"
+        Title="Hierarchy View"
+        Level="1"
+        Absent="allow"
+        AllowAdvertise="no"
+        Display="expand">
+        <ComponentRef Id="Hierarchy"/>
+      </Feature>
+      <Feature 
+        Id="ProjectSetup"
+        Title="Project Setup"
+        Level="1"
+        Absent="allow"
+        AllowAdvertise="no"
+        Display="expand">
+        <ComponentRef Id="ProjectSetup"/>
+      </Feature>
+    </Feature>
+
+    <Feature Id="Tools" Title="Tools" Level="1" Display="expand">
+      <Feature 
+        Id="PollingService"
+        Title="Polling Service"
+        Level="1"
+        Absent="allow"
+        AllowAdvertise="no"
+        Display="expand">
+        <ComponentRef Id="PollingService"/>
+      </Feature>
+      
+      <Feature 
+        Id="ReportViewer"
+        Title="Report Viewer"
+        Level="1"
+        Absent="allow"
+        AllowAdvertise="no"
+        Display="expand">
+        <ComponentRef Id="ReportViewer"/>
+      </Feature>
+      <Feature 
+        Id="StatisticsViewer"
+        Title="Statistics Viewer"
+        Level="1"
+        Absent="allow"
+        AllowAdvertise="no"
+        Display="expand">
+        <ComponentRef Id="StatisticsViewer"/>
+      </Feature>
+
+      <Feature 
+        Id="FilterService"
+        Title="Filter Service"
+        Level="1"
+        Absent="allow"
+        AllowAdvertise="no"
+        Display="expand">
+        <ComponentRef Id="FilterService"/>
+      </Feature>
+
+      <Feature 
+        Id="VersionCheck"
+        Title="Version Check Service"
+        Level="1"
+        Absent="allow"
+        AllowAdvertise="no"
+        Display="expand">
+        <ComponentRef Id="VersionCheck"/>
+      </Feature>
+    </Feature>
+        
+    <ComponentRef Id="ProgramMenuDir"/>
+    <ComponentRef Id="TfsWorkbenchCore"/>
+    <ComponentRef Id="TfsWorkbenchUIDesktopShortcut"/>
+  </Feature>
+
+  <Component 
+    Id="TfsWorkbenchCore"
+    Guid="5ACAF294-6B7C-4FD1-B882-BDFE9D43EDE0"
+    Directory="APPLICATIONFOLDER">
+
+    <File 
+      Id="TfsWorkbenchUI"
+      Source="$(var.WpfUI.TargetDir)$(var.WpfUI.TargetFileName)"
+      KeyPath="yes"
+      Checksum="yes">
+        <Shortcut 
+          Id="TfsWorkbenchShortcut" 
+          Directory="ProgramMenuDir" 
+          Name="!(loc.ApplicationName)"
+          WorkingDirectory="TARGETDIR" 
+          Advertise="yes" 
+          Icon="TfsWorkbench.exe" 
+          />
+    </File >
+
+     <File 
+       Id="Coredll"
+       Source="$(var.Core.TargetDir)\$(var.Core.TargetFileName)"
+       KeyPath="no"
+       Checksum="yes"
+       /> 
+
+    <File 
+      Id="UIElementsdll"
+      Source="$(var.UIElements.TargetDir)\$(var.UIElements.TargetFileName)"
+      KeyPath="no"
+      Checksum="yes"
+      />
+    
+  </Component>
+
+  <Component
+    Id="TfsDataProvider2010"
+    Guid="57B6499A-6C5B-42E6-82D3-F2D614105D77"
+    Directory="APPLICATIONFOLDER">
+
+    <File
+      Id="TFSDataProvider2010"
+      Source="$(var.TFSDataProvider2010.TargetDir)\$(var.TFSDataProvider2010.TargetFileName)"
+      KeyPath="yes"
+      Checksum="yes"
+      />
+
+    <File
+      Id="WorkItemEditordll2010"
+      Source="$(var.WorkItemEditor2010.TargetDir)\$(var.WorkItemEditor2010.TargetFileName)"
+      KeyPath="no"
+      Checksum="yes"
+      />
+
+  </Component>
+
+  <Component
+    Id="TfsDataProvider2012"
+    Guid="0AB4A99E-3C76-4F18-9C22-16FE032E02F7"
+    Directory="APPLICATIONFOLDER">
+
+    <File
+      Id="TFSDataProvider2012"
+      Source="$(var.TFSDataProvider2012.TargetDir)\$(var.TFSDataProvider2012.TargetFileName)"
+      KeyPath="yes"
+      Checksum="yes"
+      />
+
+    <File
+      Id="WorkItemEditordll2012"
+      Source="$(var.WorkItemEditor2012.TargetDir)\$(var.WorkItemEditor2012.TargetFileName)"
+      KeyPath="no"
+      Checksum="yes"
+      />
+
+  </Component>
+
+<Component 
+    Id="NotePad"
+    Guid="F8D8ABF9-6B87-481A-B0DC-87EBA44AD09F"
+    Directory="APPLICATIONFOLDER">
+
+    <File 
+      Id="NotePadUIdll"
+      Source="$(var.NotePadUI.TargetDir)$(var.NotePadUI.TargetFileName)"
+      KeyPath="yes"
+      Checksum="yes"
+      />
+  </Component>
+  
+  <Component 
+    Id="ProjectSetup"
+    Guid="13AF44B9-EC25-40A6-B8AD-1AC70F918D77"
+    Directory="APPLICATIONFOLDER">
+
+    <File 
+      Id="ProjectSetupUIdll"
+      Source="$(var.ProjectSetupUI.TargetDir)$(var.ProjectSetupUI.TargetFileName)"
+      KeyPath="yes"
+      Checksum="yes"
+      />
+  </Component>
+
+  <Component 
+    Id="TaskBoard"
+    Guid="878FF0EB-F54F-4CA0-A0E8-8AEE0E70314A"
+    Directory="APPLICATIONFOLDER">
+
+    <File 
+      Id="TaskBoardUIdll"
+      Source="$(var.TaskBoardUI.TargetDir)$(var.TaskBoardUI.TargetFileName)"
+      KeyPath="yes"
+      Checksum="yes"
+      />
+  </Component>
+
+  <Component 
+    Id="ItemList"
+    Guid="B530DBBA-C69E-4EFF-BE55-DB920073522F"
+    Directory="APPLICATIONFOLDER">
+
+    <File 
+      Id="ItemListUIdll"
+      Source="$(var.ItemListUI.TargetDir)$(var.ItemListUI.TargetFileName)"
+      KeyPath="yes"
+      Checksum="yes"
+      />
+  </Component>
+
+  <Component 
+    Id="Hierarchy"
+    Guid="AB53A1A4-DE09-438F-84F0-DDD3F54AD7BC"
+    Directory="APPLICATIONFOLDER">
+
+      <File 
+        Id="HierarchyUIdll"
+        Source="$(var.HierarchyUI.TargetDir)$(var.HierarchyUI.TargetFileName)"
+        KeyPath="yes"
+        Checksum="yes"
+        />
+    </Component>
+
+  <Component 
+    Id="PollingService"
+    Guid="27C0B6FA-718A-49A8-997F-19D1B8BE3137"
+    Directory="APPLICATIONFOLDER">
+
+    <File 
+      Id="PollingServiceDLL"
+      Source="$(var.PollingService.TargetDir)$(var.PollingService.TargetFileName)"
+      KeyPath="yes"
+      Checksum="yes"
+      />
+  </Component>
+
+  <Component
+    Id="ReportViewer"
+    Guid="E91347E6-6D43-4206-94D4-2DB515ED58F5"
+    Directory="APPLICATIONFOLDER">
+
+    <File 
+      Id="ReportViewerDLL"
+      Source="$(var.ReportViewer.TargetDir)$(var.ReportViewer.TargetFileName)"
+      KeyPath="yes"
+      Checksum="yes"
+      />
+
+  </Component>
+
+  <Component 
+    Id="StatisticsViewer"
+    Guid="7EDF60FC-98A1-42A4-8E6E-40CD263CE8D5"
+    Directory="APPLICATIONFOLDER">
+
+    <File 
+      Id="StatisticsViewerDLL"
+      Source="$(var.StatisticsViewer.TargetDir)$(var.StatisticsViewer.TargetFileName)"
+      KeyPath="yes"
+      Checksum="yes"
+      />
+
+  </Component>
+
+  <Component 
+    Id="FilterService"
+    Guid="8CE20AD1-5097-4F2D-B434-C191F990F063"
+    Directory="APPLICATIONFOLDER">
+
+      <File 
+        Id="FilterServiceDLL"
+        Source="$(var.FilterService.TargetDir)$(var.FilterService.TargetFileName)"
+        KeyPath="yes"
+        Checksum="yes"
+        />
+    </Component>
+
+  <Component 
+    Id="VersionCheck"
+    Guid="348ED5DF-DA48-4576-8E70-112586E20D1A"
+    Directory="APPLICATIONFOLDER">
+
+    <File 
+      Id="VersionCheckDLL"
+      Source="$(var.VersionCheck.TargetDir)$(var.VersionCheck.TargetFileName)"
+      KeyPath="yes"
+      Checksum="yes"
+      />
+  </Component>
+
+  <Icon Id="TfsWorkbench.exe" SourceFile="$(var.WpfUI.TargetDir)$(var.WpfUI.TargetFileName)" />
+  
+</Include>

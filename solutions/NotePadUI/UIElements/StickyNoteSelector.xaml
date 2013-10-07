@@ -1,0 +1,173 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.NotePadUI.UIElements.StickyNoteSelector"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:notePadUi="clr-namespace:TfsWorkbench.NotePadUI"
+    mc:Ignorable="d" 
+    d:DesignHeight="22" d:DesignWidth="150"
+    d:DataContext="{d:DesignInstance notePadUi:DisplayModeController}"
+    x:Name="PART_ControlRoot"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.NotePadUI;Component/Resources/CommonResources.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;component/Resources/ItemColours.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <DataTemplate x:Key="NoteButtonTemplate" DataType="system:String">
+                <Grid>
+                    <Path 
+			            Data="M0.5,0.5 L51,4 334.5,0.5 C329.37329,84.147296 328.58654,168.4937 335.00035,254 335.74997,250.08333 331.25368,324.77936 326.33334,325.66668 265.33389,336.66708 134,343 134,343 L0.5,343.5 C2.3333315,284.55556 8.6666586,227.33337 5.9999946,166.66667 -1.1730936,3.4786629 0.6666665,-0.66666667 0.5,0.5 z" 
+			            HorizontalAlignment="Left" 
+			            Stretch="Fill" 
+			            VerticalAlignment="Top" 
+			            Stroke="Transparent"
+                        Fill="{Binding Converter={StaticResource ColourPicker}}"
+                        >
+                        <Path.Effect>
+                            <DropShadowEffect Opacity="0.5" />
+                        </Path.Effect>
+                    </Path>
+
+                    <TextBlock 
+                        Margin="4,10,4,4"
+                        Text="TFS Workbench note pad sticky note"
+                        FontFamily="Lucida Handwriting"
+                        TextWrapping="Wrap"
+                        FontSize="7"
+                        />
+                </Grid>
+            </DataTemplate>
+            
+            <Style x:Key="AddButtonStyle" TargetType="Button">
+                <Setter Property="Template" Value="{StaticResource UndecoratedButton}" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Width" Value="75" />
+                <Setter Property="Height" Value="50" />
+                <Setter Property="Cursor" Value="Hand" />
+            </Style>
+            
+            <Style x:Key="NoteButtonStyle" TargetType="Button" BasedOn="{StaticResource AddButtonStyle}">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content, StringFormat={}Add new {0} note}" />
+                <Setter Property="ContentTemplate" Value="{StaticResource NoteButtonTemplate}" />
+                <Setter Property="Command" Value="{Binding ElementName=PART_ControlRoot, Path=DataContext.CreateNoteCommand}" />
+                <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                <Setter Property="CommandTarget" Value="{Binding ElementName=PART_ControlRoot}" />
+            </Style>
+            
+        </ResourceDictionary>        
+    </UserControl.Resources>
+    <Grid>
+        <Popup 
+            PopupAnimation="Fade"
+            x:Name="PART_NoteSelectorPopup"
+            AllowsTransparency="True"
+            Placement="Bottom"
+            PlacementTarget="{Binding ElementName=PART_ControlRoot}"
+            >
+            <Border BorderBrush="Black" Background="White" BorderThickness="1" x:Name="PART_PopupContent">
+                <UniformGrid Columns="3">
+                    <Button 
+                        Style="{StaticResource NoteButtonStyle}"
+                        Content="Yellow" 
+                        >
+                        <Button.LayoutTransform>
+                            <RotateTransform Angle="-2" />
+                        </Button.LayoutTransform>
+                    </Button>
+
+                    <Button 
+                        Style="{StaticResource NoteButtonStyle}"
+                        Content="Green" 
+                        >
+                        <Button.LayoutTransform>
+                            <RotateTransform Angle="1" />
+                        </Button.LayoutTransform>
+                    </Button>
+
+                    <Button 
+                        Style="{StaticResource NoteButtonStyle}"
+                        Content="Cyan" 
+                        >
+                        <Button.LayoutTransform>
+                            <RotateTransform Angle="2" />
+                        </Button.LayoutTransform>
+                    </Button>
+
+                    <Button 
+                        Style="{StaticResource NoteButtonStyle}"
+                        Content="Red" 
+                        >
+                        <Button.LayoutTransform>
+                            <RotateTransform Angle="0.75" />
+                        </Button.LayoutTransform>
+                    </Button>
+
+                    <Button 
+                        Style="{StaticResource NoteButtonStyle}"
+                        Content="Purple" 
+                        >
+                        <Button.LayoutTransform>
+                            <RotateTransform Angle="0" />
+                        </Button.LayoutTransform>
+                    </Button>
+
+                    <Button 
+                        Style="{StaticResource NoteButtonStyle}"
+                        Content="Blue" 
+                        >
+                        <Button.LayoutTransform>
+                            <RotateTransform Angle="-0.5" />
+                        </Button.LayoutTransform>
+                    </Button>
+
+                    <Button 
+                        Style="{StaticResource NoteButtonStyle}"
+                        Content="White" 
+                        >
+                        <Button.LayoutTransform>
+                            <RotateTransform Angle="1.75" />
+                        </Button.LayoutTransform>
+                    </Button>
+
+                    <Button 
+                        Style="{StaticResource NoteButtonStyle}"
+                        Content="Orange" 
+                        />
+
+                    <Button 
+                        Style="{StaticResource NoteButtonStyle}"
+                        Content="Pink" 
+                        >
+                        <Button.LayoutTransform>
+                            <RotateTransform Angle="-2" />
+                        </Button.LayoutTransform>
+                    </Button>
+
+                </UniformGrid>
+            </Border>
+        </Popup>
+        <ToggleButton 
+			x:Name="PART_ToggleButton" 
+			HorizontalContentAlignment="Stretch"
+			Click="PART_ToggleButton_OnClick"
+			IsChecked="{Binding IsOpen, ElementName=PART_TreeViewPopup}"
+			>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="16" />
+                </Grid.ColumnDefinitions>
+                <ContentControl IsTabStop="False" Template="{StaticResource AddIconTemplate}" Margin="2" Foreground="{StaticResource ButtonNormalStroke}" />
+                <TextBlock Grid.Column="1" TextAlignment="Left" Text="Add New Note" />
+                <Rectangle Margin="0" Fill="{StaticResource Arrow}" Width="8" Height="4" Grid.Column="2" />
+            </Grid>
+        </ToggleButton>
+    </Grid>
+</UserControl>

@@ -1,0 +1,54 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TfsWorkbench.TaskBoardUI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ModeName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Task Board</Value>
+    </Setting>
+    <Setting Name="HelpPageUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.ScrumforTeamSystem.co.uk/ProcessGuidance/v3/scrum%20masters%20workbench/task-board</Value>
+    </Setting>
+    <Setting Name="DisplayPriority" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="SwimLaneRowHeight" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">196</Value>
+    </Setting>
+    <Setting Name="SmallCardSize" Type="System.Drawing.Size" Scope="Application">
+      <Value Profile="(Default)">100, 60</Value>
+    </Setting>
+    <Setting Name="MediumCardSize" Type="System.Drawing.Size" Scope="Application">
+      <Value Profile="(Default)">125, 90</Value>
+    </Setting>
+    <Setting Name="LargeCardSize" Type="System.Drawing.Size" Scope="Application">
+      <Value Profile="(Default)">157, 110</Value>
+    </Setting>
+    <Setting Name="ExtraLargeCardSize" Type="System.Drawing.Size" Scope="Application">
+      <Value Profile="(Default)">200, 150</Value>
+    </Setting>
+    <Setting Name="CurrentCardSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">125, 90</Value>
+    </Setting>
+    <Setting Name="WindowHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="WindowWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">800</Value>
+    </Setting>
+    <Setting Name="WindowLeft" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="WindowTop" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="WindowState" Type="System.Windows.WindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="UseSmoothScrolling" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="BoardScale" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

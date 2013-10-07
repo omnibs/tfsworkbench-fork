@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" targetNamespace="http://schemas.workbench/ControlItems" xmlns:mstns="http://schemas.workbench/ControlItems" xmlns="http://schemas.workbench/ControlItems" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:element name="ControlItemGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="WorkItemType" type="xs:string" minOccurs="0" />
+        <xs:element name="ControlItems" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ControlItem" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="HelpText" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
+                  </xs:sequence>
+                  <xs:attribute name="displaytext" form="unqualified" type="xs:string" />
+                  <xs:attribute name="fieldname" form="unqualified" type="xs:string" />
+                  <xs:attribute name="controltype" form="unqualified" type="xs:string" />
+                  <xs:attribute name="readonly" form="unqualified" type="xs:boolean" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

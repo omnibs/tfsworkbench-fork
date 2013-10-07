@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+  xmlns:tns="http://schemas.workbench/ProjectData" 
+  elementFormDefault="qualified" 
+  targetNamespace="http://schemas.workbench/ProjectData" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  >
+  <xs:element name="ProjectData" nillable="true" type="tns:ProjectData" />
+  <xs:complexType name="ProjectData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ProjectName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProjectCollectionUrl" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProjectGuid" nillable="true" type="tns:guid" />
+      <xs:element minOccurs="0" maxOccurs="1" name="WebAccessUrl" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProjectIterationPath" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProjectAreaPath" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Filter" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ViewMaps" type="tns:ArrayOfViewMap" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ItemTypes" type="tns:ArrayOfItemTypeData" />
+    </xs:sequence>
+    <xs:attribute name="hideVolumeWarning" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfViewMap">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ViewMap" nillable="true" type="tns:ViewMap" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ViewMap">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NotifierBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Description" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ParentTypes" type="tns:ArrayOfType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ParentSort" type="tns:RowSorter" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ChildSort" type="tns:ItemSorter" />
+          <xs:element minOccurs="0" maxOccurs="1" name="SwimLaneStates" type="tns:ArrayOfState" />
+          <xs:element minOccurs="0" maxOccurs="1" name="BucketStates" type="tns:ArrayOfState" />
+          <xs:element minOccurs="0" maxOccurs="1" name="StateItemColours" type="tns:ArrayOfStateColour" />
+        </xs:sequence>
+        <xs:attribute name="title" type="xs:string" />
+        <xs:attribute name="child" type="xs:string" />
+        <xs:attribute name="link" type="xs:string" />
+        <xs:attribute name="position" type="xs:int" />
+        <xs:attribute name="notswimlane" type="xs:boolean" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NotifierBase" abstract="true" />
+  <xs:complexType name="RowSorter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SorterBaseOfISwimLaneRow" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SorterBaseOfISwimLaneRow" abstract="true">
+    <xs:attribute name="field" type="xs:string" />
+    <xs:attribute name="direction" type="tns:SortDirection" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="SortDirection">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ascending" />
+      <xs:enumeration value="Descending" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemSorter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SorterBaseOfIWorkbenchItem" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SorterBaseOfIWorkbenchItem" abstract="true">
+    <xs:attribute name="field" type="xs:string" />
+    <xs:attribute name="direction" type="tns:SortDirection" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfState">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="state" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfStateColour">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="state" nillable="true" type="tns:StateColour" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StateColour">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="colour" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfItemTypeData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItemTypeData" nillable="true" type="tns:ItemTypeData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemTypeData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ContextFields" type="tns:ArrayOfField" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DuplicationFields" type="tns:ArrayOfField" />
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string" />
+    <xs:attribute name="caption" type="xs:string" />
+    <xs:attribute name="body" type="xs:string" />
+    <xs:attribute name="numeric" type="xs:string" />
+    <xs:attribute name="owner" type="xs:string" />
+    <xs:attribute name="colour" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfField">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Field" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

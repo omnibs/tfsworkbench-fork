@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TfsWorkbench.ReportViewer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TfsWorkbench_ReportViewer_ReportWebService_ReportingService2005" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://TFS2010:80/ReportServer/ReportService2005.asmx</Value>
+    </Setting>
+    <Setting Name="PluginName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Report Viewer</Value>
+    </Setting>
+    <Setting Name="DisplayPriority" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="ReportViewerPath2008" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/Pages/ReportViewer.aspx?</Value>
+    </Setting>
+    <Setting Name="TfsWorkbench_ReportsService_ReportWebService_ReportingService2005" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://TFS2010:80/ReportServer/ReportService2005.asmx</Value>
+    </Setting>
+    <Setting Name="TfsWorkbench_ReportViewer_ReportService2005_ReportingService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://tfsrtm08/ReportServer/ReportService.asmx</Value>
+    </Setting>
+    <Setting Name="ReportViewerPath2005" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/ReportService.asmx?</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

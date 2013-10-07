@@ -1,0 +1,153 @@
+﻿<ProjectSetupUI:SetupDialogBase 
+    x:Class="TfsWorkbench.ProjectSetupUI.AdvancedSetupControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements;assembly=TfsWorkbench.UIElements"
+    xmlns:ProjectSetupUI="clr-namespace:TfsWorkbench.ProjectSetupUI"
+    Height="414" 
+    Width="600"
+    UIElements:DialogWrapper.IsResizeable="True"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="Resources/ProjectSetupTemplates.xaml" />
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border>
+        <DockPanel>
+            <Grid DockPanel.Dock="Top">
+                <StackPanel Orientation="Horizontal" Style="{DynamicResource CommandPanel}" HorizontalAlignment="Right">
+                    <Button 
+                        Click="Execute_Click" 
+                        Style="{DynamicResource ApplyButtonStyle}" ToolTip="Apply setup parameters" 
+                        />
+                    <Button 
+                        Command="{x:Static UIElements:CommandLibrary.CloseDialogCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                        CommandTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                        Style="{DynamicResource CloseButtonStyle}" 
+                        ToolTip="Close"
+                        IsCancel="True"
+                        />
+                </StackPanel>
+                <TextBlock 
+                    Style="{StaticResource DialogCaptionStyle}"
+                    Text="Advanced Setup" 
+                    />
+            </Grid>
+            <Border
+                Style="{DynamicResource DialogInnerBorderStyle}"
+                DockPanel.Dock="Top"
+                >
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Foreground="DarkRed" Name="ValidationErrors" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock 
+                            FontWeight="Bold" 
+                            VerticalAlignment="Center">Project Name:</TextBlock>
+
+                        <TextBox 
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            IsReadOnly="True" 
+                            Style="{StaticResource GreyOutOnReadOnly}" 
+                            Text="{Binding Mode=OneWay, Path=ProjectSetup.Name}" 
+                            />
+
+                        <TextBlock 
+                            Grid.Row="1"
+                            FontWeight="Bold" 
+                            VerticalAlignment="Center"
+                            Text="Project Start Date:" 
+                            />
+
+                        <DatePicker 
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            SelectedDate="{Binding Path=ProjectSetup.StartDate}"
+                            Name="ProjectStartDate"
+                            />
+
+                        <TextBlock 
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            FontWeight="Bold" 
+                            VerticalAlignment="Center"
+                            Text="Project End Date:" 
+                            />
+
+                        <DatePicker 
+                            Grid.Row="1"
+                            Grid.Column="3"
+                            SelectedDate="{Binding Path=ProjectSetup.EndDate}"
+                            Name="EndDate"
+                            />
+
+                        <Grid Grid.Row="2" Grid.ColumnSpan="4">
+                            <TabControl 
+                                Name="PART_TabControl"
+                                Background="{StaticResource ListControlBackground}" 
+                                BorderBrush="{x:Null}"
+                                >
+                                <TabItem Header="Releases">
+                                    <ContentControl 
+                                        Content="{Binding Path=ProjectSetup.Releases}" 
+                                        ContentTemplate="{StaticResource ReleaseCollectionTemplate}" 
+                                        />
+                                </TabItem>
+
+                                <TabItem Header="Work Streams">
+                                    <ContentControl 
+                                        Content="{Binding Path=ProjectSetup.WorkStreams}" 
+                                        ContentTemplate="{StaticResource WorkStreamCollectionTemplate}" 
+                                        />
+                                </TabItem>
+                                <TabItem Header="Teams">
+                                    <ContentControl 
+                                        Content="{Binding Path=ProjectSetup.Teams}" 
+                                        ContentTemplate="{StaticResource TeamCollectionTemplateWithWorkStreams}"
+                                        />
+                                </TabItem>
+                            </TabControl>
+                            <Border 
+                                Background="{StaticResource ToolbarBackground}"
+			                    Effect="{DynamicResource DropShadowLevel1}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Margin="0,5,0,-33"
+			                    CornerRadius="5"
+                                Padding="2"
+                                >
+                                <DockPanel LastChildFill="False">
+                                    <Button DockPanel.Dock="Right" Style="{DynamicResource AddButtonStyle}" Click="AddTeam_Click" Content="Team" ToolTip="Add a team"/>
+                                    <Button DockPanel.Dock="Right" Margin="5,0,5,0" Style="{DynamicResource AddButtonStyle}" Click="AddWorkStream_Click" Content="Work Stream" ToolTip="Add a work stream" />
+                                    <Button DockPanel.Dock="Right" Style="{DynamicResource AddButtonStyle}" Click="AddRlease_Click" Content="Release" ToolTip="Add a release"/>
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+                        <TextBlock Grid.ColumnSpan="4" Grid.Row="3" Foreground="DarkRed" TextWrapping="Wrap" HorizontalAlignment="Center">
+                            <Run Text="Note: This feature is intended for inital setup only. Right click on the project nodes for more options." />
+                        </TextBlock>
+                    </Grid>
+                </DockPanel>
+            </Border>
+        </DockPanel>
+    </Border>
+</ProjectSetupUI:SetupDialogBase>

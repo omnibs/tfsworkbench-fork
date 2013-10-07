@@ -1,0 +1,62 @@
+﻿<Window 
+    x:Class="TfsWorkbench.WpfUI.MainAppWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Properties="clr-namespace:TfsWorkbench.WpfUI.Properties"
+    xmlns:Controls="clr-namespace:TfsWorkbench.WpfUI.Controls"
+    Title="{Binding Source={x:Static Properties:Settings.Default}, Path=ApplicationTitle}"
+    Height="{Binding Source={x:Static Properties:Settings.Default}, Path=WindowHeight, Mode=TwoWay}" 
+    Width="{Binding Source={x:Static Properties:Settings.Default}, Path=WindowWidth, Mode=TwoWay}" 
+    Left="{Binding Source={x:Static Properties:Settings.Default}, Path=WindowLeft, Mode=TwoWay}" 
+    Top="{Binding Source={x:Static Properties:Settings.Default}, Path=WindowTop, Mode=TwoWay}"
+    WindowState="{Binding Source={x:Static Properties:Settings.Default}, Path=WindowState, Mode=TwoWay}"
+    Icon="/TfsWorkbench.WpfUI;component/scrumwindowicon.ico"
+    UseLayoutRounding="True"
+    Background="Black"
+    >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="{DynamicResource MainBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Name="PART_InternalGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Controls:MainMenuControl x:Name="MainMenu" />
+            <Controls:TitleControl x:Name="TitleControl" Grid.Row="1" />
+            <Grid Grid.Row="2" Name="PART_DisplayModeGrid" />
+        </Grid>
+        <Border 
+			Grid.Row="1" 
+			MaxHeight="75" 
+			Background="{StaticResource ToolbarBackground}"
+			Effect="{DynamicResource DropShadowLevel1}"
+			CornerRadius="5"
+			Margin="4"
+			Padding="10,5"
+			>
+            <DockPanel Name="PART_PlugInPanel">
+                <ScrollViewer 
+                    DockPanel.Dock="Left"
+                    HorizontalContentAlignment="Left" 
+                    HorizontalScrollBarVisibility="Disabled" 
+                    VerticalScrollBarVisibility="Auto" Padding="0"
+                    >
+                    <TextBlock Name="PART_StatusBar" TextWrapping="Wrap" VerticalAlignment="Center" />
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+        <Rectangle Grid.RowSpan="2" Name="PATH_DisabledOverlay" Visibility="Collapsed" Fill="{DynamicResource DisableOverlayBrush}"/>
+        <Canvas Grid.RowSpan="2" Name="PART_DialogCanvas" />
+    </Grid>
+</Window>

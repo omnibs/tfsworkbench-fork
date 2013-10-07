@@ -1,0 +1,63 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TfsWorkbench.ProjectSetupUI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ReleaseType" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Release</Value>
+    </Setting>
+    <Setting Name="SprintType" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Sprint</Value>
+    </Setting>
+    <Setting Name="TeamType" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Team Sprint</Value>
+    </Setting>
+    <Setting Name="ReleaseStartDateFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Scrum.v3.PlannedWorkStarts</Value>
+    </Setting>
+    <Setting Name="ReleaseEndDateFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Scrum.v3.PlannedWorkEnds</Value>
+    </Setting>
+    <Setting Name="SprintStartDateFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Scrum.v3.SprintStart</Value>
+    </Setting>
+    <Setting Name="SprintEndDateFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Scrum.v3.SprintEnd</Value>
+    </Setting>
+    <Setting Name="TeamStartDateFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Scrum.v3.SprintStart</Value>
+    </Setting>
+    <Setting Name="TeamEndDateFieldName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Scrum.v3.SprintEnd</Value>
+    </Setting>
+    <Setting Name="RelationLinkName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Scrum.ImplementedBy</Value>
+    </Setting>
+    <Setting Name="TeamCapacityField" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Scrum.v3.Capacity</Value>
+    </Setting>
+    <Setting Name="DefaultWorkStreamCadance" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
+    <Setting Name="DefaultTeamCapacity" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">120</Value>
+    </Setting>
+    <Setting Name="ReleaseDepth" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="SprintDepth" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="TeamDepth" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="ModeName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Project Setup</Value>
+    </Setting>
+    <Setting Name="HelpPageUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.ScrumforTeamSystem.co.uk/ProcessGuidance/v3/scrum%20masters%20workbench/project-setup</Value>
+    </Setting>
+    <Setting Name="DisplayPriority" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

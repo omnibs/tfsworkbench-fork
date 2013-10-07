@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="TfsWorkbench.TaskBoardUI.ViewSorter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ValueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters;assembly=TfsWorkbench.UIElements" xmlns:Properties="clr-namespace:TfsWorkbench.TaskBoardUI.Properties" Name="PART_UserControl"
+    >
+    <UserControl.Resources>
+        <ValueConverters:DirectionToBooleanConverter x:Key="directionConverter" />
+    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+        <TextBlock VerticalAlignment="Center" xml:space="preserve" Text="{x:Static Properties:Resources.String021}" />
+        <ToggleButton 
+            Click="OnDirectionChanged" 
+            Content="{Binding ElementName=PART_UserControl, Path=View.ViewMap.ParentSorter.Direction}" 
+            IsChecked="{Binding ElementName=PART_UserControl, Path=View.ViewMap.ParentSorter.Direction, Converter={StaticResource directionConverter}, Mode=TwoWay}" 
+            Unchecked="OnDirectionChanged"
+            Checked="OnDirectionChanged"
+            />
+        <ComboBox 
+            Name="PART_Selector"
+            ItemsSource="{Binding ElementName=PART_UserControl, Path=Fields}"
+            SelectedItem="{Binding ElementName=PART_UserControl, Path=View.ViewMap.ParentSorter.FieldName}" 
+            IsEditable="False" 
+            MinWidth="100"
+            SelectionChanged="OnSortOrderChanged"
+            />
+    </StackPanel>
+</UserControl>

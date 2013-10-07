@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DBC518BF-8FD8-4B2E-B3AA-20CA41CA9C9F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TfsWorkbench.Tests</RootNamespace>
+    <AssemblyName>TfsWorkbench.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\common\TfsWorkbench.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\TfsWorkbench.Tests.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\TfsWorkbench.Tests.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\TfsWorkbench.Tests.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\TfsWorkbench.Tests.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.core">
+      <HintPath>..\..\lib\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.3.9345, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\lib\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpArch.Testing">
+      <HintPath>..\..\lib\SharpArch.Testing.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpArch.Testing.NUnit">
+      <HintPath>..\..\lib\SharpArch.Testing.NUnit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.XML" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommandControllerTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FilterServiceTests.cs" />
+    <Compile Include="Helpers\ServiceManagerHelper.cs" />
+    <Compile Include="ToDoListControllerTests.cs" />
+    <Compile Include="UIPadItemTemplateSelectorTests.cs" />
+    <Compile Include="PadLayoutServiceTests.cs" />
+    <Compile Include="ProjectDataServiceFixture.cs" />
+    <Compile Include="NotePadDisplayModeControllerTests.cs" />
+    <Compile Include="TaskBoardSortOrderFixture.cs" />
+    <Compile Include="WpfUiProjectSelector\ProjectDataGenerationHelper.cs" />
+    <Compile Include="WpfUiProjectSelector\LoaderWithVolumeCheckFixture.cs" />
+    <Compile Include="WpfUiProjectSelector\ProjectSelectorServiceFixture.cs" />
+    <Compile Include="WpfUiProjectSelector\ProjectSelectorViewModelFixture.cs" />
+    <Compile Include="ReportViewerButtonTests.cs" />
+    <Compile Include="Helpers\DataObjectHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helpers\DispatcherHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DispatcherHelperDemoTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MultiSelectControlItemTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ProjectSetupUITests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportControllerTests.cs" />
+    <Compile Include="ReportPluginInterfaceTests.cs" />
+    <Compile Include="ReportViewerMenuTests.cs" />
+    <Compile Include="ReportViewerTestBase.cs" />
+    <Compile Include="StatisticsControllerTests.cs" />
+    <Compile Include="StatisticsMenuTests.cs" />
+    <Compile Include="StatisticsServiceTests.cs" />
+    <Compile Include="StatisticsViewerPluginTests.cs" />
+    <Compile Include="SwimLaneTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TaskBoardControlTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewEditPanelTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{D6B29321-75AE-4665-A9AD-A32E90E2B196}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FilterService\FilterService.csproj">
+      <Project>{E961A5EB-C3E3-4D23-8E85-595E6F6AE715}</Project>
+      <Name>FilterService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HierarchyUI\HierarchyUI.csproj">
+      <Project>{8CE5622A-203E-4B1C-89CA-25CC32577C5E}</Project>
+      <Name>HierarchyUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ItemListUI\ItemListUI.csproj">
+      <Project>{4ACC58C3-06F0-4FA8-998A-A587FB543FAB}</Project>
+      <Name>ItemListUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NotePadUI\NotePadUI.csproj">
+      <Project>{e0a153d7-1ab6-45b3-ab53-17e0bc6d7419}</Project>
+      <Name>NotePadUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectSetupUI\ProjectSetupUI.csproj">
+      <Project>{2BD06EE5-23D2-43F5-A64A-B32BD8E7DC28}</Project>
+      <Name>ProjectSetupUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReportViewer\ReportViewer.csproj">
+      <Project>{54214479-290E-4ECE-98D9-69637A98EE34}</Project>
+      <Name>ReportViewer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StatisticsViewer\StatisticsViewer.csproj">
+      <Project>{7446888A-259F-4974-9DE4-7CEB1CE9DD7E}</Project>
+      <Name>StatisticsViewer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskBoardUI\TaskBoardUI.csproj">
+      <Project>{98174C73-3DB9-47EA-933F-A614DA7CB597}</Project>
+      <Name>TaskBoardUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UIElments\UIElements.csproj">
+      <Project>{AC531AD4-6E7A-4ADB-BA7C-5584478FCDC6}</Project>
+      <Name>UIElements</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfUI\WpfUI.csproj">
+      <Project>{33c8bbb6-9503-4b92-839f-6be55f3e40ba}</Project>
+      <Name>WpfUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\common\TfsWorkbench.snk">
+      <Link>Properties\TfsWorkbench.snk</Link>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

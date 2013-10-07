@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.0</ProductVersion>
+    <ProjectGuid>{2404a78f-5f98-41d1-a84e-7cf50759ba80}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>TfsWorkbench.v$(VersionNumber)_$(Platform)</OutputName>
+    <OutputType>Package</OutputType>
+    <WixRootPath>$(MSBuildProjectDirectory)..\..\..\lib\WiX\3.7.1224\</WixRootPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(WixRootPath)MSBuild\Wix.targets</WixTargetsPath>
+    <WixTasksPath Condition=" '$(WixTasksPath)' == '' ">$(WixRootPath)lib\WixTasks.dll</WixTasksPath>
+    <WixToolPath Condition=" '$(WixToolPath)' == '' ">$(WixRootPath)lib</WixToolPath>
+    <WixExtDir Condition=" '$(WixExtDir)' == '' ">$(WixRootPath)lib</WixExtDir>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug;VersionNumber=0.0.0.0;LocaleToBuild=$(LocaleToBuild)</DefineConstants>
+    <SuppressAllWarnings>False</SuppressAllWarnings>
+    <Pedantic>True</Pedantic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <SuppressPdbOutput>True</SuppressPdbOutput>
+    <DefineConstants>Debug;VersionNumber=$(VersionNumber);LocaleToBuild=$(LocaleToBuild)</DefineConstants>
+    <VerboseOutput>True</VerboseOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DefineConstants>Debug;VersionNumber=1.0.0.0;LocaleToBuild=$(LocaleToBuild)</DefineConstants>
+    <OutputPath>bin\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+    <SuppressAllWarnings>False</SuppressAllWarnings>
+    <Pedantic>True</Pedantic>
+    <SuppressPdbOutput>True</SuppressPdbOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <SuppressPdbOutput>True</SuppressPdbOutput>
+    <DefineConstants>Debug;VersionNumber=$(VersionNumber);LocaleToBuild=$(LocaleToBuild)</DefineConstants>
+    <VerboseOutput>True</VerboseOutput>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Product.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Name>Core</Name>
+      <Project>{d6b29321-75ae-4665-a9ad-a32e90e2b196}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\FilterService\FilterService.csproj">
+      <Name>FilterService</Name>
+      <Project>{e961a5eb-c3e3-4d23-8e85-595e6f6ae715}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\HierarchyUI\HierarchyUI.csproj">
+      <Name>HierarchyUI</Name>
+      <Project>{8ce5622a-203e-4b1c-89ca-25cc32577c5e}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\InstallerUI\InstallerUI.wixproj">
+      <Name>InstallerUI</Name>
+      <Project>{2d4ff07b-26f8-4bef-b41c-e4383f86dc32}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\ItemListUI\ItemListUI.csproj">
+      <Name>ItemListUI</Name>
+      <Project>{4acc58c3-06f0-4fa8-998a-a587fb543fab}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\NotePadUI\NotePadUI.csproj">
+      <Name>NotePadUI</Name>
+      <Project>{e0a153d7-1ab6-45b3-ab53-17e0bc6d7419}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\PollingService\PollingService.csproj">
+      <Name>PollingService</Name>
+      <Project>{dba331c0-35b6-4235-8a5f-6c535425797f}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectSetupUI\ProjectSetupUI.csproj">
+      <Name>ProjectSetupUI</Name>
+      <Project>{2bd06ee5-23d2-43f5-a64a-b32bd8e7dc28}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\ReportViewer\ReportViewer.csproj">
+      <Name>ReportViewer</Name>
+      <Project>{54214479-290e-4ece-98d9-69637a98ee34}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\StatisticsViewer\StatisticsViewer.csproj">
+      <Name>StatisticsViewer</Name>
+      <Project>{7446888a-259f-4974-9de4-7ceb1ce9dd7e}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskBoardUI\TaskBoardUI.csproj">
+      <Name>TaskBoardUI</Name>
+      <Project>{98174c73-3db9-47ea-933f-a614da7cb597}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\TFSDataProvider2010\TFSDataProvider2010.csproj">
+      <Name>TFSDataProvider2010</Name>
+      <Project>{db93e220-8107-4b14-bd8b-f1bd6824e721}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\TFSDataProvider2012\TFSDataProvider2012.csproj">
+      <Name>TFSDataProvider2012</Name>
+      <Project>{1bf00905-8b7b-41e4-ad6a-d10c7c778aa3}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\UIElments\UIElements.csproj">
+      <Name>UIElements</Name>
+      <Project>{ac531ad4-6e7a-4adb-ba7c-5584478fcdc6}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\VersionCheck\VersionCheck.csproj">
+      <Name>VersionCheck</Name>
+      <Project>{b8ddc410-df4e-48aa-a307-fbc46f9352a4}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\WorkItemEditor2010\WorkItemEditor2010.csproj">
+      <Name>WorkItemEditor2010</Name>
+      <Project>{3a7382bc-d841-4f1b-8898-cb1d6c833389}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\WorkItemEditor2012\WorkItemEditor2012.csproj">
+      <Name>WorkItemEditor2012</Name>
+      <Project>{0bb088eb-8306-4dfe-b43d-25ef8650717f}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfUI\WpfUI.csproj">
+      <Name>WpfUI</Name>
+      <Project>{33c8bbb6-9503-4b92-839f-6be55f3e40ba}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CustomActions.wxi" />
+    <Content Include="DirectoryStructure.wxi" />
+    <Content Include="Feature.wxi" />
+    <Content Include="GlobalProperties.wxi" />
+    <Content Include="License.rtf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="en-US.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

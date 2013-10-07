@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FORM>
+  <Layout>
+    <Group>
+      <Column PercentWidth="100">
+        <Control FieldName="System.Title" Type="FieldControl" Label="Title" LabelPosition="Left" />
+      </Column>
+    </Group>
+    <Group>
+      <Column PercentWidth="33">
+        <Group Label="Fundamentals">
+          <Column PercentWidth="100">
+            <Control FieldName="Scrum.v3.BusinessValue" Type="FieldControl" Label="Business Priority" LabelPosition="Left" />
+            <Control FieldName="Microsoft.VSTS.Scheduling.StoryPoints" Type="FieldControl" Label="Dev Story Points" LabelPosition="Left" />
+            <Control FieldName="RSG.tfs.mods.RSGTestStoryPoints" Type="FieldControl" Label="Test Story Points" LabelPosition="Left" Name="TestStoryPoints" />
+            <Control FieldName="System.AreaPath" Type="WorkItemClassificationControl" Label="Area" LabelPosition="Left" ReadOnly="True" />
+          </Column>
+        </Group>
+      </Column>
+      <Column PercentWidth="33">
+        <Group Label="Scheduling">
+          <Column PercentWidth="100">
+            <Control FieldName="Scrum.v3.DeliveryOrder" Type="FieldControl" Label="Delivery Order" LabelPosition="Left" />
+            <Control FieldName="System.IterationPath" Type="WorkItemClassificationControl" Label="In Release/Sprint" LabelPosition="Left" />
+          </Column>
+        </Group>
+      </Column>
+      <Column PercentWidth="33">
+        <Group Label="Tracking">
+          <Column PercentWidth="100">
+            <Control FieldName="System.State" Type="FieldControl" Label="Current Status" LabelPosition="Left" />
+            <Control FieldName="Scrum.v3.WorkRemaining" Type="FieldControl" Label="Work Remaining (hours)" LabelPosition="Left" ReadOnly="True" />
+            <Control FieldName="RSG.tfs.mods.TimeTrackingCode" Type="FieldControl" Label="Time Tracking Code" LabelPosition="Left" />
+          </Column>
+        </Group>
+      </Column>
+    </Group>
+    <TabGroup>
+      <Tab Label="Description">
+        <Control FieldName="System.Description" Type="HtmlFieldControl" Label="User Story or Detailed Description:" LabelPosition="Top" Dock="Fill" />
+      </Tab>
+      <Tab Label="History">
+        <Control FieldName="System.History" Type="WorkItemLogControl" Label="History:" LabelPosition="Top" Dock="Fill" />
+      </Tab>
+      <Tab Label="Impeded By">
+        <Control Type="LinksControl" Label="Impediments for this Product Backlog Item:" LabelPosition="Top" Name="Impediments">
+          <LinksControlOptions>
+            <LinkColumns>
+              <LinkColumn RefName="System.ID" />
+              <LinkColumn RefName="System.Links.LinkType" />
+              <LinkColumn RefName="System.WorkItemType" />
+              <LinkColumn RefName="System.Title" />
+              <LinkColumn RefName="System.Description" />
+              <LinkColumn RefName="System.State" />
+              <LinkColumn LinkAttribute="System.Links.Comment" />
+            </LinkColumns>
+            <WorkItemLinkFilters FilterType="include">
+              <Filter LinkType="Scrum.ImpededBy" FilterOn="forwardname" />
+            </WorkItemLinkFilters>
+            <ExternalLinkFilters FilterType="excludeAll" />
+            <WorkItemTypeFilters FilterType="include">
+              <Filter WorkItemType="Impediment" />
+            </WorkItemTypeFilters>
+          </LinksControlOptions>
+        </Control>
+      </Tab>
+      <Tab Label="Tested By">
+        <Control Type="LinksControl" Label="Acceptance Tests for this Product Backlog Item:" LabelPosition="Top" Name="LinkedAcceptanceTests">
+          <LinksControlOptions>
+            <LinkColumns>
+              <LinkColumn RefName="System.ID" />
+              <LinkColumn RefName="System.Links.LinkType" />
+              <LinkColumn RefName="System.WorkItemType" />
+              <LinkColumn RefName="System.Title" />
+              <LinkColumn RefName="System.AssignedTo" />
+              <LinkColumn RefName="System.State" />
+              <LinkColumn LinkAttribute="System.Links.Comment" />
+            </LinkColumns>
+            <WorkItemLinkFilters FilterType="include">
+              <Filter LinkType="Microsoft.VSTS.Common.TestedBy" FilterOn="forwardname" />
+            </WorkItemLinkFilters>
+            <ExternalLinkFilters FilterType="excludeAll" />
+            <WorkItemTypeFilters FilterType="include">
+              <Filter WorkItemType="Acceptance Test" />
+            </WorkItemTypeFilters>
+          </LinksControlOptions>
+        </Control>
+      </Tab>
+      <Tab Label="Implemented By">
+        <Control Type="LinksControl" Label="Sprint Backlog Tasks that implement this Product Backlog Item:" LabelPosition="Top" Name="LinkedTasks">
+          <LinksControlOptions>
+            <LinkColumns>
+              <LinkColumn RefName="System.ID" />
+              <LinkColumn RefName="System.Links.LinkType" />
+              <LinkColumn RefName="System.WorkItemType" />
+              <LinkColumn RefName="System.Title" />
+              <LinkColumn RefName="System.AssignedTo" />
+              <LinkColumn RefName="System.State" />
+              <LinkColumn LinkAttribute="System.Links.Comment" />
+            </LinkColumns>
+            <WorkItemLinkFilters FilterType="include">
+              <Filter LinkType="Scrum.ImplementedBy" FilterOn="forwardname" />
+            </WorkItemLinkFilters>
+            <ExternalLinkFilters FilterType="excludeAll" />
+            <WorkItemTypeFilters FilterType="include">
+              <Filter WorkItemType="Sprint Backlog Task" />
+            </WorkItemTypeFilters>
+          </LinksControlOptions>
+        </Control>
+      </Tab>
+      <Tab Label="All Links">
+        <Control Type="LinksControl" LabelPosition="Top" Name="OtherLinks">
+          <LinksControlOptions>
+            <LinkColumns>
+              <LinkColumn RefName="System.ID" />
+              <LinkColumn RefName="System.Links.LinkType" />
+              <LinkColumn RefName="System.WorkItemType" />
+              <LinkColumn RefName="System.Title" />
+              <LinkColumn RefName="System.AssignedTo" />
+              <LinkColumn RefName="System.State" />
+              <LinkColumn LinkAttribute="System.Links.Comment" />
+            </LinkColumns>
+            <WorkItemLinkFilters FilterType="includeAll" />
+            <ExternalLinkFilters FilterType="includeAll" />
+            <WorkItemTypeFilters FilterType="includeAll" />
+          </LinksControlOptions>
+        </Control>
+      </Tab>
+      <Tab Label="File Attachments">
+        <Control Type="AttachmentsControl" LabelPosition="Top" />
+      </Tab>
+    </TabGroup>
+  </Layout>
+</FORM>

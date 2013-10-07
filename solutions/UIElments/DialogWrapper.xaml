@@ -1,0 +1,68 @@
+﻿<UserControl 
+    x:Class="TfsWorkbench.UIElements.DialogWrapper"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:UIElements="clr-namespace:TfsWorkbench.UIElements" 
+    mc:Ignorable="d" 
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Name="PART_ControlRoot"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Border Style="{StaticResource DialogBorder}">
+            <Grid>
+                <Rectangle 
+                    Name="PART_DragHandle" 
+                    Height="34" 
+                    Fill="#60000000" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Stretch" 
+                    MouseDown="OnDragHandleMouseDown" 
+                    Cursor="{x:Static UIElements:CustomCursors.Hand}" 
+                    Margin="-5"
+                    RadiusX="5"
+                    RadiusY="5"
+                    />
+                <ContentPresenter Name="PART_ContentPresenter" />
+                <!--
+                <DockPanel>
+                    <Grid DockPanel.Dock="Top">
+                        <TextBlock Style="{StaticResource DialogCaptionStyle}" Text="Dialog Caption" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Style="{StaticResource CloseButtonStyle}" />
+                        </StackPanel>
+                    </Grid>
+                    <Border
+                        DockPanel.Dock="Top"
+                        Style="{StaticResource DialogInnerBorderStyle}">
+                    </Border>
+                </DockPanel>
+                -->
+            </Grid>
+        </Border>
+        <Path 
+        	x:Name="PART_ResizeHandle" 
+        	Cursor="SizeNWSE" Data="M27.5,7.5 L27.5,22.5 C27.5,25.261424 25.261424,27.5 22.5,27.5 L7.5,27.5" 
+        	Fill="{x:Null}" 
+        	HorizontalAlignment="Right" 
+        	Height="25" 
+        	MouseDown="OnResizeHandleMouseDown" 
+        	Margin="0,0,2,2" 
+            Stretch="Fill" 
+        	Stroke="#60000000" 
+        	StrokeThickness="5" 
+        	VerticalAlignment="Bottom" 
+        	Width="25" StrokeEndLineCap="Round" StrokeStartLineCap="Round" 
+            />
+    </Grid>
+</UserControl>

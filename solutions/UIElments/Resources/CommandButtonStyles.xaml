@@ -1,0 +1,827 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d">
+	<!-- Resource dictionary entries should be defined here. -->
+	<Style x:Key="ButtonFocusVisual">
+		<Setter Property="Control.Template">
+			<Setter.Value>
+				<ControlTemplate>
+					<Rectangle Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1" Margin="2" SnapsToDevicePixels="true"/>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+	<LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+		<GradientStop Color="#F3F3F3" Offset="0"/>
+		<GradientStop Color="#EBEBEB" Offset="0.5"/>
+		<GradientStop Color="#DDDDDD" Offset="0.5"/>
+		<GradientStop Color="#CDCDCD" Offset="1"/>
+	</LinearGradientBrush>
+	<SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+	
+	<SolidColorBrush x:Key="ButtonNormalStroke" Color="#FF0525BE"/>
+	<SolidColorBrush x:Key="ButtonMouseOverStroke" Color="#FF852222"/>
+	<SolidColorBrush x:Key="ButtonDisabledStroke" Color="#60000000"/>
+	
+   	<DropShadowEffect x:Key="ButtonDropShadow" Opacity="0.5" ShadowDepth="1" BlurRadius="1"/>
+
+	<Style x:Key="ButtonBaseStyle" TargetType="{x:Type Button}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+		<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+		<Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource ButtonNormalStroke}"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="0"/>
+        <Setter Property="Height" Value="25" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+	<Style x:Key="PathStyle" TargetType="{x:Type Path}">
+		<Setter Property="Stretch" Value="Fill" />
+		<Setter Property="StrokeThickness" Value="10" />
+		<Setter Property="Height" Value="Auto" />
+	</Style>
+
+	<Style x:Key="MenuIconStyle" TargetType="ContentControl">
+		<Setter Property="Height" Value="16" />
+		<Setter Property="Width" Value="16" />
+		<Setter Property="Foreground" Value="{DynamicResource ButtonNormalStroke}" />
+		<Style.Triggers>
+            <Trigger Property="IsEnabled" Value="true">
+                <Setter Property="Foreground" Value="{DynamicResource ButtonNormalStroke}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+				<Setter Property="Foreground" Value="{DynamicResource ButtonDisabledStroke}" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+	<ControlTemplate x:Key="BringToFrontIconTemplate">
+		<Viewbox Stretch="Fill">
+			<Path 
+				Stroke="{TemplateBinding Foreground}" 
+				Style="{DynamicResource PathStyle}" 
+				Data="M5,5 L65,5 65,60 5,60 z M64.916667,40 L95,40 95,95 35,95 35,59.916667"
+				/>
+		</Viewbox>
+	</ControlTemplate>
+
+	<ControlTemplate x:Key="QuestionIconTemplate">
+		<Viewbox Stretch="Fill">
+			<Path 
+				Stroke="{TemplateBinding Foreground}" 
+				Style="{DynamicResource PathStyle}" 
+				Margin="15,0" 
+				Width="70" 
+				Height="100" 
+				Data="M45.162055,63.214753 C56.72925,59.052439 65,47.9865 65,34.989499 65,18.426756 51.568542,5 35,5 18.431458,5 5,18.426756 5,34.989499 5,34.989499 22.5,34.989499 22.5,34.989499 22.5,28.088356 28.096441,22.493874 35,22.493874 41.903559,22.493874 47.5,28.088356 47.5,34.989499 47.5,41.890642 41.903559,47.485123 35,47.485123 33.320648,47.485123 23.114437,51.487905&#xd;&#xa;23.047401,57.051405 23,60.985369 22.875,58.274537 22.833333,67.267002 L45,67.266954 z M22.855835,79.908 C22.855835,79.908 44.811,79.925696 44.811,79.925696 44.811,79.925696 44.768436,92.67318 44.768436,92.67318 44.768436,93.958247 43.842474,95 42.700243,95 L24.844193,95 C23.701961,95 22.776,93.958247 22.776,92.67318 22.776,92.67318 22.855835,79.908 22.855835,79.908 z"
+				/>
+		</Viewbox>
+	</ControlTemplate>
+
+	<ControlTemplate x:Key="SaveIconTemplate">
+		<Viewbox Stretch="Fill">
+			<Path 
+				Style="{StaticResource PathStyle}" 
+				Stroke="{TemplateBinding Foreground}"
+				Data="M8.5566935,5 C8.5566935,5 63.092661,5 90.360644,5 94.883831,5.1159805 94.99981,9.1752965 94.99981,9.1752965 94.99981,9.1752965 94.99981,90.341686 94.99981,90.341686 94.99981,90.341686 96.012962,95.119258 90.34073,95.000836 L20.302998,95.000836 5,79.546147 C5,55.676822 5,32.307497 5,8.4381717 5.3479374,5.5 8.5566935,5 8.5566935,5 z M20,23.167 C20,20.865629 21.865629,19 24.167,19 L75.833,19 C78.134371,19 80,20.865629 80,23.167 L80,55.833 C80,58.134371 78.134371,60 75.833,60 L24.167,60 C21.865629,60 20,58.134371 20,55.833 z M20,89.833 C20,89.833 20,83.055667 20,79.167 20,76.865629 21.865629,75 24.167,75 L75.833,75 C78.134371,75 80,76.865629 80,79.167 80,83.055667 80,95.083 80,95.083" 
+			Width="100" Height="100" 
+			/>
+		</Viewbox>
+	</ControlTemplate>
+
+	<ControlTemplate x:Key="EditIconTemplate">
+		<Viewbox Stretch="Fill">
+			<Grid Width="100" Height="100">
+				<Path 
+					Style="{StaticResource PathStyle}" 
+					Stroke="{TemplateBinding Foreground}"
+					Data="M8.4845068,5.0006497 C17.984507,5.0006497 16.94803,4.9999998 26.44803,4.9999998 29.38553,5.0624998 29.51053,5.1249998 29.61503,8.4999998 L29.463523,67.38983 17.539488,91.650381 4.9999999,67.307147 C4.9999999,47.557147 5.1515068,27.750649 5.1515068,8.0006497 5.2345068,5.2506497 5.3595068,5.0631497 8.4845068,5.0006497 z M5.1440037,23.249 L29.588627,23.228628" 
+					RenderTransformOrigin="0.5,0.5" 
+					Width="40"
+					>
+					<Path.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform Angle="33.352" />
+							<TranslateTransform />
+						</TransformGroup>
+					</Path.RenderTransform>
+				</Path>
+			</Grid>
+		</Viewbox>
+	</ControlTemplate>
+
+	<ControlTemplate x:Key="CloseIconTemplate">
+		<Viewbox Stretch="Fill">
+			<Path  
+				Style="{StaticResource PathStyle}" 
+				Stroke="{TemplateBinding Foreground}"
+				Data="M65,5.667 C65,3.9179142 63.582086,2.5 61.833,2.5 L38.167,2.5 C36.417914,2.5 35,3.9179142 35,5.667 35,14.972444 35.000002,35 35.000002,35 L5.6659651,35 C3.9174508,35 2.5,36.417914 2.5,38.167 L2.5,61.833 C2.5,63.582086 3.9174508,65 5.6659651,65 5.6659651,65 35,65.001002 35,65.001002 35,74.778367 35,84.555732 35,94.333097 35,96.082129 36.417914,97.5 38.167,97.5 L62.833,97.5 C64.582086,97.5 66,96.082129 66,94.333097 66,84.555732 66,74.778366 66,65.001 66,65.001 94.333817,65 94.333817,65 96.082452,65 97.5,63.582086 97.5,61.833 L97.5,38.167 C97.5,36.417914 96.082452,35 94.333817,35 L65.008,35 z" 
+				RenderTransformOrigin="0.5,0.5" Width="100" Height="100">
+				<Path.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="45"/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Path.RenderTransform>
+			</Path>
+		</Viewbox>
+	</ControlTemplate>
+	
+    <ControlTemplate x:Key="AddIconTemplate">
+        <Viewbox Stretch="Fill">
+    		<Path 
+    			Style="{StaticResource PathStyle}" 
+    			Stroke="{TemplateBinding Foreground}"
+    			Data="M65,5.667 C65,3.9179142 63.582086,2.5 61.833,2.5 L38.167,2.5 C36.417914,2.5 35,3.9179142 35,5.667 35,14.972444 35.000002,35 35.000002,35 L5.6659651,35 C3.9174508,35 2.5,36.417914 2.5,38.167 L2.5,61.833 C2.5,63.582086 3.9174508,65 5.6659651,65 5.6659651,65 35,65.001002 35,65.001002 35,74.778367 35,84.555732 35,94.333097 35,96.082129 36.417914,97.5 38.167,97.5 L62.833,97.5 C64.582086,97.5 66,96.082129 66,94.333097 66,84.555732 66,74.778366 66,65.001 66,65.001 94.333817,65 94.333817,65 96.082452,65 97.5,63.582086 97.5,61.833 L97.5,38.167 C97.5,36.417914 96.082452,35 94.333817,35 L65.008,35 z" 
+            Width="100" Height="100"
+            />
+    	</Viewbox>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RefreshIconTemplate">
+        <Viewbox Stretch="Fill">
+    		<Path 
+    			Style="{StaticResource PathStyle}" 
+    			Stroke="{TemplateBinding Foreground}"
+    			Data="M33.317136,65.097677 C37.43406,69.644063 43.38351,72.5 50,72.5 62.426407,72.5 72.5,62.426407 72.5,50 72.5,37.573593 62.426407,27.5 50,27.5 37.573593,27.5 27.5,37.573593 27.5,50 27.5,50 15.000333,59.5 15.000333,59.5 15.000333,59.5 2.5,50 2.5,50 2.5,23.766474 23.766474,2.5 50,2.5 76.233526,2.5 97.5,23.766474&#xa;97.5,50 97.5,76.233526 76.233526,97.5 50,97.5 36.650432,97.5 24.587097,91.992981 15.957846,83.126792 18.996302,79.971094 29.667,79 29.667,79 29.667,79 30.569162,67.951684 33.317136,65.097677 z" 
+            Width="100" Height="100"
+            />
+    	</Viewbox>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="DeleteIconTemplate">
+        <Viewbox Stretch="Fill">
+    		<Path 
+    			Style="{StaticResource PathStyle}" 
+    			Stroke="{TemplateBinding Foreground}"
+    			Data="M12,24 L72,24 L72,95 L12,95 z M42.369116,5.0001718 C22.321307,5.066611 4.9999999,25.081 4.9999999,25.081 4.9999999,25.081 53.940237,25.081 79,25.081 79,25.081 62.896002,4.9321449 42.369116,5.0001718 z M27,44.667 L27,80.667 M42,44.667 L42,80.667 M57,44.667 L57,80.667" 
+            Width="100" Height="100" Margin="4"
+            />
+    	</Viewbox>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="FilterIconTemplate">
+        <Viewbox Stretch="Fill">
+    		<Path 
+    			Style="{StaticResource PathStyle}" 
+    			Stroke="{TemplateBinding Foreground}"
+    			Data="M95,9.167 C95,6.8656294 93.134371,5 90.833,5 L9.167,5 C6.8656294,5 5,6.8656294 5,9.167 5,9.167 35.666667,54.333333 35.666667,54.333333 35.666667,54.333333 35.666667,95 35.666667,95 35.666667,95 64,95 64,95 64,95 64,54.333333 64,54.333333 64,54.333333 95,9.167 95,9.167 z" 
+            Width="100" Height="100"
+            />
+    	</Viewbox>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ApplyIconTemplate">
+        <Viewbox Stretch="Fill">
+    		<Path 
+    			Style="{StaticResource PathStyle}" 
+    			Stroke="{TemplateBinding Foreground}"
+    			Data="M94.999997,35.333 C94.999997,35.333 32.953125,125.333 32.952344,125.333 32.9375,125.333 5,94.997822 5,94.997822 5,94.997822 5,52.0224 5,52.0224 5,52.0224 32.952344,83.857579 32.952344,83.857579 32.952344,83.857579 95,-6.1426551 94.999997,-6.1424213 94.985745,-4.9726039 94.999997,35.333 94.999997,35.333 z" 
+            Width="100" Height="100"
+            />
+    	</Viewbox>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SetupIconTemplate">
+        <Viewbox Stretch="Fill">
+    		<Path 
+    			Style="{StaticResource PathStyle}" 
+    			Stroke="{TemplateBinding Foreground}"
+    			Data="M34.75,5 L66,5 L66,23.25 L34.75,23.25 z M5,76.750005 L36.25,76.750005 L36.25,95.000005 L5,95.000005 z M63.75,76.750005 L95,76.750005 L95,95.000005 L63.75,95.000005 z M18.25,76.625005 C28.75,59.291671 49.765625,24.64063 49.75,24.625005 49.735269,24.610273 70.265625,60.21875 79.875,76.875005" 
+            Width="100" Height="100" Margin="4"
+            />
+    	</Viewbox>
+    </ControlTemplate>
+    
+	<ControlTemplate x:Key="WebIconTemplate">
+    	<Viewbox Stretch="Fill">
+    		<Path 
+    			Style="{StaticResource PathStyle}" 
+    			Stroke="{TemplateBinding Foreground}"
+				Data="M95,50 C95,74.852814 74.852814,95 50,95 C25.147186,95 5,74.852814 5,50 C5,25.147186 25.147186,5 50,5 C74.852814,5 95,25.147186 95,50 z M71.984788,8.25 C68.873375,13.8063 65.886148,14.434837 59.860703,17.000713 55.372567,18.911941 53.695914,18.349613 53.695914,25.532658 53.695914,29.442511 57.89391,31.658666 58.422252,35.595977 59.378466,42.721874 58.49663,40.128177 54.928872,46.096832 50.770339,53.05382 56.56102,50.615611 57.805773,58.566598 58.938765,65.803691 54.613859,65.837023 62.326619,69.942524 66.204776,72.006867 66.595529,72.91383 67.874929,63.37949 68.816201,56.36494 66.956503,58.28086&#xd;&#xa;75.889154,56.37892 75.889154,56.233074 75.889154,56.08723 75.889154,55.941384 80.631071,54.931735 81.779179,49.562713 83.90338,43.909154 86.208554,37.773933 84.372958,35.539048 95,38.439959 M10.75,35.875166 C11.54109,35.919946 17.707745,29.281618 18.99977,30.250645 22.203894,32.653756 24.063294,35.539378 24.749607,40.000443 25.257522,43.301919 17.166444,46.88186 17.166444,50.166535 17.166444,53.651087 27.830271,57.201966 29.249479,60.750012 30.211199,63.154333 18.355151,63.605326 18.749831,66.24952 19.58324,71.833017 22.416883,71.291354 17.75,73.833002 z" 
+				Height="100" 
+				Width="100"/>
+    	</Viewbox>
+    </ControlTemplate>
+    
+	<ControlTemplate x:Key="FindIconTemplate">
+		<Viewbox Stretch="Fill">
+			<Grid Width="100" Height="100">
+				<Path 
+					Data="M65,35 C65,51.568542 51.568542,65 35,65 C18.431458,65 5,51.568542 5,35 C5,18.431458 18.431458,5 35,5 C51.568542,5 65,18.431458 65,35 z M47.500001,64.250001 C58.406251,75.328125 77.174056,94.691284 79.50819,94.47328 92.269906,96.791507 97.829433,91.46556 93.604694,78.333781 92.900621,76.260502 73.296875,58.906251 62.250001,49.000001"
+					Style="{StaticResource PathStyle}" 
+					Stroke="{TemplateBinding Foreground}"
+					/>
+			</Grid>
+		</Viewbox>
+	</ControlTemplate>
+
+    <ControlTemplate x:Key="CircleIconTemplate">
+        <Viewbox Stretch="Fill">
+            <Grid Width="100" Height="100">
+                <Ellipse
+					Stroke="{TemplateBinding Foreground}"
+                    StrokeThickness="10"
+					/>
+                <Ellipse
+                    Margin="40"
+					Stroke="{TemplateBinding Foreground}"
+                    StrokeThickness="10"
+					/>
+            </Grid>
+        </Viewbox>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ReportIconTemplate">
+    	<Viewbox Stretch="Fill">
+    		<Grid Width="100" Height="100">
+    			<Path 
+					Data="M99.994997,100 L5,100 5,5 M5.6670001,47.666875 L26.666667,24.667 44.666667,35.666667 55.333333,64.666667 76.333333,53 93,85.666999" 
+					Stretch="Fill" 
+					Stroke="{TemplateBinding Foreground}" 
+					StrokeThickness="10"/>
+    		</Grid>
+    	</Viewbox>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="StatisticsIconTemplate">
+        <Viewbox Stretch="Fill">
+            <Grid Width="100" Height="100">
+            	<Path Data="M95,50 C95,74.852814 74.852814,95 50,95 25.147186,95 5,74.852814 5,50 5,25.147186 25.147186,5 50,5 58.225386,5 65.93533,7.2068652 72.570034,11.060795 M70.66576,5.3370002 L50.000001,51.330529 97.998001,54.997001" Stretch="Fill" Stroke="{TemplateBinding Foreground}" StrokeThickness="10" Margin="0,0,-2.998,0"/>
+            </Grid>
+        </Viewbox>
+    </ControlTemplate>
+	
+    <ControlTemplate x:Key="CopyIconTemplate">
+		<Viewbox Stretch="Fill">
+			<Path 
+				Stroke="{TemplateBinding Foreground}" 
+				Style="{DynamicResource PathStyle}" 
+				Data="M65,40 L65,5 5,5 5,60 35.083333,60 M35.25,40.083333 L35,95 95,95 95,40 64.998664,40.041843 z" Height="100" Width="100"
+				/>
+		</Viewbox>
+    </ControlTemplate>
+	
+    <ControlTemplate x:Key="NewWindowIconTemplate">
+    	<Viewbox Stretch="Fill">
+ 			<Path
+				Stroke="{TemplateBinding Foreground}"
+				Style="{DynamicResource PathStyle}" 
+				Data="M5,5 L95,5 95,95 5,95 z M20,45 L55,45 55,80 20,80 z" 
+				Height="100" 
+				Width="100"
+				Stretch="Fill" 
+			/>
+    	</Viewbox>
+    </ControlTemplate>
+
+    <Style x:Key="SaveButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+							<ContentControl IsTabStop="False" Template="{StaticResource SaveIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+					</Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<Style x:Key="EditButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource EditIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" d:LayoutOverrides="Width, Height" />
+                        </Grid>
+					</Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<Style x:Key="AddButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource AddIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+					</Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+	<Style x:Key="RefreshButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+						<Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource RefreshIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+					</Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+	<Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource CloseIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+					</Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                             <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                           <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+	<Style x:Key="DeleteButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource DeleteIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                             <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                           <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+	<Style x:Key="FilterButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+		<Setter Property="Template">
+			<Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource FilterIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+		</Setter>
+	</Style>
+    
+	<Style x:Key="ApplyButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource ApplyIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="SetupButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource SetupIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="WebButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource WebIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="QuestionButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource QuestionIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="FindButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource FindIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CircleButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource CircleIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ReportButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource ReportIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="StatisticsButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource StatisticsIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CopyButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+                        <Grid x:Name="PART_ContentGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl IsTabStop="False" Template="{StaticResource CopyIconTemplate}" />
+                            <ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="NewWindowButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBaseStyle}">
+    	<Setter Property="Template">
+    		<Setter.Value>
+    			<ControlTemplate TargetType="{x:Type Button}">
+    				<Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="#01000000" Padding="2">
+    					<Grid x:Name="PART_ContentGrid">
+    						<Grid.ColumnDefinitions>
+    							<ColumnDefinition Width="Auto" />
+    							<ColumnDefinition Width="Auto" />
+    						</Grid.ColumnDefinitions>
+    						<ContentControl IsTabStop="False" Template="{StaticResource NewWindowIconTemplate}" />
+    						<ContentPresenter Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" Margin="2,0,0,0"/>
+    					</Grid>
+    				</Border>
+    				<ControlTemplate.Triggers>
+    					<Trigger Property="IsMouseOver" Value="False">
+    						<Setter Property="Foreground" Value="{StaticResource ButtonNormalStroke}" />
+    					</Trigger>
+    					<Trigger Property="IsMouseOver" Value="True">
+    						<Setter TargetName="PART_ContentGrid" Property="Effect" Value="{DynamicResource ButtonDropShadow}"/>
+    						<Setter Property="Foreground" Value="{StaticResource ButtonMouseOverStroke}" />
+    					</Trigger>
+    					<Trigger Property="IsEnabled" Value="false">
+    						<Setter TargetName="PART_ContentGrid" Property="Effect" Value="{x:Null}"/>
+    						<Setter Property="Foreground" Value="{StaticResource ButtonDisabledStroke}" />
+    					</Trigger>
+    				</ControlTemplate.Triggers>
+    			</ControlTemplate>
+    		</Setter.Value>
+    	</Setter>
+    </Style>
+</ResourceDictionary>

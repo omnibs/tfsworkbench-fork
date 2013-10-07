@@ -1,0 +1,240 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:PopupControls="clr-namespace:TfsWorkbench.UIElements.PopupControls;assembly=TfsWorkbench.UIElements" xmlns:Properties="clr-namespace:TfsWorkbench.WpfUI.Properties" xmlns:ValueConverters="clr-namespace:TfsWorkbench.UIElements.ValueConverters;assembly=TfsWorkbench.UIElements" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+    x:Class="TfsWorkbench.WpfUI.ProjectSelector.ProjectSelectorView" 
+    MinHeight="365"
+    Width="498"
+    MaxHeight="550"
+    x:Name="PART_ControlRoot"
+    >
+    <UserControl.Resources>
+    	<ResourceDictionary>
+    		<ResourceDictionary.MergedDictionaries>
+    			<ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/ApplicationStyles.xaml"/>
+    			<ResourceDictionary Source="/TfsWorkbench.UIElements;Component/Resources/CommandButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+    		<Style x:Key="TitleTextBlock" TargetType="{x:Type TextBlock}">
+    			<Setter Property="HorizontalAlignment" Value="Center" />
+    			<Setter Property="FontWeight" Value="Bold" />
+    		</Style>
+            <ValueConverters:InvertBoolean x:Key="BooleanInvert" />
+            <ValueConverters:IsNullConverter x:Key="IsNullConverter" />
+            <Storyboard x:Key="FadeIn" FillBehavior="Stop">
+                <DoubleAnimation To="1" Duration="0:0:0.5" Storyboard.TargetProperty="(UIElement.Opacity)" Completed="SetFullOpacity" />
+    		</Storyboard>
+            <Storyboard x:Key="FadeOut" FillBehavior="Stop">
+                <DoubleAnimation To="0" Duration="0:0:0.5" Storyboard.TargetProperty="(UIElement.Opacity)" Completed="RemoveOpacity" />
+            </Storyboard>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border>
+    	<Grid>
+    		<Button 
+    			Style="{StaticResource CloseButtonStyle}" 
+    			VerticalAlignment="Top" 
+    			HorizontalAlignment="Right" 
+    			ToolTip="Cancel"
+    			Command="{Binding CancelCommand}"
+    			CommandParameter="{Binding ElementName=PART_ControlRoot}"
+                IsCancel="True"
+                />
+    		<DockPanel>
+    			<TextBlock 
+    				DockPanel.Dock="Top" 
+    				Style="{StaticResource DialogCaptionStyle}"
+    				Text="{x:Static Properties:Resources.String053}" 
+                    />
+
+    			<ScrollViewer
+                    IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvert}}"
+    				DockPanel.Dock="Top"
+    				HorizontalScrollBarVisibility="Disabled"
+    				VerticalScrollBarVisibility="Auto"
+                    >
+    				<Border 
+    					DockPanel.Dock="Top"
+    					Style="{StaticResource DialogInnerBorderStyle}"
+                        >
+
+    					<DockPanel>
+    						<TextBlock 
+    							Margin="0,0,0,10" 
+    							DockPanel.Dock="Top" 
+    							Style="{StaticResource TitleTextBlock}"
+    							Text="{x:Static Properties:Resources.String054}" 
+                                />
+
+    						<Button 
+    							DockPanel.Dock="Top" 
+    							Margin="0,0,0,10" 
+    							Width="150"
+    							Content="{x:Static Properties:Resources.String055}"
+    							Command="{Binding ShowProjectSelectorCommand}"
+    							CommandParameter="{Binding ElementName=PART_ControlRoot}"
+                                />
+
+    						<Grid DockPanel.Dock="Top">
+    							<Grid.RowDefinitions>
+    								<RowDefinition />
+    								<RowDefinition />
+    							</Grid.RowDefinitions>
+    							<Grid.ColumnDefinitions>
+    								<ColumnDefinition Width="Auto" />
+    								<ColumnDefinition />
+    							</Grid.ColumnDefinitions>
+
+    							<TextBlock 
+    								VerticalAlignment="Center" 
+    								Margin="5,0,5,0"
+    								Text="{x:Static Properties:Resources.String056}" 
+                                    />
+
+    							<TextBox 
+    								Grid.Column="1" 
+    								IsReadOnly="True" 
+    								IsTabStop="False" 
+    								Text="{Binding SelectedCollectionEndPoint, Mode=OneWay}" 
+    								HorizontalAlignment="Stretch" 
+    								Margin="0,2" 
+    								Style="{StaticResource GreyOutOnReadOnly}"
+					                />
+
+    							<TextBlock 
+    								Grid.Row="1" 
+    								Margin="5,0,5,0" 
+    								VerticalAlignment="Center"
+    								Text="{x:Static Properties:Resources.String057}" 
+                                    />
+
+    							<TextBox 
+    								Grid.Row="1" 
+    								Grid.Column="1" 
+    								IsReadOnly="True" 
+    								IsTabStop="False" 
+    								Text="{Binding SelectedProjectName, Mode=OneWay}" 
+    								Margin="0,2" 
+    								Style="{StaticResource GreyOutOnReadOnly}"
+                                    />
+    						</Grid>
+
+    						<TextBlock 
+    							DockPanel.Dock="Top" 
+    							Margin="0,10,0,10" 
+    							Style="{StaticResource TitleTextBlock}"
+    							Text="{x:Static Properties:Resources.String058}" 
+                                />
+
+    						<PopupControls:ComboBoxTreeView 
+    							DockPanel.Dock="Top"
+    							Value="{Binding IterationPath, Mode=TwoWay}" 
+    							RootNode="{Binding IterationRootNode, Mode=OneWay}"
+    							ToolTip="{Binding IterationPath}" 
+    							PreviewGotKeyboardFocus="OnPathSelectorGotKeyboardFocus"
+    							PreviewMouseLeftButtonDown="OnPathSelectorMouseLeftButtonDown"
+                                />
+
+    						<TextBlock 
+    							DockPanel.Dock="Top" 
+    							Margin="0,10,0,10" 
+    							Style="{StaticResource TitleTextBlock}"
+    							Text="{x:Static Properties:Resources.String059}" 
+                                />
+
+    						<PopupControls:ComboBoxTreeView 
+    							DockPanel.Dock="Top"
+    							Value="{Binding AreaPath, Mode=TwoWay}" 
+    							RootNode="{Binding AreaRootNode, Mode=OneWay}"
+    							ToolTip="{Binding AreaPath}" 
+    							PreviewGotKeyboardFocus="OnPathSelectorGotKeyboardFocus"
+    							PreviewMouseLeftButtonDown="OnPathSelectorMouseLeftButtonDown"
+                                />
+
+    						<TextBlock 
+    							Style="{StaticResource TitleTextBlock}" 
+    							DockPanel.Dock="Top" 
+    							Margin="0,10"
+    							Text="{x:Static Properties:Resources.String060}"
+                                />
+
+    						<Button
+    							DockPanel.Dock="Top"
+    							Width="200"
+    							Height="35"
+    							FontWeight="Bold"
+    							FontSize="20"
+    							Content="{x:Static Properties:Resources.String061}" 
+    							Command="{Binding LoadProjectDataCommand}"
+    							CommandParameter="{Binding ElementName=PART_ControlRoot}"
+                                IsDefault="True"
+                                />
+
+    						<TextBlock 
+    							DockPanel.Dock="Top"
+    							Foreground="DarkRed"
+    							Text="{Binding ErrorMessage}"
+    							TextWrapping="Wrap" 
+    							TextAlignment="Center"
+    							FontWeight="Bold"
+    							FontSize="16"
+    							VerticalAlignment="Center"
+                                >
+    							<TextBlock.Style>
+    								<Style TargetType="{x:Type TextBlock}">
+    									<Setter Property="Visibility" Value="Visible" />
+    									<Style.Triggers>
+    										<DataTrigger Binding="{Binding ErrorMessage}" Value="{x:Null}">
+    											<Setter Property="Visibility" Value="Collapsed" />
+    										</DataTrigger>
+    									</Style.Triggers>
+    								</Style>
+    							</TextBlock.Style>
+    						</TextBlock>
+
+    					</DockPanel>
+    				</Border>
+    			</ScrollViewer>
+
+    		</DockPanel>
+    		<Border 
+                Opacity="0"
+                IsHitTestVisible="False"
+                Name="PART_StatusMessageBackground"
+                CornerRadius="5" 
+        		Effect="{DynamicResource DropShadowLevel1}" 
+		    	Background="{DynamicResource ToolbarBackground}" 
+			    Padding="10" 
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                >
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=StatusMessage, Converter={StaticResource IsNullConverter}}" Value="false" />
+                                    <Condition Binding="{Binding Path=IsBusy}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource FadeIn}" />
+                                </MultiDataTrigger.EnterActions>
+                            </MultiDataTrigger>
+                            <DataTrigger Binding="{Binding Path=IsBusy}" Value="false">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource FadeOut}" />
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+    			<TextBlock
+    				Foreground="Blue"
+    				Text="{Binding Path=StatusMessage}"
+    				TextWrapping="Wrap" 
+    				TextAlignment="Center"
+    				FontWeight="Bold"
+    				FontSize="20"
+    				Height="26.6"
+                />
+
+    		</Border>
+    	</Grid>
+    </Border>
+</UserControl>
