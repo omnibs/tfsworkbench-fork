@@ -222,6 +222,7 @@
     <Compile Include="ValueConverters\ControlTemplateSelector.cs" />
     <Compile Include="ValueConverters\BodyConverter.cs" />
     <Compile Include="ValueConverters\BoolToStringConverter.cs" />
+    <Compile Include="ValueConverters\IdConverter.cs" />
     <Compile Include="ValueConverters\HeaderTitleConverter.cs" />
     <Compile Include="ValueConverters\NumberToStringConverter.cs" />
     <Compile Include="ValueConverters\OwnerConverter.cs" />

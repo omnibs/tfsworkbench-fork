@@ -20,6 +20,7 @@
 
     <Converters:ChildColourConverter x:Key="ColourConverter" BackgoundConverter="{StaticResource ColourPicker}" />
 
+    <ValueConverters:IdConverter x:Key="IdConverter" />
     <ValueConverters:CaptionConverter x:Key="CaptionConverter" />
     <ValueConverters:OwnerConverter x:Key="OwnerConverter" />
     <ValueConverters:NumericConverter x:Key="NumericConverter" />
@@ -163,12 +164,21 @@
                     TextWrapping="Wrap"
                     FontWeight="SemiBold"
                     >
-                    <TextBlock.Text>
-                        <MultiBinding Converter="{StaticResource TaskTextConverter}">
-                            <Binding Path="[System.State]" />
-                            <Binding />
-                        </MultiBinding>
-                    </TextBlock.Text>
+                    <Run Foreground="Blue">
+                        <Run.Text>
+                            <MultiBinding StringFormat="({0})">
+                                <Binding Path="[System.Id]" />
+                            </MultiBinding>
+                        </Run.Text>
+                    </Run>
+                    <Run>
+                        <Run.Text>
+                            <MultiBinding Converter="{StaticResource CaptionConverter}">
+                                <Binding Path="[System.State]" />
+                                <Binding Path="."/>
+                            </MultiBinding>
+                        </Run.Text>
+                    </Run>
                 </TextBlock>
                 <TextBlock 
                     DockPanel.Dock="Top"
