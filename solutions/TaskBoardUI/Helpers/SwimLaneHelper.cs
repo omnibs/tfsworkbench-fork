@@ -275,22 +275,34 @@ namespace TfsWorkbench.TaskBoardUI.Helpers
             }
         }
 
-        public static string GetItemStatus(IWorkbenchItem workbenchItem)
+        public static string GetItemStatus(IWorkbenchItem workbenchItem, SwimLaneView view)
         {
+            var itemState = workbenchItem.GetState();
+            var finalState = "";
+
             var body = workbenchItem.GetBody().Trim().ToLowerInvariant();
             if (body.EndsWith("]"))
             {
                 foreach (var customState in WorkbenchItemHelper.CustomStates)
                 {
-                    if (body.EndsWith("[" + customState.ToLowerInvariant() + "]"))
+                    if (body.EndsWith("[" + customState.Name.ToLowerInvariant() + "]"))
                     {
-                        return customState;
+                        finalState = customState.Name;
+                        break;
                     }
                 }
             }
+            if (string.IsNullOrEmpty(finalState))
+            {
+                return itemState;
+            }
 
-            // else
-            return workbenchItem.GetState();
+            if (view == null || view.ViewMap.SwimLaneStates.IndexOf(itemState) < view.ViewMap.SwimLaneStates.IndexOf(finalState) || WorkbenchItemHelper.CustomStates.Any(c => c.IsBucketState && c.Name == finalState))
+            {
+                return finalState;
+            }
+
+            return itemState;
         }
 
         /// <summary>
@@ -318,7 +330,8 @@ namespace TfsWorkbench.TaskBoardUI.Helpers
             var hasIncludedParent =
                 workbenchItem.ParentLinks.Any(l => swimLaneView.ViewMap.IsViewLink(l) && !filterService.IsExcluded(l.Parent));
 
-            itemState = GetItemStatus(workbenchItem);
+
+           itemState = GetItemStatus(workbenchItem, swimLaneView);
 
             if (!hasIncludedParent)
             {

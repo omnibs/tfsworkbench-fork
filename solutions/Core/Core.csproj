@@ -160,6 +160,7 @@
     <Compile Include="DataObjects\ChildCreationParameters.cs" />
     <Compile Include="DataObjects\ControlItem.cs" />
     <Compile Include="DataObjects\ControlItemGroup.cs" />
+    <Compile Include="DataObjects\CustomState.cs" />
     <Compile Include="DataObjects\FieldTypeData.cs" />
     <Compile Include="DataObjects\IdAndRevision.cs" />
     <Compile Include="DataObjects\NotifierBase.cs" />

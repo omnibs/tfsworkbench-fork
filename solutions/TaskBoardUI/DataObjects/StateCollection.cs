@@ -97,10 +97,10 @@ namespace TfsWorkbench.TaskBoardUI.DataObjects
         /// <param name="child">The child.</param>
         public new void Add(IWorkbenchItem child)
         {
-            var itemStatus = SwimLaneHelper.GetItemStatus(child);
+            var itemStatus = SwimLaneHelper.GetItemStatus(child, null);
             if (itemStatus != this.State)
             {
-                if (WorkbenchItemHelper.CustomStates.Contains(this.State))
+                if (WorkbenchItemHelper.CustomStates.Any(c => c.Name == this.State))
                 {
                     var body = child.GetBody();
                     if (body.ToLowerInvariant().EndsWith("]"))

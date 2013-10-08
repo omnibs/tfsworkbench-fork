@@ -174,7 +174,7 @@ namespace TfsWorkbench.Core.Helpers
             ItemTypeData typeData;
             return TryGetItemTypeData(workbenchItemTypeName, out typeData) ? typeData.NumericField : null;
         }
-        
+
         /// <summary>
         /// Gets the name of the owner field.
         /// </summary>
@@ -185,7 +185,7 @@ namespace TfsWorkbench.Core.Helpers
             ItemTypeData typeData;
             return TryGetItemTypeData(workbenchItemTypeName, out typeData) ? typeData.OwnerField : null;
         }
-        
+
         /// <summary>
         /// Sets the id.
         /// </summary>
@@ -216,11 +216,28 @@ namespace TfsWorkbench.Core.Helpers
             setState(workbenchItem, state);
         }
 
-        public static string[] CustomStates
+        public static CustomState[] CustomStates
         {
             get
             {
-                return new string[] { "Working", "Blocked", "Removed" };
+                return new[]
+                       {
+                           new CustomState()
+                           {
+                               Name = "Working",
+                               IsBucketState = false
+                           }, 
+                           new CustomState()
+                           {
+                               Name = "Blocked",
+                               IsBucketState = false
+                           },
+                           new CustomState()
+                           {
+                               Name = "Removed",
+                               IsBucketState = true
+                           }
+                       };
             }
         }
 

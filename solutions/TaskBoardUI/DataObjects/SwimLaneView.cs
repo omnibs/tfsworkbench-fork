@@ -67,11 +67,18 @@ namespace TfsWorkbench.TaskBoardUI.DataObjects
         public SwimLaneView(ViewMap viewMap, bool includeAsTab)
         {
             var customStates = WorkbenchItemHelper.CustomStates;
-            if (customStates.Length > 0 && !viewMap.SwimLaneStates.Contains(customStates[0]))
+            if (customStates.Length > 0 && !viewMap.SwimLaneStates.Contains(customStates[0].Name))
             {
                 foreach (var customState in customStates)
                 {
-                    viewMap.SwimLaneStates.Insert(viewMap.SwimLaneStates.Count - 1, customState);
+                    if (!customState.IsBucketState)
+                    {
+                        viewMap.SwimLaneStates.Insert(viewMap.SwimLaneStates.Count - 1, customState.Name);
+                    }
+                    else
+                    {
+                        viewMap.SwimLaneStates.Add(customState.Name);
+                    }
                 }
             }
 

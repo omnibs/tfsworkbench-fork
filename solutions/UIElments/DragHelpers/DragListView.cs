@@ -141,7 +141,7 @@ namespace TfsWorkbench.UIElements.DragHelpers
 
                     var allowedValuesArray = allowedValues as IEnumerable<object>;
 
-                    if (allowedValuesArray == null || allowedValuesArray.Contains(this.State) ||  WorkbenchItemHelper.CustomStates.Contains(this.State))
+                    if (allowedValuesArray == null || allowedValuesArray.Contains(this.State) ||  WorkbenchItemHelper.CustomStates.Any(c => c.Name == this.State))
                     {
                         continue;
                     }
