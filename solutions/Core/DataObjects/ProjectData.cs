@@ -25,6 +25,12 @@ namespace TfsWorkbench.Core.DataObjects
     [XmlRoot(ElementName = "ProjectData", Namespace = "http://schemas.workbench/ProjectData")]
     public class ProjectData : IProjectData
     {
+
+        /// <summary>
+        /// Get the current user
+        /// </summary>
+        public static string CurrentUser { get; set; }
+
         /// <summary>
         /// The internal view maps collection.
         /// </summary>

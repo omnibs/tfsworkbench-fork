@@ -316,9 +316,7 @@ namespace TfsWorkbench.TaskBoardUI.Helpers
             var filterService = ServiceManager.Instance.GetService<IFilterService>();
 
             var hasIncludedParent =
-                workbenchItem.ParentLinks
-                    .Where(l => swimLaneView.ViewMap.IsViewLink(l) && !filterService.IsExcluded(l.Parent))
-                    .Any();
+                workbenchItem.ParentLinks.Any(l => swimLaneView.ViewMap.IsViewLink(l) && !filterService.IsExcluded(l.Parent));
 
             itemState = GetItemStatus(workbenchItem);
 

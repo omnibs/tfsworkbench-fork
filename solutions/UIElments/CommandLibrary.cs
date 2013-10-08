@@ -203,6 +203,24 @@ namespace TfsWorkbench.UIElements
             new RoutedUICommand("Duplicate", "duplicate", typeof(CommandLibrary));
 
         /// <summary>
+        /// Assign to me
+        /// </summary>
+        private static readonly RoutedUICommand assignToMeCommand = 
+            new RoutedUICommand("Assign To Me", "assignToMe", typeof(CommandLibrary));
+
+
+        /// <summary>
+        /// Assign to me command
+        /// </summary>
+        public static RoutedUICommand AssignToMeCommand
+        {
+            get
+            {
+                return assignToMeCommand;
+            }
+        }
+
+        /// <summary>
         /// Gets the duplicate command.
         /// </summary>
         /// <value>The duplicate command.</value>

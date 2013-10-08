@@ -59,6 +59,16 @@
                             </TextBlock>
                         </MenuItem.Header>
                     </MenuItem>
+                    <MenuItem
+                        CommandParameter="{Binding}" 
+				        Command="{x:Static UIElements:CommandLibrary.AssignToMeCommand}"
+				        CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                        Header="Assign to me"
+                        >
+                        <MenuItem.Icon>
+                            <ContentControl Template="{StaticResource EditIconTemplate}" Style="{StaticResource MenuIconStyle}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem 
                         Header="Open In Browser"
                         CommandParameter="{Binding}" 

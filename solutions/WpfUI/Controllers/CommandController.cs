@@ -49,7 +49,9 @@ namespace TfsWorkbench.WpfUI.Controllers
         /// </summary>
         public static void SetupCommandBindings()
         {
-            ApplicationController.Instance.MainWindow.CommandBindings.Clear();            
+            ApplicationController.Instance.MainWindow.CommandBindings.Clear();
+
+            RegisterCommandBinding(CommandLibrary.AssignToMeCommand, OnAssignToMe, CanAssignToMeExecute);
 
             RegisterCommandBinding(CommandLibrary.EditViewCommand, OnEditView, CanExecute);
             RegisterCommandBinding(CommandLibrary.AddViewCommand, OnAddView, CanProjectActionExecute);
@@ -87,6 +89,20 @@ namespace TfsWorkbench.WpfUI.Controllers
             RegisterCommandBinding(CommandLibrary.ExitCommand, OnExitApplication, CanExecute);
             RegisterCommandBinding(CommandLibrary.ApplicationMessageCommand, OnApplicationMessage);
             RegisterCommandBinding(CommandLibrary.ApplicationExceptionCommand, OnApplicationException);
+        }
+
+        private static void CanAssignToMeExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = e.Parameter != null;
+        }
+
+        /// <summary>
+        /// Assign item to current user
+        /// </summary>
+        private static void OnAssignToMe(object sender, ExecutedRoutedEventArgs e)
+        {
+            var source = e.Parameter as IWorkbenchItem;
+            source[WorkbenchItemHelper.GetOwnerFieldName(source.GetTypeName())] = ProjectData.CurrentUser;
         }
 
         /// <summary>

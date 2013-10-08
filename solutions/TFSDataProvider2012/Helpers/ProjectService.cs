@@ -19,6 +19,8 @@ using TfsWorkbench.TFSDataProvider2012.Properties;
 
 namespace TfsWorkbench.TFSDataProvider2012.Helpers
 {
+    using TfsWorkbench.Core.DataObjects;
+
     /// <summary>
     /// The TFS service version.
     /// </summary>
@@ -115,10 +117,13 @@ namespace TfsWorkbench.TFSDataProvider2012.Helpers
                     var tfs = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(projectCollectionUri);
 
                     tfs.EnsureAuthenticated();
-
                     var store = tfs.GetService<WorkItemStore>();
-
                     project = store.Projects.OfType<Project>().FirstOrDefault(p => p.Name.Equals(projectName));
+
+                    if (tfs.AuthorizedIdentity != null)
+                    {
+                        ProjectData.CurrentUser = tfs.AuthorizedIdentity.DisplayName;
+                    }
                 }
                 catch (Exception ex)
                 {
