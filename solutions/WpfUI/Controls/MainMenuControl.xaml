@@ -66,6 +66,8 @@
                         />
                 </MenuItem.Icon>
             </MenuItem>
+            <!--<MenuItem Command="{x:Static UIElements:CommandLibrary.ExportPngCommand}" CommandTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />-->
+            <MenuItem Command="{x:Static UIElements:CommandLibrary.ExportExcelCommand}" CommandTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
             <Separator />
             <MenuItem Command="{x:Static UIElements:CommandLibrary.ExitCommand}" CommandTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
         </MenuItem>

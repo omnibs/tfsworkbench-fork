@@ -59,6 +59,18 @@ namespace TfsWorkbench.UIElements
             new RoutedUICommand("Save Project", "saveProject", typeof(CommandLibrary));
 
         /// <summary>
+        /// The save project routed command;
+        /// </summary>
+        private static readonly RoutedUICommand exportPngCommand =
+            new RoutedUICommand("Export to Png", "exportPng", typeof(CommandLibrary));
+
+        /// <summary>
+        /// The save project routed command;
+        /// </summary>
+        private static readonly RoutedUICommand exportExcelCommand =
+            new RoutedUICommand("Export to Excel", "exportExcel", typeof(CommandLibrary));
+
+        /// <summary>
         /// The close routed command;
         /// </summary>
         private static readonly RoutedUICommand closeProjectCommand =
@@ -301,6 +313,30 @@ namespace TfsWorkbench.UIElements
             get
             {
                 return loadProjectCommand;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Save Project command.
+        /// </summary>
+        /// <value>The SaveProject command.</value>
+        public static RoutedUICommand ExportExcelCommand
+        {
+            get
+            {
+                return exportExcelCommand;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Save Project command.
+        /// </summary>
+        /// <value>The SaveProject command.</value>
+        public static RoutedUICommand ExportPngCommand
+        {
+            get
+            {
+                return exportPngCommand;
             }
         }
 

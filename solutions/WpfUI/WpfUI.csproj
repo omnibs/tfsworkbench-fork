@@ -139,6 +139,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=3.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
@@ -146,6 +150,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -301,6 +306,7 @@
       <SubType>Designer</SubType>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resources\Kanban.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="scrumicon.ico" />

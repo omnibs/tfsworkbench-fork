@@ -10,19 +10,28 @@
 namespace TfsWorkbench.WpfUI.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Threading;
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Media;
+    using System.Windows.Media.Imaging;
     using System.Windows.Threading;
+
+    using Microsoft.Win32;
+
+    using OfficeOpenXml;
 
     using TfsWorkbench.Core.DataObjects;
     using TfsWorkbench.Core.Helpers;
     using TfsWorkbench.Core.Interfaces;
     using TfsWorkbench.Core.Services;
+    using TfsWorkbench.TaskBoardUI;
+    using TfsWorkbench.TaskBoardUI.Helpers;
     using TfsWorkbench.UIElements;
     using TfsWorkbench.WpfUI.Controls;
     using TfsWorkbench.WpfUI.Properties;
@@ -73,6 +82,8 @@ namespace TfsWorkbench.WpfUI.Controllers
             RegisterCommandBinding(CommandLibrary.CloseProjectCommand, OnCloseProject, CanProjectActionExecute);
             RegisterCommandBinding(CommandLibrary.RefreshProjectDataCommand, OnRefreshProjectData, CanProjectActionExecute, new KeyGesture(Key.R, ModifierKeys.Control | ModifierKeys.Shift));
             RegisterCommandBinding(CommandLibrary.ResetProjectLayoutCommand, OnResetProjectLayout, CanProjectActionExecute);
+            RegisterCommandBinding(CommandLibrary.ExportExcelCommand, OnExportExcel, CanProjectActionExecute);
+            RegisterCommandBinding(CommandLibrary.ExportPngCommand, OnExportPng, CanProjectActionExecute);
             RegisterCommandBinding(CommandLibrary.EditTypeDataCommand, OnEditTypeData, CanProjectActionExecute);
             RegisterCommandBinding(CommandLibrary.ShowSearchDialogCommand, OnShowSearchDialog, CanProjectActionExecute, new KeyGesture(Key.F, ModifierKeys.Control));
             RegisterCommandBinding(CommandLibrary.ClearHighlightsCommand, OnClearHightlights, null, new KeyGesture(Key.Z, ModifierKeys.Control | ModifierKeys.Shift));
@@ -89,6 +100,93 @@ namespace TfsWorkbench.WpfUI.Controllers
             RegisterCommandBinding(CommandLibrary.ExitCommand, OnExitApplication, CanExecute);
             RegisterCommandBinding(CommandLibrary.ApplicationMessageCommand, OnApplicationMessage);
             RegisterCommandBinding(CommandLibrary.ApplicationExceptionCommand, OnApplicationException);
+        }
+
+        private static void OnExportExcel(object sender, ExecutedRoutedEventArgs e)
+        {
+            var swimLine = SwimLaneService.Instance.SwimLaneViews[0];
+
+            var positions = new Dictionary<int, int[]>();
+            positions.Add(0, new []{0, 1}); // estoria
+            positions.Add(1, new []{1, 5}); // tarefas
+            positions.Add(2, new []{6, 2}); // working
+            positions.Add(3, new []{8, 2}); // blocked
+            positions.Add(4, new []{16, 2}); // removed
+            positions.Add(5, new []{10, 6}); // closed
+
+            var file = new MemoryStream(Resources.Kanban);
+            var package = new ExcelPackage(file);
+            var sheet = package.Workbook.Worksheets.First();
+            for (var i = 0; i < swimLine.SwimLaneRows.Count; i++)
+            {
+                var swimLineRow = swimLine.SwimLaneRows[i];
+                var story = swimLineRow.Parent;
+
+                var drawing = ExcelHelper.CreateStoryDraw(i, story.GetCaption(), "", "");
+                sheet.AddDrawing(drawing);
+
+                for (var x = 0; x < swimLineRow.SwimLaneColumns.Count; x++)
+                {
+                    var col = swimLineRow.SwimLaneColumns[x];
+                    var colSize = positions[x + 1][1];
+                    var position = positions[x + 1][0];
+                    var line = (ExcelHelper.StoryRowSize * i) + 1;
+                    for (var y = 0; y < col.Count; y++)
+                    {
+                        var tLine = line + y / colSize;
+                        sheet.CreateTask(tLine + 1, (y % colSize) + position + 1, col[y]);
+                    }
+                }
+            }
+
+            SaveFileDialog _SD = new SaveFileDialog();
+            _SD.Filter = "Excel Files (*.xlsx)|*.xlsx|Show All Files (*.*)|*.*";
+            _SD.FileName = "Untitled";
+            _SD.Title = "Save As";
+            var dResult = _SD.ShowDialog();
+            if (dResult == true)
+            {
+                using (var saveAs = File.Create(_SD.FileName))
+                {
+                    package.SaveAs(saveAs);
+                }
+            }
+        }
+
+        private static void OnExportPng(object sender, ExecutedRoutedEventArgs e)
+        {
+            var main = (MainAppWindow)sender;
+            var view = main.PART_InternalGrid;
+            Size size = new Size(view.ActualWidth, view.ActualHeight);
+
+            if (size.IsEmpty)
+                return;
+
+            RenderTargetBitmap result = new RenderTargetBitmap((int)size.Width, (int)size.Height, 96, 96, PixelFormats.Pbgra32);
+
+            DrawingVisual drawingvisual = new DrawingVisual();
+            using (DrawingContext context = drawingvisual.RenderOpen())
+            {
+                context.DrawRectangle(new VisualBrush(view), null, new Rect(new Point(), size));
+                context.Close();
+            }
+
+            result.Render(drawingvisual);
+            PngBitmapEncoder encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(result));
+
+            SaveFileDialog _SD = new SaveFileDialog();
+            _SD.Filter = "Png File (*.png)|*.png|Show All Files (*.*)|*.*";
+            _SD.FileName = "Untitled";
+            _SD.Title = "Save As";
+            var dResult = _SD.ShowDialog();
+            if (dResult == true)
+            {
+                using (var file = File.Create(_SD.FileName))
+                {
+                    encoder.Save(file);
+                }
+            }
         }
 
         private static void CanAssignToMeExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -111,7 +209,7 @@ namespace TfsWorkbench.WpfUI.Controllers
         /// <param name="commandBinding">The command binding.</param>
         public static void RegisterCommandBinding(CommandBinding commandBinding)
         {
-            ApplicationController.Instance.MainWindow.CommandBindings.Add(commandBinding);            
+            ApplicationController.Instance.MainWindow.CommandBindings.Add(commandBinding);
         }
 
         /// <summary>
@@ -190,7 +288,7 @@ namespace TfsWorkbench.WpfUI.Controllers
         {
             var source = e.Parameter as IWorkbenchItem;
             var projectData = ProjectDataService.CurrentProjectData;
-             
+
             if (source == null || projectData == null)
             {
                 return;
@@ -455,9 +553,9 @@ namespace TfsWorkbench.WpfUI.Controllers
             if (projectData.WorkbenchItems.Any(tbi => tbi.ValueProvider != null && tbi.ValueProvider.IsDirty))
             {
                 if (MessageBox.Show(
-                    Resources.String024, 
-                    Resources.String025, 
-                    MessageBoxButton.OKCancel, 
+                    Resources.String024,
+                    Resources.String025,
+                    MessageBoxButton.OKCancel,
                     MessageBoxImage.Warning) == MessageBoxResult.Cancel)
                 {
                     return;
@@ -497,11 +595,11 @@ namespace TfsWorkbench.WpfUI.Controllers
                 return;
             }
 
-            if (projectData.WorkbenchItems.Any(tbi => tbi.ValueProvider != null && tbi.ValueProvider.IsDirty) && 
+            if (projectData.WorkbenchItems.Any(tbi => tbi.ValueProvider != null && tbi.ValueProvider.IsDirty) &&
                 MessageBox.Show(
-                    Resources.String029, 
-                    Resources.String030, 
-                    MessageBoxButton.OKCancel, 
+                    Resources.String029,
+                    Resources.String030,
+                    MessageBoxButton.OKCancel,
                     MessageBoxImage.Warning) == MessageBoxResult.Cancel)
             {
                 return;
@@ -539,9 +637,9 @@ namespace TfsWorkbench.WpfUI.Controllers
             if (parent.ChildLinks.Any(l => l.Child.ValueProvider != null && l.Child.ValueProvider.IsDirty))
             {
                 if (MessageBox.Show(
-                    Resources.String014, 
-                    Resources.String015, 
-                    MessageBoxButton.OKCancel, 
+                    Resources.String014,
+                    Resources.String015,
+                    MessageBoxButton.OKCancel,
                     MessageBoxImage.Question) == MessageBoxResult.Cancel)
                 {
                     return;
@@ -774,8 +872,8 @@ namespace TfsWorkbench.WpfUI.Controllers
 
             var editDialog = new ViewEditorControl
                 {
-                    ViewMap = view, 
-                    ProjectData = ProjectDataService.CurrentProjectData, 
+                    ViewMap = view,
+                    ProjectData = ProjectDataService.CurrentProjectData,
                     SaveProjectLayout = ApplicationController.Instance.SaveProjectLayout
                 };
 
@@ -996,7 +1094,7 @@ namespace TfsWorkbench.WpfUI.Controllers
 
             ProjectDataService.CurrentProjectData.WorkbenchItems.Add(parent);
 
-            ShowWorkbenchItemEditPanel(parent); 
+            ShowWorkbenchItemEditPanel(parent);
         }
 
         /// <summary>

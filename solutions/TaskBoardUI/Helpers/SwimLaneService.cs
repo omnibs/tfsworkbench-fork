@@ -25,7 +25,7 @@ namespace TfsWorkbench.TaskBoardUI.Helpers
     /// <summary>
     /// The swim lane service class.
     /// </summary>
-    internal class SwimLaneService : ISwimLaneService
+    public class SwimLaneService : ISwimLaneService
     {
         /// <summary>
         /// The swim lane view collection.
